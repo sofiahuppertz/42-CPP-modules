@@ -18,13 +18,13 @@ std::string myReplace(std::string &line, std::string s1, std::string s2)
     std::string result;
 
 
-    while ((int)(found = line.find(s1, lastPos)) != -1)
+    while ((found = line.find(s1, lastPos)) != std::string::npos)
     {
         result.append(line, lastPos, found - lastPos);
         result.append(s2);
         lastPos = found + s1.length();
     }
-    result.append(line, lastPos, line.length() - lastPos);
+    result.append(line, lastPos);
     return result;
 }
 
@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
 {
     if (argc != 4)
     {
-        std::cout << "Usage: ./replace <ilename> <s1> <s2>" << std::endl;
+        std::cout << "Usage: ./replace <filename> <s1> <s2>" << std::endl;
         return 0;
     }
     else

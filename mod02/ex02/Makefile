@@ -1,6 +1,6 @@
 NAME = fixed
 
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98 -v
+CPPFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRCS = def/Fixed.class.cpp \
 	main.cpp 

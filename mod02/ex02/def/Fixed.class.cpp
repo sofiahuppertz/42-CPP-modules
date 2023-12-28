@@ -75,20 +75,32 @@ Fixed& Fixed:: operator = ( const Fixed &other)
 
 
 Fixed Fixed::operator+(const Fixed& other) const {
-    return Fixed(this->toFloat() + other.toFloat());
+    int rawBits = this->fixed_point + other.fixed_point;
+    Fixed result;
+    result.setRawBits(rawBits);
+    return result;
 }
 
 Fixed Fixed::operator-(const Fixed& other) const {
-    return Fixed(this->toFloat() - other.toFloat());
+    int rawBits = this->fixed_point - other.fixed_point;
+    Fixed result;
+    result.setRawBits(rawBits);
+    return result;
 }
 
 Fixed Fixed::operator*(const Fixed& other) const {
-    return Fixed(this->toFloat() * other.toFloat());
+    int rawBits = this->fixed_point * other.fixed_point;
+    Fixed result;
+    result.setRawBits(rawBits);
+    return result;
 }
 
 Fixed Fixed::operator/(const Fixed& other) const {
-    if (other.toFloat() != 0) {
-        return Fixed(this->toFloat() / other.toFloat());
+    if (other.fixed_point != 0) {
+        int rawBits = this->fixed_point / other.fixed_point;
+        Fixed result;
+        result.setRawBits(rawBits);
+        return result;
     } else {
         throw std::invalid_argument("Division by zero");
     }
@@ -96,14 +108,16 @@ Fixed Fixed::operator/(const Fixed& other) const {
 
 
 // Increment and decrement operators
+// The compiler knows which one is the prefix and which one is the postfix operator
+// thanks to the int parameter in the postfix operator.
 
 
-Fixed& Fixed::operator++() {
+Fixed& Fixed::operator++() { //prefix
     this->fixed_point++;
     return *this;
 }
 
-Fixed Fixed::operator++(int) {
+Fixed Fixed::operator++(int) { //postfix
     Fixed temp(*this);
     this->fixed_point++;
     return temp;

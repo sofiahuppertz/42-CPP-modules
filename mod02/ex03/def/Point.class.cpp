@@ -24,10 +24,16 @@ Point:: Point ( const Point &other): x(other.x), y(other.y) {
 
 
 // Assignment operator
+// Points are inmutable, but we could have an array of points 
+// and we would like to initialize them "twice"
+// So we can use the const_cast to remove the constness of the object
 
-Point& Point::operator= (const Point &other) {
-    (void)other;
-    throw std::logic_error("Assignment not allowed for Point objects");
+Point &Point::operator=(const Point &other) {
+    if (this != &other) {
+        const_cast<Fixed&>(this->x) = other.x;
+        const_cast<Fixed&>(this->y) = other.y;
+    }
+    return *this;
 }
 
 // Getters

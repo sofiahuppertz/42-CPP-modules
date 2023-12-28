@@ -1,31 +1,32 @@
 
 #include "dec/Bsp.hpp"
 
-int    main(void)
+int main(void)
 {
+    std::cout << "Welcome to triangle_point!" << std::endl;
+    std::cout << "This program checks wether a point P is inside" << std::endl;
+    std::cout << "a triangle ABC or not." << std::endl;
+    while (true)
     {
-        Point a(-7, 4);
-        Point b(-5, -2);
-        Point c(4, 4);
-        Point point(-3, 2);
-
-        std::cout << ((bsp(a, b, c, point)) ? "True" : "False") << std::endl;
+        Point points[4];
+        char point_names[4] = {'A', 'B', 'C', 'P'};
+        for (int i = 0; i < 4; i++)
+        {
+            int x, y;
+            std::cout << "Enter the x and y coordinates of point " << point_names[i] << ": " << std::endl;
+            std::cout << "x: ";
+            std::cin >> x;
+            std::cout << "y: ";
+            std::cin >> y;
+            points[i] = Point(x, y);
+        }
+        std::cout << ((bsp(points[0], points[1], points[2], points[3])) ? "True" : "False") << std::endl;
+        std::cout << "Do you want to try again? (y/n): ";
+        char answer;
+        std::cin >> answer;
+        if (answer == 'n')
+            break;
     }
-    {
-        Point a(-7, 4);
-        Point b(-5, -2);
-        Point c(4, 4);
-        Point point(-8, -2);
-
-        std::cout << ((bsp(a, b, c, point)) ? "True" : "False") << std::endl;
-    }
-    {
-        Point a(-7, 4);
-        Point b(-5, -2);
-        Point c(4, 4);
-        Point point(4, 4);
-
-        std::cout << ((bsp(a, b, c, point)) ? "True" : "False") << std::endl;
-    }
-
+    return 0;
 }
+

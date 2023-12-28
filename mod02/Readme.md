@@ -28,8 +28,7 @@ public:
     MyClass& operator=(const MyClass& other); // Copy assignment operator
 };
 
-​
-# Computer Science Concepts
+​# Computer Science Concepts
 Understanding how computers represent and process different types of numerical data is crucial.
 
 ### Integers

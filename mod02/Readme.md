@@ -18,19 +18,7 @@ A good practice in class declaration, the Orthodox Canonical Class Form includes
 - Destructor
 - Copy assignment operator
 
-Example:
-```cpp
-class MyClass {
-public:
-    MyClass(); // Default constructor
-    MyClass(const MyClass& other); // Copy constructor
-    ~MyClass(); // Destructor
-    MyClass& operator=(const MyClass& other); // Copy assignment operator
-};
-``
-
-
-​# Computer Science Concepts
+# Computer Science Concepts
 Understanding how computers represent and process different types of numerical data is crucial.
 
 ### Integers

@@ -75,20 +75,32 @@ Fixed& Fixed:: operator = ( const Fixed &other)
 
 
 Fixed Fixed::operator+(const Fixed& other) const {
-    return Fixed(this->toFloat() + other.toFloat());
+    int rawBits = this->fixed_point + other.fixed_point;
+    Fixed result;
+    result.setRawBits(rawBits);
+    return result;
 }
 
 Fixed Fixed::operator-(const Fixed& other) const {
-    return Fixed(this->toFloat() - other.toFloat());
+    int rawBits = this->fixed_point - other.fixed_point;
+    Fixed result;
+    result.setRawBits(rawBits);
+    return result;
 }
 
 Fixed Fixed::operator*(const Fixed& other) const {
-    return Fixed(this->toFloat() * other.toFloat());
+    int rawBits = this->fixed_point * other.fixed_point;
+    Fixed result;
+    result.setRawBits(rawBits);
+    return result;
 }
 
 Fixed Fixed::operator/(const Fixed& other) const {
-    if (other.toFloat() != 0) {
-        return Fixed(this->toFloat() / other.toFloat());
+    if (other.fixed_point != 0) {
+        int rawBits = this->fixed_point / other.fixed_point;
+        Fixed result;
+        result.setRawBits(rawBits);
+        return result;
     } else {
         throw std::invalid_argument("Division by zero");
     }

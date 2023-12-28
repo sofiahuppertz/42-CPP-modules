@@ -1,13 +1,14 @@
 #ifndef HARL_CLASS_H
-#define HARL_CLASS_H
+# define HARL_CLASS_H
 
 #include <iostream>
+#include <string>
 
 class Harl {
 
     public:
-        Harl(void);
-        ~Harl(void);
+        Harl( void );
+        ~Harl( void );
 
         void    complain(std::string level );
     
@@ -17,6 +18,6 @@ class Harl {
         void     _info( void );
         void     _warning( void );
         void     _error( void );
-}
+};
 
 #endif

@@ -4,7 +4,7 @@
 
 int main( void )
 {
-    Zombie *zombies = zombieHorde(5, "Juanita");
+    Zombie *zombies = zombieHorde(5, "sofia");
     for (int i = 0; i < 5; i += 1)
     {
         if (zombies[i].getName() != "")

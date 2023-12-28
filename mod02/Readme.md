@@ -1,10 +1,13 @@
-Module 02
-Polymorphism, operator overloading and Orthodox Canonical class form
-Key C++ concepts:
-Polymorphism: a principle in object-oriented programming that allows objects of different types to be treated as objects of a more general common type. It enables the same method or operator to perform different operations based on the type of the object it is acting upon.
-Overloading:  a concept in programming where one function name can have multiple functionalities, depending on the argument list. The function to be used for a particular call is determined by the number of arguments and their types. In a way, operator overloading can be seen as a form of polymorphism.
-Operator Overloading: a feature in C++ where different operators can be used to perform an operation on user-defined data types. This allows operators to have a different implementation based on their arguments, providing a more intuitive interface for users.
-Orthodox Canonical Class Form: Good practice for class declaration. By the standard of C++98 it includes four key methods: the default constructor, copy constructor, destructor, and copy assignment operator
+### Module 02
+
+
+## Polymorphism, operator overloading and Orthodox Canonical class form
+
+### Key C++ concepts:
+***Polymorphism:*** a principle in object-oriented programming that allows objects of different types to be treated as objects of a more general common type. It enables the same method or operator to perform different operations based on the type of the object it is acting upon.
+***Overloading:***  a concept in programming where one function name can have multiple functionalities, depending on the argument list. The function to be used for a particular call is determined by the number of arguments and their types. In a way, operator overloading can be seen as a form of polymorphism.
+***Operator Overloading:*** a feature in C++ where different operators can be used to perform an operation on user-defined data types. This allows operators to have a different implementation based on their arguments, providing a more intuitive interface for users.
+***Orthodox Canonical Class Form:*** Good practice for class declaration. By the standard of C++98 it includes four key methods: the default constructor, copy constructor, destructor, and copy assignment operator
 class MyClass {
 public:
     // Default constructor
@@ -26,9 +29,9 @@ public:
 };
 
 ​
-Computer Science concepts:
-How computers represent and process different types of numerical data
-Integers: Integers are a type of numerical data that represent whole numbers, both positive and negative, including zero. In computers, they are represented in binary. Binary is a base-2 number system that uses only two numbers: 0 and 1. Each digit in a binary number is referred to as a bit. A binary integer might look something like this: 1010, which is the binary representation for the decimal number 10.
+###Computer Science concepts:
+<i>How computers represent and process different types of numerical data<i>
+***Integers: Integers are a type of numerical data that represent whole numbers, both positive and negative, including zero. In computers, they are represented in binary. Binary is a base-2 number system that uses only two numbers: 0 and 1. Each digit in a binary number is referred to as a bit. A binary integer might look something like this: 1010, which is the binary representation for the decimal number 10.
 Floating Points: Floating point numbers are used to represent real numbers and are stored in the computer as binary fractions. They can handle a much larger range of values compared to integers, with the ability to represent fractions and very large or very small numbers. A floating point number is typically represented in scientific notation in binary, with a mantissa, exponent, and sign. Due to their nature, floating point numbers can sometimes lead to rounding errors.
 
 💡

@@ -2,41 +2,37 @@
 #include "../dec/Fixed.class.hpp"
 
 
+//Destructor
+
+
+Fixed:: ~Fixed ( void ) {
+    return;
+}
+
+
 // Constructors 
 
-Fixed:: Fixed ( void )
-{
+
+Fixed:: Fixed ( void ) {
     this->fixed_point = 0;
     return;
 }
 
-Fixed:: Fixed ( const int n )
-{
+Fixed:: Fixed ( const int n ) {
     this->fixed_point = n << this->fractionalBits;
     return;
 }
 
-Fixed:: Fixed ( const float n )
-{
+Fixed:: Fixed ( const float n ) {
     this->fixed_point = roundf(n * (1 << this->fractionalBits));
     return;
 }
 
-Fixed:: Fixed ( const Fixed &other): fixed_point(other.fixed_point)
-{
-    return;
-}
+Fixed:: Fixed ( const Fixed &other): fixed_point(other.fixed_point) {return;}
 
 
-// Destructor
+// Setter and getter
 
-Fixed:: ~Fixed ( void )
-{
-    return;
-}
-
-
-// Member Functions
 
 int Fixed::getRawBits ( void ) const 
 {
@@ -49,6 +45,10 @@ void Fixed::setRawBits ( const int raw )
     return;
 }
 
+
+// Conversion functions
+
+
 float Fixed::toFloat ( void ) const
 {
     return (float)this->fixed_point / (1 << this->fractionalBits);
@@ -60,7 +60,8 @@ int Fixed::toInt ( void ) const
 }
 
 
-// Operator overloading
+// Assignment operator
+
 
 Fixed& Fixed:: operator = ( const Fixed &other)
 {
@@ -69,11 +70,9 @@ Fixed& Fixed:: operator = ( const Fixed &other)
     return *this;
 }
 
-std::ostream& operator << (std::ostream& os, const Fixed& object) 
-{
-    os << object.toFloat();
-    return os;
-}
+
+// Arithmetic operators
+
 
 Fixed Fixed::operator+(const Fixed& other) const {
     return Fixed(this->toFloat() + other.toFloat());
@@ -95,31 +94,35 @@ Fixed Fixed::operator/(const Fixed& other) const {
     }
 }
 
+
+// Increment and decrement operators
+
+
 Fixed& Fixed::operator++() {
     this->fixed_point++;
     return *this;
 }
 
-// Post-increment
 Fixed Fixed::operator++(int) {
     Fixed temp(*this);
     this->fixed_point++;
     return temp;
 }
 
-// Pre-decrement
 Fixed& Fixed::operator--() {
     this->fixed_point--;
     return *this;
 }
 
-// Post-decrement
-Fixed Fixed::operator--(int) 
-{
+Fixed Fixed::operator--(int) {
     Fixed temp(*this);
     this->fixed_point--;
     return temp;
 }
+
+
+// Comparison operators
+
 
 bool Fixed::operator>(const Fixed& other) const {
     return this->getRawBits() > other.getRawBits();
@@ -145,22 +148,33 @@ bool Fixed::operator<=(const Fixed& other) const {
     return this->getRawBits() <= other.getRawBits();
 }
 
-Fixed& Fixed::min( Fixed &a, Fixed &b )
-{
+
+// Static member functions
+
+
+Fixed& Fixed::min( Fixed &a, Fixed &b ) {
     return (a < b) ? a : b;
 }
 
-Fixed& Fixed::max( Fixed &a, Fixed &b )
-{
+Fixed& Fixed::max( Fixed &a, Fixed &b ) {
     return (a > b ) ? a : b; 
 }
 
-const Fixed& Fixed::min( const Fixed& a, const Fixed& b )
-{
+const Fixed& Fixed::min( const Fixed& a, const Fixed& b ) {
     return (a < b) ? a : b;
 }
 
-const Fixed& Fixed::max( const Fixed& a, const Fixed& b )
-{
+const Fixed& Fixed::max( const Fixed& a, const Fixed& b ) {
     return (a > b ) ? a : b; 
+}
+
+
+// Non-member functions
+
+
+// Insertion operator
+std::ostream& operator << (std::ostream& os, const Fixed& object) 
+{
+    os << object.toFloat();
+    return os;
 }

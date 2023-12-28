@@ -5,37 +5,43 @@
 #include <cmath>
 
 class Fixed {
-    
     public:
+        // Constructors and destructor
         Fixed ( void );
         Fixed ( const int n );
         Fixed ( const float n );
         Fixed ( const Fixed &other);
         ~Fixed ( void );
-        
-        // Operators
+
+        // Assignment operator
         Fixed& operator = (const Fixed &other);
+
+        // Arithmetic operators
         Fixed operator+(const Fixed& other) const;
         Fixed operator-(const Fixed& other) const;
         Fixed operator*(const Fixed& other) const;
         Fixed operator/(const Fixed& other) const;
 
+        // Increment and decrement operators
         Fixed& operator++(void);
         Fixed operator++(int);
         Fixed& operator--(void);
         Fixed operator--(int);
 
+        // Comparison operators
         bool operator>(const Fixed& other) const;
         bool operator<(const Fixed& other) const;
         bool operator==(const Fixed& other) const;
         bool operator!=(const Fixed& other) const;
         bool operator>=(const Fixed& other) const;
         bool operator<=(const Fixed& other) const;
-        
-        // Member Functions
+
+        // Conversion functions
         float toFloat ( void ) const;
-        void setRawBits ( const int raw );
         int toInt ( void ) const;
+
+        // Getter and setter for raw bits
+        void setRawBits ( const int raw );
         int getRawBits ( void ) const;
 
         // Static member Functions

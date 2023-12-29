@@ -32,7 +32,7 @@ ScavTrap::ScavTrap( const ScavTrap &other) : ClapTrap(other)
 
 ScavTrap::~ScavTrap(void) 
 {
-    std::cout << "ScavTrap: destructor called" << std::endl;
+    std::cout << "ScavTrap: Destructor called" << std::endl;
 }
 
 // Copy assignment operator

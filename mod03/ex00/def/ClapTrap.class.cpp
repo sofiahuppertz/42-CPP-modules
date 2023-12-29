@@ -70,4 +70,3 @@ void ClapTrap::beRepaired(unsigned int amount) {
         std::cout << "ClapTrap: " << this->_name << " is dead!" << std::endl;
     return;
 }
-

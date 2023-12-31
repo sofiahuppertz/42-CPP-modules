@@ -16,9 +16,9 @@ class ClapTrap {
 
         //Getters and setters
         virtual void setName(std::string name);
-        virtual void setHitPoints(int hitPoints);
-        virtual void setEnergyPoints(int energyPoints);
-        virtual void setAttackDamage(int attackDamage);
+        void setHitPoints(int hitPoints);
+        void setEnergyPoints(int energyPoints);
+        void setAttackDamage(int attackDamage);
 
         virtual std::string getName(void) const;
         virtual int getHitPoints(void) const;

@@ -1,4 +1,5 @@
-# Inheritance
+# Module 03
+<p><i>Inheritance</i>i></p>
 
 ## Key C++ Concepts
 

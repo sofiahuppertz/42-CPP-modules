@@ -1,12 +1,11 @@
-NAME = Animals
+NAME = Ideas
 
 CPPFLAGS = -g -Wall -Wextra -Werror -std=c++98
 
 SRCS = def/Animal.class.cpp \
 	def/Cat.class.cpp \
 	def/Dog.class.cpp \
-	def/WrongAnimal.class.cpp \
-	def/WrongCat.class.cpp \
+	def/Brain.class.cpp \
 	main.cpp 
 
 OBJS = $(SRCS:.cpp=.o)
@@ -14,9 +13,10 @@ OBJS = $(SRCS:.cpp=.o)
 all : $(NAME)
 
 $(NAME): $(OBJS)
-	c++ -I./dec $(CPPFLAGS) $(OBJS) -o $(NAME)
+	g++ -I./dec $(CPPFLAGS) $(OBJS) -o $(NAME)
 
 re: fclean all
+
 clean:
 	rm -f $(OBJS)
 

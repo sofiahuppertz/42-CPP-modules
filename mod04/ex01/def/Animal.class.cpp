@@ -16,7 +16,7 @@ Animal::Animal ( std::string type): _type(type)
 Animal::Animal( const Animal &other)
 {
     std::cout << "Animal copy constructor called" << std::endl;
-    _type = other._type;
+    this->_type = other._type;
 }
 
 
@@ -43,4 +43,22 @@ void Animal::makeSound ( void ) const
 std::string Animal::getType ( void ) const
 {
     return this->_type;
+}
+
+Brain *Animal::getBrain( void ) const
+{
+    return nullptr;
+}
+
+void Animal::setIdea ( std::string idea, int index)
+{
+    (void)idea;
+    (void)index;
+    return;
+}
+
+std::string Animal::getIdea ( int index ) const
+{
+    (void)index;
+    return "";
 }

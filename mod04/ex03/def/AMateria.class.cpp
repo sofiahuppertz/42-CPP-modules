@@ -28,6 +28,7 @@ AMateria::~AMateria( void )
 AMateria &AMateria::operator=( const AMateria &other )
 {
     std::cout << "AMateria copy assignment operator called" << std::endl;
+    (void)other;
     return *this;
 }
 

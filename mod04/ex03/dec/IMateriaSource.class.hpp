@@ -14,7 +14,7 @@ class IMateriaSource
     public:
         IMateriaSource( void );
         IMateriaSource( const IMateriaSource &other );
-        virtual ~IMateriaSource() {}
+        virtual ~IMateriaSource();
 
         IMateriaSource &operator=( const IMateriaSource &other );
 

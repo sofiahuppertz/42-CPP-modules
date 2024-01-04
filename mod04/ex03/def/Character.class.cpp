@@ -54,7 +54,7 @@ void Character::equip( AMateria *m )
 {
     if (_count == 4 || !m)
         return;
-    for (int i = 0; i < _count; i++)
+    for (int i = 0; i < 4; i++)
     {
         if (_inventory[i] == NULL)
         {

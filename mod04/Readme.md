@@ -41,9 +41,9 @@ This module focuses on key C++ concepts including Subtype Polymorphism, Abstract
   virtual std::string getIdea(int index) const = 0;
   ```
 
-### Ex03: Minecraft-Inspired System
+### Ex03: Interfaces, Abstract and Derived classes that interconnect
 
-- **Objective**: Construct a system with materials, sources, and characters, inspired by Minecraft.
+- **Objective**: Construct a system with materials, material sources, and characters, inspired by Minecraft.
 - **Components**:
   - Materials and their source management.
   - Characters with abilities to equip/unequip materials.

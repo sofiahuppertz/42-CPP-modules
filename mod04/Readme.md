@@ -16,7 +16,7 @@ This module focuses on key C++ concepts including Subtype Polymorphism, Abstract
 
 - **Object Slicing**: Occurs when a subclass object is assigned to a superclass object, leading to loss of subclass-specific attributes or methods.
 
-- **Dynamic and Static Cast**: Used for type conversion; dynamic cast checks type safety at runtime, while static cast does so at compile time.
+- **Dynamic and Static Cast**: Used for type conversion; dynamic cast checks type safety at runtime, while static cast doesn't and is faster.
 
 ## Exercises
 

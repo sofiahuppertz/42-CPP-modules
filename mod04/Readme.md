@@ -52,7 +52,7 @@ This module focuses on key C++ concepts including Subtype Polymorphism, Abstract
   - AMateria arrays to hold different derived classes.
 
 <p align="center">
-  <img src="./../images/mod04_ex03.png" alt="Example Image" width="500"/>
+  <img src="./../images/mod04_ex03.png" alt="Example Image" width="700"/>
 </p>
 
 

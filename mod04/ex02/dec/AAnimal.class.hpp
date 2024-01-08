@@ -1,18 +1,18 @@
-#ifndef ANIMAL_CLASS_H
-# define ANIMAL_CLASS_H
+#ifndef AANIMAL_CLASS_H
+# define AANIMAL_CLASS_H
 
 #include "Brain.class.hpp"
 #include <iostream>
 #include <string>
 
-class Animal {
+class AAnimal {
     public:
-        Animal ( void );
-        Animal ( std::string type );
-        Animal (const Animal &other);
-        virtual ~Animal ( void );
+        AAnimal ( void );
+        AAnimal ( std::string type );
+        AAnimal (const AAnimal &other);
+        virtual ~AAnimal ( void );
 
-        Animal &operator=(const Animal &other);
+        AAnimal &operator=(const AAnimal &other);
         std::string getType ( void )const;
         virtual void makeSound ( void ) const;  
         // These are pure virtual functions.

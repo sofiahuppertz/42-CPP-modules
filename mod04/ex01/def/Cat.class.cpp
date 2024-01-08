@@ -17,7 +17,7 @@ Cat::Cat (const Cat &other) : Animal( other )
     {
         brain = new Brain(*other.brain);
     } else {
-        brain = nullptr;
+        brain = NULL;
     }
 }
 
@@ -38,7 +38,7 @@ Cat &Cat::operator=(const Cat &other)
         if (other.brain) {
             this->brain = new Brain(*other.brain);
         } else {
-            brain = nullptr;
+            brain = NULL;
         }
         this->_type = other._type;
     }

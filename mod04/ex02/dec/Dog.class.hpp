@@ -1,12 +1,12 @@
 #ifndef DOG_CLASS_H
 # define DOG_CLASS_H
 
-#include "Animal.class.hpp"
+#include "AAnimal.class.hpp"
 #include "Brain.class.hpp"
 #include <iostream>
 #include <string>
 
-class Dog : public Animal {
+class Dog : public AAnimal {
     public:
         Dog ( void );
         Dog ( const Dog &other);

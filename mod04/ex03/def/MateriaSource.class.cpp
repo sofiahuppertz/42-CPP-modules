@@ -36,7 +36,7 @@ void MateriaSource::learnMateria( AMateria *m )
         return;
     for (int i = 0; i < 4; i++)
     {
-        if (this->_inventory[i] == nullptr)
+        if (this->_inventory[i] == NULL)
         {
             this->_inventory[i] = m;
             return;
@@ -52,5 +52,5 @@ AMateria *MateriaSource::createMateria( std::string const &type )
         if (this->_inventory[i] && this->_inventory[i]->getType() == type)
             return this->_inventory[i]->clone();
     }
-    return nullptr;
+    return NULL;
 }

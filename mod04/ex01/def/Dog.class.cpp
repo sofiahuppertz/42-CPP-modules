@@ -16,7 +16,7 @@ Dog::Dog (const Dog &other) : Animal( other )
     if (other.brain) {
         brain = new Brain(*other.brain);
     } else {
-        brain = nullptr;
+        brain = NULL;
     }
     return;
 }
@@ -39,7 +39,7 @@ Dog &Dog::operator=( const Dog &other )
         {
             this->brain = new Brain(*other.brain);
         } else {
-            brain = nullptr;
+            brain = NULL;
         }
         this->_type = other._type;
     }

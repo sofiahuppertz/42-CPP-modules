@@ -106,6 +106,7 @@ int main ( void )
         std::cout << Whiskers->getIdea(0) << std::endl;
         std::cout << Whiskers->getIdea(1) << std::endl;
         std::cout << Whiskers->getIdea(2) << std::endl;
+        std::cout << Whiskers->getIdea(3) << std::endl; //This will leave a blank space, because there is no idea at index 3.
 
         // If you're not sure if Mittens is a pointer to Cat, you can use dynamic_cast ( feature of polymorphism).
         Dog *dog = dynamic_cast<Dog*>(Mittens);

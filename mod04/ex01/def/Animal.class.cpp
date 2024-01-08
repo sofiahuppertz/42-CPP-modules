@@ -47,7 +47,7 @@ std::string Animal::getType ( void ) const
 
 Brain *Animal::getBrain( void ) const
 {
-    return nullptr;
+    return NULL;
 }
 
 void Animal::setIdea ( std::string idea, int index)

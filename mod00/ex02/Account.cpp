@@ -70,7 +70,7 @@ void    Account::makeDeposit( int deposit)
 
 void   Account::_displayTimestamp( void )
 {
-    std::time_t t = std::time(nullptr);
+    std::time_t t = std::time(NULL);
     std::tm* localTime = std::localtime(&t);
 
     std::cout << std::put_time(localTime, "[%Y%m%d_%H%M%S] ");

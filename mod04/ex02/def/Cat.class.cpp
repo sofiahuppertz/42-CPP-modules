@@ -1,7 +1,7 @@
 
 #include "../dec/Cat.class.hpp"
 
-Cat::Cat ( void ): Animal()
+Cat::Cat ( void ): AAnimal()
 {
     std::cout << "Cat constructor called" << std::endl;
     this->_type = "Cat";
@@ -9,7 +9,7 @@ Cat::Cat ( void ): Animal()
     return;
 }
 
-Cat::Cat (const Cat &other) : Animal( other )
+Cat::Cat (const Cat &other) : AAnimal( other )
 {
     std::cout << "Cat copy constructor called" << std::endl;
     this->_type = other._type;
@@ -17,7 +17,7 @@ Cat::Cat (const Cat &other) : Animal( other )
     {
         brain = new Brain(*other.brain);
     } else {
-        brain = nullptr;
+        brain = NULL;
     }
 }
 
@@ -33,12 +33,12 @@ Cat &Cat::operator=(const Cat &other)
     std::cout << "Cat copy assignment operator called" << std::endl;
     if (this != &other)
     {
-        Animal::operator=(other);
+        AAnimal::operator=(other);
         delete brain;
         if (other.brain) {
             this->brain = new Brain(*other.brain);
         } else {
-            brain = nullptr;
+            brain = NULL;
         }
         this->_type = other._type;
     }

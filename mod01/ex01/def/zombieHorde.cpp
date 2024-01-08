@@ -17,6 +17,6 @@ Zombie *zombieHorde ( int N, std::string name)
     {
         std::cerr << "bad_alloc caught: " << ba.what() << std::endl; 
     }
-    return nullptr;
+    return NULL;
 
 }

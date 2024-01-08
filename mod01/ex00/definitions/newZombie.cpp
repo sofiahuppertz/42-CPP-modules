@@ -13,5 +13,5 @@ Zombie* newZombie( std::string name )
     {
         std::cerr << "bad_alloc caught: " << ba.what() << std::endl;    
     }
-    return nullptr;
+    return NULL;
 }

@@ -33,8 +33,7 @@ ICharacter::ICharacter( const ICharacter &other )
 ICharacter::~ICharacter( void )
 {
     for(int i = 0; i < 4; ++i) {
-        delete _inventory[i];
-        _inventory[i] = nullptr; 
+        _inventory[i] = NULL; 
     }
     std::cout << "ICharacter destructor called" << std::endl;
     return;

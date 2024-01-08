@@ -1,5 +1,5 @@
 
-#include "dec/Animal.class.hpp"
+#include "dec/AAnimal.class.hpp"
 #include "dec/Brain.class.hpp"
 #include "dec/Cat.class.hpp"
 #include "dec/Dog.class.hpp"
@@ -10,7 +10,7 @@ int main ( void )
     {   
         std::cout << "---------------------" << std::endl;
         std::cout << "-------Test 1--------" << std::endl;
-        Animal* animals[4];
+        AAnimal* animals[4];
         for (int i = 0; i < 4; i++)
         {
             if (i % 2 == 0)
@@ -30,8 +30,8 @@ int main ( void )
     {
         std::cout << "---------------------" << std::endl;
         std::cout << "-------Test 2--------" << std::endl;
-        Animal* cat = new Cat();
-        Animal* dog = new Dog();
+        AAnimal* cat = new Cat();
+        AAnimal* dog = new Dog();
 
         for (int i = 0; i < 10; i++)
         {
@@ -62,7 +62,7 @@ int main ( void )
     {
         std::cout << "---------------------" << std::endl;
         std::cout << "-------Test 4--------" << std::endl;
-        Animal* animal = new Dog();
+        AAnimal* animal = new Dog();
         animal->makeSound(); // Should print "Woof!"
         delete animal;
     }
@@ -95,14 +95,14 @@ int main ( void )
     {
         std::cout << "---------------------" << std::endl;
         std::cout << "-------Test 7--------" << std::endl;
-        Animal *Mittens = new Cat();
+        AAnimal *Mittens = new Cat();
         Mittens->setIdea("What does the human do with all those boxes they receive?", 0);
         Mittens->setIdea("I should try to fit in one of those boxes", 1);
         Mittens->setIdea("I fit in the box, now what?", 2);
 
-        // Animal *Whiskers = new Cat(*Mittens);
-        // It's important we typecast Mittens because it is a pointer to Animal.
-        Animal *Whiskers = new Cat(*static_cast<Cat*>(Mittens));
+        // AAnimal *Whiskers = new Cat(*Mittens);
+        // It's important we typecast Mittens because it is a pointer to AAnimal.
+        AAnimal *Whiskers = new Cat(*static_cast<Cat*>(Mittens));
         std::cout << Whiskers->getIdea(0) << std::endl;
         std::cout << Whiskers->getIdea(1) << std::endl;
         std::cout << Whiskers->getIdea(2) << std::endl;
@@ -111,7 +111,7 @@ int main ( void )
         Dog *dog = dynamic_cast<Dog*>(Mittens);
         if (dog)
         {
-            Animal *Fido = new Dog(*dog);
+            AAnimal *Fido = new Dog(*dog);
             Fido->makeSound();
         }
         else

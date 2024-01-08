@@ -5,7 +5,7 @@ IMateriaSource::IMateriaSource( void )
 {
     std::cout << "IMateriaSource constructor called" << std::endl;
     for (int i = 0; i < 4; i++)
-        this->_inventory[i] = nullptr;
+        this->_inventory[i] = NULL;
     return;
 }
 
@@ -14,7 +14,7 @@ IMateriaSource::IMateriaSource( const IMateriaSource &other )
     std::cout << "IMateriaSource copy constructor called" << std::endl;
     for (int i = 0; i < 4; i++)
     {
-        this->_inventory[i] = nullptr;
+        this->_inventory[i] = NULL;
         if (other._inventory[i])
             this->_inventory[i] = other._inventory[i]->clone();
     }
@@ -40,7 +40,7 @@ IMateriaSource &IMateriaSource::operator=( const IMateriaSource &other )
         for (int i = 0; i < 4; i++)
         {
             delete this->_inventory[i];
-            this->_inventory[i] = nullptr;
+            this->_inventory[i] = NULL;
             if (other._inventory[i])
             {
                 this->_inventory[i] = other._inventory[i]->clone();

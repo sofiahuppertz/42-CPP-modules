@@ -1,12 +1,12 @@
 #ifndef CAT_CLASS_H
 # define CAT_CLASS_H
 
-#include "Animal.class.hpp"
+#include "AAnimal.class.hpp"
 #include "Brain.class.hpp"
 #include <iostream>
 #include <string>
 
-class Cat : public Animal {
+class Cat : public AAnimal {
     public:
         Cat ( void );
         Cat ( const Cat &other);

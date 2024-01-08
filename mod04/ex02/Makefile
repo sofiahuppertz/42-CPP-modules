@@ -2,7 +2,7 @@ NAME = Ideas
 
 CPPFLAGS = -g -Wall -Wextra -Werror -std=c++98
 
-SRCS = def/Animal.class.cpp \
+SRCS = def/AAnimal.class.cpp \
 	def/Cat.class.cpp \
 	def/Dog.class.cpp \
 	def/Brain.class.cpp \

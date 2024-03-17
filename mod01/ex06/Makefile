@@ -1,16 +1,20 @@
 NAME = harlFilter
 
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+CXX = c++
+
+CXXFLAGS = -std=c++98
 
 SRCS = def/Harl.class.cpp \
-	main.cpp 
+	main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
+
+.SECONDARY : $(OBJS)
 
 all : $(NAME)
 
 $(NAME): $(OBJS)
-	c++ -I./dec $(CPPFLAGS) $(OBJS) -o $(NAME)
+	$(CXX) -I./dec -g3 $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 clean:
 	rm -f $(OBJS)

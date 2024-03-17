@@ -3,7 +3,7 @@
 int main ( void )
 {
     // Default constructor called.
-    Fixed a;  
+    Fixed a;
 
     // Copy constructor called.
     Fixed b( a );

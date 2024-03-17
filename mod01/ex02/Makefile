@@ -1,11 +1,13 @@
 NAME = brain
 
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+CXX = c++
+
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 all : $(NAME)
 
-$(NAME): $(OBJS)
-	c++ $(CPPFLAGS) main.cpp  -o $(NAME)
+$(NAME):
+	$(CXX) $(CXXFLAGS) main.cpp  -o $(NAME)
 
 clean:
 	rm -f $(NAME)

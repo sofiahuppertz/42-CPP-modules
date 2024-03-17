@@ -1,22 +1,26 @@
 #ifndef ZOMBIE_CLASS_H
 # define ZOMBIE_CLASS_H
 
-#include <iostream>
+# include <iostream>
 
-class Zombie {
+class Zombie
+{
+  public:
+	Zombie(void);
+	Zombie(std::string name);
+	~Zombie(void);
 
-    public:
-        Zombie( void );
-        ~Zombie( void );
+	//Setter
+	void setName(std::string name);
 
-        void setName( std::string name );
-        std::string getName (void ) const;
-        void anounce( void ) const;
+	//Getter
+	std::string getName(void) const;
 
-    private:
-        std::string _name;
-        
+	// Member function
+	void anounce(void) const;
 
+  private:
+	std::string _name;
 };
 
 #endif

@@ -1,6 +1,6 @@
 
 #include "dec/Bsp.hpp"
-
+#include <climits>
 int main(void)
 {
     std::cout << "Welcome to triangle_point!" << std::endl;
@@ -18,7 +18,7 @@ int main(void)
             std::cin >> x;
             if (std::cin.fail()) {
                 std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cin.ignore(INT_MAX, '\n');
                 std::cout << "Invalid input. Please enter a number." << std::endl;
                 i--;
                 continue;
@@ -27,7 +27,7 @@ int main(void)
             std::cin >> y;
             if (std::cin.fail()) {
                 std::cin.clear();
-                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                std::cin.ignore(INT_MAX, '\n');
                 std::cout << "Invalid input. Please enter a number." << std::endl;
                 i--;
                 continue;

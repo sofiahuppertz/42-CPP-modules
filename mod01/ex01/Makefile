@@ -1,17 +1,21 @@
 NAME = zombieHorde
 
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+CXX = c++
+
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
 SRCS = def/zombieHorde.cpp \
 	def/Zombie.class.cpp \
-	main.cpp 
+	main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
+
+.SECONDARY : $(OBJS)
 
 all : $(NAME)
 
 $(NAME): $(OBJS)
-	c++ -I./dec $(CPPFLAGS) $(OBJS) -o $(NAME)
+	$(CXX) -I./dec $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 clean:
 	rm -f $(OBJS)

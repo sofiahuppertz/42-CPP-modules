@@ -1,15 +1,19 @@
 NAME = replace
 
-CPPFLAGS = -Wall -Wextra -Werror -std=c++98
+CXX = c++
 
-SRCS = main.cpp 
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+
+SRCS = main.cpp
 
 OBJS = $(SRCS:.cpp=.o)
+
+.SECONDARY : $(OBJS)
 
 all : $(NAME)
 
 $(NAME): $(OBJS)
-	c++ $(CPPFLAGS) $(OBJS) -o $(NAME)
+	$(CXX) $(CXXFLAGS) $(OBJS) -o $(NAME)
 
 clean:
 	rm -f $(OBJS)

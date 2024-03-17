@@ -18,5 +18,7 @@ bool bsp( Point const a, Point const b, Point const c, Point const point) {
     float area1 = triArea(point, b, c);
     float area2 = triArea(a, point, c);
     float area3 = triArea(a, b, point);
+    if (area1 <= 0 || area2 <= 0 || area3 <= 0)
+        return false;
     return area == area1 + area2 + area3;
 }

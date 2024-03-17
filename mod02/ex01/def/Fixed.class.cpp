@@ -2,7 +2,7 @@
 #include "../dec/Fixed.class.hpp"
 
 
-// Constructors 
+// Constructors
 
 Fixed:: Fixed ( void )
 {
@@ -25,9 +25,10 @@ Fixed:: Fixed ( const float n )
     return;
 }
 
-Fixed:: Fixed ( const Fixed &other): fixed_point(other.fixed_point)
+Fixed:: Fixed ( const Fixed &other)
 {
     std::cout << "Copy Constructor called." << std::endl;
+    this->fixed_point = other.getRawBits();
     return;
 }
 
@@ -43,7 +44,7 @@ Fixed:: ~Fixed ( void )
 
 // Member Functions
 
-int Fixed::getRawBits ( void ) const 
+int Fixed::getRawBits ( void ) const
 {
     std::cout << "getRawBits member function called." << std::endl;
     return this->fixed_point;
@@ -77,7 +78,7 @@ Fixed& Fixed:: operator = ( const Fixed &other)
     return *this;
 }
 
-std::ostream& operator << (std::ostream& os, const Fixed& object) 
+std::ostream& operator << (std::ostream& os, const Fixed& object)
 {
     os << object.toFloat();
     return os;

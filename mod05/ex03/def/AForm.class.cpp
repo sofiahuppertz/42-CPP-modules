@@ -58,6 +58,17 @@ std::string AForm::getName( void ) const
     return name;
 }
 
+void AForm::setTarget(std::string _target)
+{
+    target = _target;
+}
+
+std::string AForm::getTarget( void ) const
+{
+    return target;
+}
+
+
 int AForm::getGradeToExecute( void ) const
 {
     return gradeToExecute;

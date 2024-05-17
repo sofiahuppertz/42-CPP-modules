@@ -77,6 +77,15 @@ std::string AForm::getIsSigned( void ) const
     return "False";
 }
 
+void AForm::setTarget(std::string _target)
+{
+    target = _target;
+}
+
+std::string AForm::getTarget( void ) const
+{
+    return target;
+}
 
 void AForm::check_and_execute(Bureaucrat const &executor)
 {
@@ -95,11 +104,9 @@ void AForm::check_and_execute(Bureaucrat const &executor)
         std::cerr << e.what() << std::endl;
         failure();
     }
-
-    
-
     return ;
 }
+
 std::ostream& operator<< (std::ostream& os, const AForm &object)
 {
     os << "AForm: " << object.getName() << "; Grade to execute: " << object.getGradeToExecute() << "; Grade to sign: " << object.getGradeToSign() << "; Is signed: " << object.getIsSigned();

@@ -2,17 +2,28 @@
 
 RobotomyRequestForm::RobotomyRequestForm( void ): AForm("RobotomyRequestForm", 72, 45) 
 {
+    setTarget("default");
+    std::cout << "Calling RobotomyRequestForm constructor." << std::endl;
+    return ;
+}
+
+RobotomyRequestForm::RobotomyRequestForm(std::string _target): AForm("RobotomyRequestForm", 72, 45) 
+{
+    setTarget(_target);
     std::cout << "Calling RobotomyRequestForm constructor." << std::endl;
     return ;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &other): AForm(other) {
+
+    setTarget(other.getTarget());
     std::cout << "Calling RobotomyRequestForm copy constructor." << std::endl;
     return ;
 }
 
 RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm const &other) {
-    (void)other;
+
+    setTarget(other.getTarget());
     std::cout << "Calling RobotomyRequestForm assignment operator." << std::endl;
     return *this;
 }
@@ -26,9 +37,10 @@ RobotomyRequestForm::~RobotomyRequestForm( void ) {
 
 void RobotomyRequestForm::execute ( Bureaucrat const &executor ) const
 {   
+    (void)executor;
     std::cout << "RobotomyRequestForm execute() called." << std::endl;
     std::cout << "* SOME DRILLING NOISES *" << std::endl;
-    std::cout << executor.getName() << " has been robotomized succesfully 50% of the time" << std::endl;
+    std::cout << getTarget() << " has been robotomized succesfully 50% of the time" << std::endl;
     return;
 }
 

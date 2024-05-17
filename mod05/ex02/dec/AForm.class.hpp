@@ -24,11 +24,15 @@ class AForm {
         void check_and_execute(Bureaucrat const &executor);
         virtual void execute(Bureaucrat const &executor) const = 0;
         virtual void failure( void ) = 0;
+        void setTarget(std::string _target);
+        std::string getTarget( void ) const;
+        
     private:
         const std::string name;
         bool isSigned;
         const int gradeToSign;
         const int gradeToExecute;
+        std::string target;
 
 };
 

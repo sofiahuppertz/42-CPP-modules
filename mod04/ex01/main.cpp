@@ -41,10 +41,12 @@ int main ( void )
                 dog->setIdea("E = mc^2", i);
         }
         cat = dog;
+        std::cout << "Type: " << cat->getType() << std::endl;        
         for (int i = 0; i < 10; i++)
         {
             std::cout << cat->getIdea(i) << std::endl;
         }
+
     }
     {
         std::cout << "---------------------" << std::endl;
@@ -79,7 +81,7 @@ int main ( void )
         delete cat1;
         delete cat2;
     }
-        {
+    {
         std::cout << "---------------------" << std::endl;
         std::cout << "-------Test 6--------" << std::endl;
         Dog* dog1 = new Dog();
@@ -123,9 +125,8 @@ int main ( void )
         x->makeSound();
         std::cout << "Type: " << x->getType() << std::endl;
         //Ideas weren't copied because they are part of the derived class.
-        std::cout << "Ideas: " << x->getIdea(0) << std::endl;
-        std::cout << x->getIdea(1) << std::endl;
-        std::cout << x->getIdea(2) << std::endl;
+        std::cout << "Ideas: " << x->getIdea(0) << x->getIdea(1) << x->getIdea(2) << std::endl;
+        std::cout << "This cat is actually not Cat class, it's only Animal. Animal doesn't have a brain so no ideas..." << std::endl;
         delete Mittens;
         delete Whiskers;
         delete x;

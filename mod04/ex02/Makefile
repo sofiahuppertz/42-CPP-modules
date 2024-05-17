@@ -1,4 +1,4 @@
-NAME = Ideas
+NAME = AbstractClass
 
 CPPFLAGS = -g -Wall -Wextra -Werror -std=c++98
 

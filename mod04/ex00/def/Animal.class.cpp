@@ -7,7 +7,7 @@ Animal::Animal ( void ) : _type("Animal")
     return;
 }
 
-Animal::Animal ( std::string type): _type(type)
+Animal::Animal ( std::string name): _type(name)
 {
     std::cout << "Animal constructor called" << std::endl;
     return;

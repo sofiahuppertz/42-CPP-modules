@@ -181,9 +181,6 @@ const Fixed& Fixed::max( const Fixed& a, const Fixed& b ) {
 }
 
 
-// Non-member functions
-
-
 // Insertion operator
 std::ostream& operator << (std::ostream& os, const Fixed& object) 
 {

@@ -38,7 +38,7 @@ void PresidentialPardonForm::execute ( Bureaucrat const &executor ) const
     return;
 }
 
-void PresidentialPardonForm::failure( void )
+void PresidentialPardonForm::local_failure( void )
 {
     return;
 }

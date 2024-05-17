@@ -16,10 +16,10 @@ The `Bureaucrat` class can throw exceptions, which are caught by outer functions
 The `Form` class has `const` member attributes, which cannot be reassigned after initialization. The `Form` and `Bureaucrat` classes are dependent on each other.
 
 ### Ex02: Form Becomes Abstract (AForm)
-To avoid repetition, we check requirements that are common in the base class function `check_and_execute` which then calls each form's concrete `execute` function. This is a more elegant and efficient way than checking requirements in each derived function.
+To avoid repetition, we check requirements that are common in the base class function `execute` which then calls each form's concrete `execute` function. This is a more elegant and efficient way than checking requirements in each derived function.
 
 ```cpp
-void AForm::check_and_execute(Bureaucrat const &executor) {
+void AForm::execute(Bureaucrat const &executor) {
     try {
         if (executor.getGrade() > getGradeToExecute()) {
             throw GradeTooLowException();
@@ -30,14 +30,14 @@ void AForm::check_and_execute(Bureaucrat const &executor) {
         execute(executor);
     } catch (std::exception &e) {
         std::cerr << e.what() << std::endl;
-        failure();
+        local_failure();
     }
 }
 ``````
 
-Execute() and failure() are pure virtual in AForm… but it’s fine to call them because AForm is an abstract class…
+Execute() and local_failure() are pure virtual in AForm… but it’s fine to call them because AForm is an abstract class…
 
-Each derived functions has it’s own execute() and failure() implementation, according to the subject’s requirements.
+Each derived functions has it’s own execute() and local_failure() implementation, according to the subject’s requirements.
 
 The target attribute is passed to the constructor of any derived class of AForm. Because I want to avoid repetition, I made target a private member of AForm, and created getters and setters for it.
 

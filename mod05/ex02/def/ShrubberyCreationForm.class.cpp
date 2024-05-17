@@ -34,7 +34,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm( void ) {
     return ;
 }
 
-void ShrubberyCreationForm::execute ( Bureaucrat const &executor ) const
+void ShrubberyCreationForm::local_execute ( Bureaucrat const &executor ) const
 {
     std::ofstream ofs;
     std::string filename;
@@ -56,7 +56,7 @@ void ShrubberyCreationForm::execute ( Bureaucrat const &executor ) const
     return;
 }
 
-void ShrubberyCreationForm::failure( void )
+void ShrubberyCreationForm::local_failure( void ) const
 {
     return;
 }

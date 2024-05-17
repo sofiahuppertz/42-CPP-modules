@@ -45,6 +45,22 @@ int main ( void )
             std::cout << e.what() << std::endl;
         };
     }
+    {
+        std::cout << std::endl << "Test 3 " << std::endl;
+        Bureaucrat Sofia("Sofia", 150);
+        Form form1("Form1", 149, 1);
+        Sofia.signForm(form1);
+        Sofia.incrementGrade();
+        Sofia.signForm(form1);
+    }
+        {
+        std::cout << std::endl << "Test 4 " << std::endl;
+        Bureaucrat Sofia("Sofia", 130);
+        Form form1("Form1", 140, 1);
+        Sofia.signForm(form1);
+        Sofia.incrementGrade();
+        Sofia.signForm(form1);
+    }
     std::cout << std::endl;
     return 0;
 }

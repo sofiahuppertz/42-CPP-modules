@@ -56,7 +56,7 @@ void ShrubberyCreationForm::execute ( Bureaucrat const &executor ) const
     return;
 }
 
-void ShrubberyCreationForm::failure( void )
+void ShrubberyCreationForm::local_failure( void )
 {
     return;
 }

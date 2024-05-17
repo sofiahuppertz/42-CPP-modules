@@ -35,7 +35,7 @@ RobotomyRequestForm::~RobotomyRequestForm( void ) {
 }
 
 
-void RobotomyRequestForm::execute ( Bureaucrat const &executor ) const
+void RobotomyRequestForm::local_execute ( Bureaucrat const &executor ) const
 {   
     (void)executor;
     std::cout << "RobotomyRequestForm execute() called." << std::endl;
@@ -44,7 +44,7 @@ void RobotomyRequestForm::execute ( Bureaucrat const &executor ) const
     return;
 }
 
-void RobotomyRequestForm::failure ( void )
+void RobotomyRequestForm::local_failure ( void ) const
 {
     std::cout << "Robotomy failed. " << std::endl;
     return;

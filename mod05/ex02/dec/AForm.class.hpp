@@ -21,9 +21,9 @@ class AForm {
         std::string getIsSigned( void ) const;
         int getGradeToExecute( void ) const;
         int getGradeToSign( void ) const;
-        void check_and_execute(Bureaucrat const &executor);
-        virtual void execute(Bureaucrat const &executor) const = 0;
-        virtual void failure( void ) = 0;
+        void execute(Bureaucrat const &executor) const;
+        virtual void local_execute(Bureaucrat const &executor) const = 0;
+        virtual void local_failure( void ) const = 0;
         void setTarget(std::string _target);
         std::string getTarget( void ) const;
         

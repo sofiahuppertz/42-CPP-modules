@@ -30,7 +30,7 @@ PresidentialPardonForm::~PresidentialPardonForm( void ) {
     return ;
 }
 
-void PresidentialPardonForm::execute ( Bureaucrat const &executor ) const
+void PresidentialPardonForm::local_execute ( Bureaucrat const &executor ) const
 {
     (void)executor;
     std::cout << "PresidentialPardonForm execute() called." << std::endl;
@@ -38,7 +38,7 @@ void PresidentialPardonForm::execute ( Bureaucrat const &executor ) const
     return;
 }
 
-void PresidentialPardonForm::failure( void )
+void PresidentialPardonForm::local_failure( void ) const
 {
     return;
 }

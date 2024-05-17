@@ -6,23 +6,12 @@
 int main( void )
 {
     {
-        std::cout << std::endl << "Test copy constructor and assignment operator in derived classes" << std::endl;
-        ShrubberyCreationForm a = ShrubberyCreationForm();
-        ShrubberyCreationForm b = a;
-        ShrubberyCreationForm c = ShrubberyCreationForm(a);
-
-        std::cout << a << std::endl;
-        std::cout << b << std::endl;
-        std::cout << c << std::endl;
-
-    }
-    {
         std::cout << std::endl << "Test 1" << std::endl;
         Bureaucrat b("Sofia", 146);
         AForm *form1 = new ShrubberyCreationForm();
         std::cout << b << std::endl;
         std::cout << *form1 << std::endl;
-        form1->check_and_execute(b);
+        form1->execute(b);
         std::cout << *form1 << std::endl;
         delete form1;
     }
@@ -32,7 +21,7 @@ int main( void )
         AForm *form1 = new ShrubberyCreationForm();
         std::cout << b << std::endl;
         std::cout << *form1 << std::endl;
-        form1->check_and_execute(b);
+        form1->execute(b);
         std::cout << *form1 << std::endl;
         delete form1;   
     }
@@ -42,19 +31,20 @@ int main( void )
         AForm *form1 = new ShrubberyCreationForm();
         std::cout << b << std::endl;
         std::cout << *form1 << std::endl;
-        form1->beSigned(b);
-        form1->check_and_execute(b);
+        b.signAForm(*form1);
+        std::cout << *form1 << std::endl;
+        form1->execute(b);
         std::cout << *form1 << std::endl;
         delete form1;   
     }
     std::cout << std::endl;
     {
         std::cout << std::endl << "Test 4" << std::endl;
-        Bureaucrat b("Sofia", 146);
+        Bureaucrat b("Sofia", 40);
         AForm *form1 = new RobotomyRequestForm();
         std::cout << b << std::endl;
         std::cout << *form1 << std::endl;
-        form1->check_and_execute(b);
+        form1->execute(b);
         std::cout << *form1 << std::endl;
         delete form1;
     }
@@ -64,7 +54,7 @@ int main( void )
         AForm *form1 = new RobotomyRequestForm();
         std::cout << b << std::endl;
         std::cout << *form1 << std::endl;
-        form1->check_and_execute(b);
+        form1->execute(b);
         std::cout << *form1 << std::endl;
         delete form1;   
     }
@@ -75,7 +65,7 @@ int main( void )
         std::cout << b << std::endl;
         std::cout << *form1 << std::endl;
         form1->beSigned(b);
-        form1->check_and_execute(b);
+        form1->execute(b);
         std::cout << *form1 << std::endl;
         delete form1;   
     }
@@ -86,17 +76,18 @@ int main( void )
         AForm *form1 = new PresidentialPardonForm();
         std::cout << b << std::endl;
         std::cout << *form1 << std::endl;
-        form1->check_and_execute(b);
+        form1->execute(b);
         std::cout << *form1 << std::endl;
         delete form1;
     }
     {
         std::cout << std::endl << "Test 8" << std::endl;
-        Bureaucrat b("Sofia", 130);
+        Bureaucrat b("Sofia", 10);
         AForm *form1 = new PresidentialPardonForm();
+        b.signAForm(*form1);
         std::cout << b << std::endl;
         std::cout << *form1 << std::endl;
-        form1->check_and_execute(b);
+        form1->execute(b);
         std::cout << *form1 << std::endl;
         delete form1;   
     }
@@ -107,7 +98,7 @@ int main( void )
         std::cout << b << std::endl;
         std::cout << *form1 << std::endl;
         form1->beSigned(b);
-        form1->check_and_execute(b);
+        form1->execute(b);
         std::cout << *form1 << std::endl;
         delete form1;   
     }

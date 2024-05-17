@@ -12,7 +12,7 @@ class ShrubberyCreationForm : public AForm {
         ShrubberyCreationForm &operator=(ShrubberyCreationForm const &other);
         virtual ~ShrubberyCreationForm( void );
         virtual void execute(Bureaucrat const &executor) const;
-        virtual void failure( void );
+        virtual void local_failure( void );
 };
 
 # endif

@@ -87,7 +87,7 @@ std::string AForm::getTarget( void ) const
     return target;
 }
 
-void AForm::check_and_execute(Bureaucrat const &executor)
+void AForm::execute(Bureaucrat const &executor) const
 {
     try {
         if (executor.getGrade() >  getGradeToExecute())
@@ -98,11 +98,11 @@ void AForm::check_and_execute(Bureaucrat const &executor)
         {
             throw FormNotSignedException();
         }
-        execute(executor);
+        local_execute(executor);
     } catch (std::exception &e)
     {
         std::cerr << e.what() << std::endl;
-        failure();
+        local_failure();
     }
     return ;
 }

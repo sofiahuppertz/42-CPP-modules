@@ -87,7 +87,7 @@ std::string AForm::getIsSigned( void ) const
 }
 
 
-void AForm::check_and_execute(Bureaucrat const &executor)
+void AForm::execute(Bureaucrat const &executor)
 {
     try {
         if (executor.getGrade() >  getGradeToExecute())
@@ -102,7 +102,7 @@ void AForm::check_and_execute(Bureaucrat const &executor)
     } catch (std::exception &e)
     {
         std::cerr << e.what() << std::endl;
-        failure();
+        local_failure();
     }
 
     

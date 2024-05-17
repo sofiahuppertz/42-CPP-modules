@@ -33,9 +33,9 @@ void AForm::check_and_execute(Bureaucrat const &executor) {
         failure();
     }
 }
+``````
 
-
-execute() and failure() are pure virtual in AForm… but it’s fine to call them because AForm is an abstract class…
+Execute() and failure() are pure virtual in AForm… but it’s fine to call them because AForm is an abstract class…
 
 Each derived functions has it’s own execute() and failure() implementation, according to the subject’s requirements.
 

@@ -3,22 +3,26 @@
 
 template <class T>
 Array<T>::Array( void ): array(nullptr), _size(0){
+    std::cout << "Default constructor called" << std::endl;
 // array = nullptr is the same than array = new T[0];
 }
 
 template <class T>
 Array<T>::Array ( unsigned int n ): _size(n) {
+    std::cout << "Parameterized constructor called" << std::endl;
     array = new T[n];
 }
 
 template <class T>
 Array<T>::Array ( Array const & src): _size(src._size){
+    std::cout << "Copy constructor called" << std::endl;
     array = new T[_size];
     copyElements(src.array, array, _size);
 }
 
 template <class T>
 Array<T>::~Array( void ) {
+    std::cout << "Destructor called" << std::endl;
     delete [] array;
 }
 
@@ -47,12 +51,14 @@ const T & Array<T>::operator[](unsigned int idx ) const {
 
 template <class T>
 Array<T> & Array<T>::operator=( Array const & other) {
+    std::cout << "Assignment operator called" << std::endl;
     if (this != &other) {
         delete [] array;
         _size = other._size;
         array = new T[_size];
         copyElements(other.array, array, _size);
     }
+    return *this;
 }
 
 template <class T>

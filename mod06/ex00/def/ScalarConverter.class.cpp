@@ -79,8 +79,6 @@ void printNumericalConversions( double Value)
         std::cout << static_cast<int>(Value) << std::endl;
 
     std::cout << "float: ";
-    //if (isnan(Value))
-    //    std::cout << "nanf" << std::endl;
     if (isinf(Value))
         std::cout << (Value > 0 ? "inff" : "-inff") << std::endl;
     else 

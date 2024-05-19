@@ -15,4 +15,6 @@ int main( void )
     std::cout << deserializedData->str_a << std::endl;
     std::cout << original_data.int_a << std::endl;
     std::cout << deserializedData->int_a << std::endl;
+
+    
 }

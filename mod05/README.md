@@ -41,4 +41,6 @@ Each derived functions has it’s own execute() and local_failure() implementati
 
 The target attribute is passed to the constructor of any derived class of AForm. Because I want to avoid repetition, I made target a private member of AForm, and created getters and setters for it.
 
-### Ex03: In this exercise we create an Intern class, which can create forms based on a string. For this we use abstract class function pointers that return concrete derived classes. It is constructed in a way that would make it extremely easy to add a new derived class and allow for interns to return them… Way better than having an if/else long block
+### Ex03:
+In this exercise we create an Intern class, which can create 
+based on a string. For this we use abstract class function pointers that return concrete derived classes. It is constructed in a way that would make it extremely easy to add a new derived class and allow for interns to return them… Way better than having an if/else long block

@@ -1,5 +1,5 @@
-#ifndef ARRAY_CLASS_HPP
-#define ARRAY_CLASS_HPP
+#ifndef ARRAY_HPP
+#define ARRAY_HPP
 
 
 template <class T>
@@ -26,6 +26,6 @@ class Array {
         unsigned int _size;
 };
 
-#include "../def/Array.class.tpp"
+#include "../def/Array.tpp"
 
 # endif

@@ -1,4 +1,3 @@
-```markdown
 # Template Programming in C++
 
 ## Overview

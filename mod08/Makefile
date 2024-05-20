@@ -1,4 +1,4 @@
-NAME = template
+NAME = easyfind
 
 CXX = c++
 

@@ -23,7 +23,6 @@ class MutantStack : public std::stack<T, Container> {
         iterator rbegin( void );
         iterator rend( void );
 
-
 };
 
 #include "../def/Mutantstack.tpp"  

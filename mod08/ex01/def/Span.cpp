@@ -4,19 +4,19 @@
 const std::string blue("\033[0;34m");
 const std::string reset("\033[0m");
 
-Span::Span( void ): storageCapacity(0), storage() {
+Span::Span( void ): storage() {
 
     std::cout << blue << "Default constructor called. Storage capacity = 0" << reset << std::endl;
 
 }
 
-Span::Span( unsigned int N ): storageCapacity(N), storage() {
+Span::Span( unsigned int N ): storage() {
     storage.reserve(N);
-    std::cout << blue << "Constructor called. Storage capacity = " << storageCapacity <<  reset <<std::endl;
+    std::cout << blue << "Constructor called. Storage capacity = " << storage.capacity() <<  reset <<std::endl;
 }
 
-Span::Span ( const Span & other ): storageCapacity(other.storageCapacity), storage(other.storage) {
-    std::cout << blue << "Copy constructor called. Storage capacity = " << storageCapacity << reset << std::endl;
+Span::Span ( const Span & other ): storage(other.storage) {
+    std::cout << blue << "Copy constructor called. Storage capacity = " << storage.capacity() << reset << std::endl;
 }
 
 Span::~Span ( void ) {
@@ -26,7 +26,6 @@ Span::~Span ( void ) {
 Span &Span::operator=( const Span &other ) {
 
     if ( this != &other ) {
-        storageCapacity = other.storageCapacity;
         storage = other.storage;
     }
     return *this;
@@ -63,7 +62,7 @@ unsigned int Span::shortestSpan ( void ) const {
     }
 
     // Calculate the shortest span
-    for ( size_t i = 1; i < storageCapacity - 1; i++) {
+    for ( size_t i = 1; i < storage.size(); i++) {
         shortestSpan = std::min(shortestSpan, std::abs(storage[i] - storage[i+1]));
     }
 
@@ -79,4 +78,15 @@ unsigned int Span::longestSpan ( void ) const {
     }
         
     return static_cast<unsigned int>(storage.back() - storage.front());
+}
+
+
+// My functions (getters)
+
+unsigned int Span::getStorageCapacity( void ) const {
+    return storage.capacity();
+}
+
+unsigned int Span::getStorageSize( void ) const {
+    return storage.size();
 }

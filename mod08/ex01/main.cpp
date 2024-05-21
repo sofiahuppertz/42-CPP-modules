@@ -5,6 +5,7 @@ int main ( void )
   // ANSI color codes
   const std::string red("\033[0;31m");
   const std::string green("\033[0;32m");
+  const std::string blue("\033[0;34m");
   const std::string reset("\033[0m");
 
   // Test 1: Add a range of numbers and check the shortest and longest span
@@ -65,5 +66,20 @@ int main ( void )
   std::cout << green << "Shortest span: " << s4.shortestSpan() << reset << std::endl;
   std::cout << green << "Longest span: " << s4.longestSpan() << reset << std::endl;
 
+
+  // Test 6: Create a Span with a capacity larger than it's size.
+  std::cout << "Test 6: Create a Span with a capacity larger than it's size." << std::endl;
+  Span s5(10000);
+  std::vector<int> v3;
+  for ( int i = 0; i < 5000; i++ ) {
+    v3.push_back(i * 1.5);
+  }
+  s5.addNumber(v3.begin(), v3.end());
+  std::cout << blue << "Storage capacity: " << s5.getStorageCapacity() << reset << std::endl;
+  std::cout << blue << "Storage size: " << s5.getStorageSize() << reset << std::endl;
+  std::cout << green << "Shortest span: " << s5.shortestSpan() << reset << std::endl;
+  std::cout << green << "Longest span: " << s5.longestSpan() << reset << std::endl;
+
   return 0;
+   
 }

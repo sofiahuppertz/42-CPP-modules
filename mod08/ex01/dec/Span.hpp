@@ -24,8 +24,11 @@ class Span {
         unsigned int shortestSpan( void ) const;
         unsigned int longestSpan( void ) const;
 
+        // Getters
+        unsigned int getStorageCapacity( void ) const;
+        unsigned int getStorageSize( void ) const;
+
     private:
-        unsigned int storageCapacity;
         std::vector<int> storage;
 };
 

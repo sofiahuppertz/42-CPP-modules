@@ -1,6 +1,8 @@
 #ifndef FORM_CLASS_H
 # define FORM_CLASS_H
 
+#include <iostream>
+#include <iomanip>
 #include <string>
 #include "Bureaucrat.class.hpp"
 #include "Exceptions.hpp"

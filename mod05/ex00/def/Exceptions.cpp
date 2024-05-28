@@ -3,7 +3,7 @@
 
 const char *GradeTooHighException::what()const throw()
 {
-    return "Grade Too High.";
+    return   "Grade is Too High." ;
 }
 
 const char *GradeTooLowException::what()const throw()

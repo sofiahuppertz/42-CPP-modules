@@ -2,13 +2,11 @@
 
 Bureaucrat::Bureaucrat( void ):name("Default"), grade(150)
 {
-    std::cout<< "Calling default constructor" << std::endl;
     return;
 }
 
-Bureaucrat::Bureaucrat( std::string _name, int _grade): name(_name), grade(_grade)
+Bureaucrat::Bureaucrat( std::string _name, int _grade): name(_name)
 {
-    std::cout<< "Calling constructor" << std::endl;
     if ( _grade < 1)
     {
         throw GradeTooHighException();
@@ -17,6 +15,7 @@ Bureaucrat::Bureaucrat( std::string _name, int _grade): name(_name), grade(_grad
     {
         throw GradeTooLowException();
     }
+    grade = _grade;
     return;
 }
 
@@ -50,35 +49,32 @@ int Bureaucrat::getGrade( void ) const
     return grade;
 }
 
-void Bureaucrat::incrementGrade( void )
+void Bureaucrat::incrementGrade( int amount )
 {
-    std::cout << "Calling incrementGrade()" << std::endl;
-    if ( grade <= 1)
+    if ( grade - amount < 1)
     {
         throw GradeTooHighException();
     }
-    grade--;
+    grade -= amount;
     return;
 }
 
-void Bureaucrat::decrementGrade( void )
+void Bureaucrat::decrementGrade( int amount )
 {
-    std::cout << "Calling decrementGrade()" << std::endl;
-    if (grade >= 150)
+    if (grade + amount > 150)
     {
         throw GradeTooLowException();
     }
-    grade++;
+    grade += amount;
     return;
 }
 
 void Bureaucrat::signForm( Form &f )
 {
-    std::cout << "Calling signForm()" << std::endl;
     try
     {
         f.beSigned(*this);
-        std::cout << name << " signed " << f.getName() << std::endl;
+        std::cout << ANSIColors::BACKGROUND_GREEN << name << " signed " << f.getName() << "✍️" << ANSIColors::RESET << std::endl;
     }
     catch(std::exception &e)
     {
@@ -89,6 +85,6 @@ void Bureaucrat::signForm( Form &f )
 // Operator overload
 std::ostream& operator<< (std::ostream& os, const Bureaucrat &object)
 {
-    os << object.getName() << ", bureaucrat grade " << object.getGrade() << ".";
+    os << ANSIColors::BLUE << object.getName() << ANSIColors::GREEN << ", bureaucrat grade " << ANSIColors::BLUE << object.getGrade() <<  ANSIColors::GREEN << "." << ANSIColors::RESET;
     return os;
 }

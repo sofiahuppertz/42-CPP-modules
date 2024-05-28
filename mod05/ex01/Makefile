@@ -4,7 +4,8 @@ CXX = c++
 
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-SRCS = def/Bureaucrat.class.cpp \
+SRCS = def/ANSIColors.cpp \
+	def/Bureaucrat.class.cpp \
 	def/Form.class.cpp \
 	def/Exceptions.cpp \
 	main.cpp \

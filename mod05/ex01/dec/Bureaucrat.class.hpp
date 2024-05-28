@@ -3,6 +3,7 @@
 
 #include <string>
 #include <iostream>
+#include "ANSIColors.hpp"
 #include "Exceptions.hpp"
 #include "Form.class.hpp"
 
@@ -24,8 +25,8 @@ class Bureaucrat {
         int getGrade( void ) const;
 
         // Memeber functions
-        void incrementGrade( void );
-        void decrementGrade( void );
+        void incrementGrade( int amount );
+        void decrementGrade( int amount );
 
         // New function
         void signForm( Form &f );

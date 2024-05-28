@@ -2,9 +2,10 @@ NAME = bureaucrat
 
 CXX = c++
 
-CXXFLAGS = -Wall -Wextra -Werror -std=c++98
+CXXFLAGS = -Wall -Wextra -Werror -std=c++98 
 
 SRCS = def/Bureaucrat.class.cpp \
+	def/ANSIColors.cpp \
 	def/Exceptions.cpp \
 	main.cpp \
 

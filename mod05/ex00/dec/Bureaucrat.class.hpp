@@ -3,7 +3,9 @@
 
 #include <string>
 #include <iostream>
-#include "../dec/Exceptions.hpp"
+#include "Exceptions.hpp"
+#include "ANSIColors.hpp"
+
 
 class Bureaucrat {
 
@@ -20,9 +22,9 @@ class Bureaucrat {
         std::string getName( void )  const;
         int getGrade( void ) const;
 
-        // Memeber functions
-        void incrementGrade( void );
-        void decrementGrade( void );
+        // Member functions
+        void incrementGrade( int amount);
+        void decrementGrade( int amount );
 
     private:
         const std::string name;

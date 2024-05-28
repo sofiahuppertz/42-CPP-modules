@@ -74,6 +74,9 @@
 		"variant": "cpp",
 		"__memory": "cpp",
 		"*.tpp": "cpp",
-		"list": "cpp"
+		"list": "cpp",
+		"__tree": "cpp",
+		"map": "cpp",
+		"stack": "cpp"
 	}
 }

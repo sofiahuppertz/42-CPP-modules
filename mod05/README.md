@@ -4,7 +4,8 @@
 This module focuses on implementing our own exceptions derived from the standard exception class, and using them with try/catch/throw statements.
 
 ## Key Concepts
-- **Exceptions**: In C++, exceptions are a more explicit alternative to if/else statements for handling exceptional circumstances that disrupt the normal flow of a program. They provide a robust mechanism to prevent the program from crashing when potential errors occur, by transferring control to a specific part of the program designed to handle the error.
+- **Exceptions**: In C++, exceptions are a more explicit alternative to if/else statements for handling exceptional circumstances that disrupt the normal flow of a program. GitHub Copilot: **Exceptions**: In C++, exceptions are a mechanism for handling runtime errors or unexpected conditions that disrupt the normal flow of a program. They provide a way to transfer control from one part of a program to another. When a function encounters an error condition, it can "throw" an exception, which is then "caught" by an appropriate exception handler designed to handle that specific type of error. This allows for more robust and maintainable error handling compared to traditional methods like return codes.
+
 - **Concepts from Previous Modules**: Abstract classes, inheritance, using `const` and `static` keywords, orthodox canonical form, function pointers, and loops to avoid nasty if/else statements for scalability.
 
 ## Exercises

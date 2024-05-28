@@ -7,10 +7,8 @@ Form::Form( void ): name("Default"), gradeToSign(150), gradeToExecute(150)
     return;
 }
 
-Form::Form(std::string _name, int _greadeToSign, int _gradeToExecute): name(_name), gradeToSign(_greadeToSign), gradeToExecute(_gradeToExecute)
+Form::Form(std::string _name, int _gradeToSign, int _gradeToExecute): name(_name), isSigned(false), gradeToSign(_gradeToSign), gradeToExecute(_gradeToExecute)
 {
-    std::cout << "Calling Form constructor." << std::endl;
-    isSigned = false;
     if (gradeToSign < 1 || gradeToExecute < 1)
         throw GradeTooHighException();
     if (gradeToSign > 150 || gradeToExecute > 150)
@@ -36,14 +34,13 @@ Form::~Form(void )
 
 bool Form::beSigned( Bureaucrat const &b )
 {
-    std::cout << "Calling beSigned()" << std::endl;
-    if (b.getGrade() <= gradeToSign)
+    if (b.getGrade() > gradeToSign)
     {
-        isSigned = true;
-        return true;
+        throw GradeTooLowException();
+        return false;
     }
-    throw GradeTooLowException();
-    return false;
+    isSigned = true;
+    return true;
 }
 
 std::string Form::getName( void ) const
@@ -64,12 +61,14 @@ int Form::getGradeToSign( void ) const
 std::string Form::getIsSigned( void ) const
 {
     if (isSigned)
-        return "True";
-    return "False";
+        return "Yes";
+    return "No ";
 }
 
-std::ostream& operator<< (std::ostream& os, const Form &object)
-{
-    os << "Form: " << object.getName() << "; Grade to execute: " << object.getGradeToExecute() << "; Grade to sign: " << object.getGradeToSign() << "; Is signed: " << object.getIsSigned();
+std::ostream& operator<<(std::ostream& os, const Form& object) {
+    os << ANSIColors::BRIGHT_BACKGROUND_BLUE  << ANSIColors::WHITE << "Form: " << ANSIColors::CYAN << object.getName() << ANSIColors::WHITE << " | ";
+    os << ANSIColors::BRIGHT_BACKGROUND_BLUE  << ANSIColors::WHITE << "Grade to execute: " << ANSIColors::CYAN << object.getGradeToExecute()<< ANSIColors::WHITE << " | ";
+    os << ANSIColors::BRIGHT_BACKGROUND_BLUE  << ANSIColors::WHITE<< "Grade to sign: " << ANSIColors::CYAN << object.getGradeToSign()<< ANSIColors::WHITE << " | ";
+    os << ANSIColors::BRIGHT_BACKGROUND_BLUE  << ANSIColors::WHITE<< "Is signed: "  << ANSIColors::CYAN  << object.getIsSigned()<< ANSIColors::WHITE << " | " << ANSIColors::RESET;
     return os;
 }

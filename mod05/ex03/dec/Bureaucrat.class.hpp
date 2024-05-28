@@ -30,9 +30,9 @@ class Bureaucrat {
 
         // New function
         void executeForm( AForm const &form );
-        
+
     private:
-        std::string name;
+        const std::string name;
         int grade;
 
 };

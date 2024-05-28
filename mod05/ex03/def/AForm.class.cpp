@@ -33,7 +33,7 @@ AForm::~AForm(void )
 {
     return;
 }
-        
+
 bool AForm::beSigned( Bureaucrat const &b )
 {
     std::cout << "Calling beSigned()" << std::endl;
@@ -105,7 +105,7 @@ void AForm::execute(Bureaucrat const &executor)
         local_failure();
     }
 
-    
+
 
     return ;
 }

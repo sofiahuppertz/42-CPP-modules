@@ -27,7 +27,7 @@ void AForm::execute(Bureaucrat const &executor) {
         if (!getIsSigned()) {
             throw FormNotSignedException();
         }
-        execute(executor);
+        local_execute(executor);
     } catch (std::exception &e) {
         std::cerr << e.what() << std::endl;
         local_failure();
@@ -35,12 +35,12 @@ void AForm::execute(Bureaucrat const &executor) {
 }
 ``````
 
-Execute() and local_failure() are pure virtual in AForm… but it’s fine to call them because AForm is an abstract class…
+local_execute() and local_failure() are pure virtual in AForm… but it’s fine to call them because AForm is an abstract class…
 
-Each derived functions has it’s own execute() and local_failure() implementation, according to the subject’s requirements.
+Each derived functions has it’s own local_execute() and local_failure() implementation, according to the subject’s requirements.
 
 The target attribute is passed to the constructor of any derived class of AForm. Because I want to avoid repetition, I made target a private member of AForm, and created getters and setters for it.
 
 ### Ex03:
-In this exercise we create an Intern class, which can create 
+In this exercise we create an Intern class, which can create
 based on a string. For this we use abstract class function pointers that return concrete derived classes. It is constructed in a way that would make it extremely easy to add a new derived class and allow for interns to return them… Way better than having an if/else long block

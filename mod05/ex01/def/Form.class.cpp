@@ -7,7 +7,8 @@ Form::Form( void ): name("Default"), gradeToSign(150), gradeToExecute(150)
     return;
 }
 
-Form::Form(std::string _name, int _greadeToSign, int _gradeToExecute): name(_name), gradeToSign(_greadeToSign), gradeToExecute(_gradeToExecute) {
+Form::Form(std::string _name, int _greadeToSign, int _gradeToExecute): name(_name), gradeToSign(_greadeToSign), gradeToExecute(_gradeToExecute)
+{
     std::cout << "Calling Form constructor." << std::endl;
     isSigned = false;
     if (gradeToSign < 1 || gradeToExecute < 1)
@@ -32,8 +33,8 @@ Form::~Form(void )
 {
     return;
 }
-        
-bool Form::beSigned( Bureaucrat &b )
+
+bool Form::beSigned( Bureaucrat const &b )
 {
     std::cout << "Calling beSigned()" << std::endl;
     if (b.getGrade() <= gradeToSign)
@@ -42,7 +43,7 @@ bool Form::beSigned( Bureaucrat &b )
         return true;
     }
     throw GradeTooLowException();
-    return false;   
+    return false;
 }
 
 std::string Form::getName( void ) const

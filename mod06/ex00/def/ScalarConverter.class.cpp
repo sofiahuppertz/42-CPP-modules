@@ -41,7 +41,7 @@ static void printCharConversions( void *literal)
     }
     catch (std::exception & e) {
         std::cout << "impossible" << std::endl;
-    
+
     }
     std::cout << "float: ";
     try {
@@ -65,36 +65,36 @@ static void printCharConversions( void *literal)
 void printNumericalConversions( double Value)
 {
     std::cout << "char: ";
-    if (Value > CHAR_MAX || Value < CHAR_MIN || isnan(Value))
+    if (Value > CHAR_MAX || Value < CHAR_MIN || (Value != Value))
         std::cout << "impossible" << std::endl;
     else if (isprint(static_cast<char>(Value)))
         std::cout << "'" << static_cast<char>(Value) << "'" << std::endl;
     else
         std::cout << "Non displayable" << std::endl;
-    
+
     std::cout << "int: ";
-    if (Value > INT_MAX || Value < INT_MIN || isnan(Value))
+    if (Value > INT_MAX || Value < INT_MIN || (Value != Value))
         std::cout << "impossible" << std::endl;
     else
         std::cout << static_cast<int>(Value) << std::endl;
 
     std::cout << "float: ";
-    if (isinf(Value))
+    if (!(Value!= Value) && !finite(Value))
         std::cout << (Value > 0 ? "inff" : "-inff") << std::endl;
-    else 
+    else
     {
         float fValue = static_cast<float>(Value);
         if (fValue == std::floor(fValue))
             std::cout << std::fixed << std::setprecision(1) << fValue << "f" << std::endl;
         else
-            std::cout << std::defaultfloat << fValue << "f" << std::endl;
+            std::cout << fValue << "f" << std::endl;
     }
 
     std::cout << "double: ";
     if (Value == std::floor(Value))
         std::cout << std::fixed << std::setprecision(1) << Value << std::endl;
     else
-        std::cout << std::defaultfloat << Value << std::endl;
+        std::cout << Value << std::endl;
 
 }
 
@@ -105,8 +105,8 @@ void ScalarConverter::convert( std::string literal ) {
         printAllImpossible();
         return;
     }
-    if ((literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'')){ 
-        
+    if ((literal.length() == 3 && literal[0] == '\'' && literal[2] == '\'')){
+
         char Value = literal[1];
         printCharConversions(&Value);
         return;

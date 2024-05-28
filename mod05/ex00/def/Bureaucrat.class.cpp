@@ -1,14 +1,12 @@
 #include "../dec/Bureaucrat.class.hpp"
 
-Bureaucrat::Bureaucrat( void )
+Bureaucrat::Bureaucrat( void ): name("Default"), grade(150)
 {
-    name = "Default";
-    grade = 150;
     std::cout<< "Calling default constructor" << std::endl;
     return;
 }
 
-Bureaucrat::Bureaucrat( std::string _name, int _grade): name(_name), grade(_grade)
+Bureaucrat::Bureaucrat( std::string _name, int _grade): name(_name)
 {
     std::cout<< "Calling constructor" << std::endl;
     if ( _grade < 1)
@@ -19,6 +17,7 @@ Bureaucrat::Bureaucrat( std::string _name, int _grade): name(_name), grade(_grad
     {
         throw GradeTooLowException();
     }
+    grade = _grade;
     return;
 }
 
@@ -31,12 +30,11 @@ Bureaucrat::~Bureaucrat( void )
 {
     return;
 }
-        
+
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat &other)
 {
     if (this != &other)
     {
-        name = other.name;
         grade = other.grade;
     }
     return *this;
@@ -56,22 +54,22 @@ int Bureaucrat::getGrade( void ) const
 void Bureaucrat::incrementGrade( void )
 {
     std::cout << "Calling incrementGrade()" << std::endl;
-    grade--;
-    if ( grade < 1)
+    if ( grade == 1)
     {
         throw GradeTooHighException();
     }
+    grade--;
     return;
 }
 
 void Bureaucrat::decrementGrade( void )
 {
     std::cout << "Calling decrementGrade()" << std::endl;
-    grade++;
-    if (grade > 150)
+    if (grade == 150)
     {
         throw GradeTooLowException();
     }
+    grade++;
     return;
 }
 

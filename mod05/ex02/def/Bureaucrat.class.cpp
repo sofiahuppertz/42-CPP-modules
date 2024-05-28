@@ -23,12 +23,11 @@ Bureaucrat::~Bureaucrat( void )
 {
     return;
 }
-        
+
 Bureaucrat& Bureaucrat::operator=(const Bureaucrat &other)
 {
     if (this != &other)
     {
-        name = other.name;
         grade = other.grade;
     }
     return *this;

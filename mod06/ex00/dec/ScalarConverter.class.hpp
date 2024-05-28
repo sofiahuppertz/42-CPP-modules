@@ -1,10 +1,13 @@
 #ifndef SCALARCONVERTER_CLASS_HPP
 #define SCALARCONVERTER_CLASS_HPP
 
+
+#include <climits>
 #include <iomanip>
 #include <iostream>
-#include <limits>
-#include <string> 
+#include <cmath>
+#include <string>
+
 
 class ScalarConverter {
 

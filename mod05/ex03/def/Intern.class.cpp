@@ -19,34 +19,44 @@ Intern &Intern::operator=( Intern const &other ) {
 }
 
 
-static AForm *makeShrubberyCreationForm( std::string target )
+AForm *Intern::makeShrubberyCreationForm( std::string target )
 {
     return new ShrubberyCreationForm(target);
 }
 
-static AForm *makeRobotomyRequestForm( std::string target )
+AForm *Intern::makeRobotomyRequestForm( std::string target )
 {
     return new RobotomyRequestForm(target);
 }
 
-static AForm *makePresidentialPardonForm( std::string target )
+AForm *Intern::makePresidentialPardonForm( std::string target )
 {
     return new PresidentialPardonForm(target);
 }
 
 AForm *Intern::makeForm( std::string formName, std::string target )
 {
-    std::string formNames[] = {"shrubbery creation", "robotomy request", "presidential pardon"};
-    AForm *(*formCreators[])(std::string) = {&makeShrubberyCreationForm, &makeRobotomyRequestForm, &makePresidentialPardonForm};
+    std::string concreteFormName[] = {"shrubbery creation", "robotomy request", "presidential pardon"};
+    AForm *(*concreteForm[])(std::string) = {&Intern::makeShrubberyCreationForm, &Intern::makeRobotomyRequestForm, &Intern::makePresidentialPardonForm};
 
-    for (int i = 0; i < 3; i++)
-    {
-        if (formNames[i] == formName)
-        {
-            std::cout << "Intern creates " << formName << std::endl;
-            return formCreators[i](target);
+    try {
+        for (int i = 0; i < 3; i++) {
+            if (concreteFormName[i] == formName) {
+                std::cout << ANSIColors::BRIGHT_BACKGROUND_YELLOW << "Intern creates a " << formName << " form." << ANSIColors::RESET << std::endl;
+                return concreteForm[i](target);
+            }
         }
+        throw FormNotFoundException();
+    } 
+    catch (std::exception &e) 
+    {
+        std::cout << ANSIColors::BACKGROUND_RED << "Exception caught:" << ANSIColors::RESET << ANSIColors::RED << " " << e.what() << ANSIColors::RESET << std::endl;
+        return NULL;
     }
-    std::cout << "Intern cannot create " << formName << std::endl;
-    return NULL;
+}
+
+// FormNotFoundException 
+const char *Intern::FormNotFoundException::what() const throw()
+{
+    return "Form doesn't exist.";
 }

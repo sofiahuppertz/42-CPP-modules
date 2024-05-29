@@ -3,48 +3,46 @@
 RobotomyRequestForm::RobotomyRequestForm( void ): AForm("RobotomyRequestForm", 72, 45) 
 {
     setTarget("default");
-    std::cout << "Calling RobotomyRequestForm constructor." << std::endl;
     return ;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(std::string _target): AForm("RobotomyRequestForm", 72, 45) 
 {
     setTarget(_target);
-    std::cout << "Calling RobotomyRequestForm constructor." << std::endl;
     return ;
 }
 
 RobotomyRequestForm::RobotomyRequestForm(RobotomyRequestForm const &other): AForm(other) {
 
     setTarget(other.getTarget());
-    std::cout << "Calling RobotomyRequestForm copy constructor." << std::endl;
     return ;
 }
 
 RobotomyRequestForm &RobotomyRequestForm::operator=(RobotomyRequestForm const &other) {
 
     setTarget(other.getTarget());
-    std::cout << "Calling RobotomyRequestForm assignment operator." << std::endl;
     return *this;
 }
 
 
 RobotomyRequestForm::~RobotomyRequestForm( void ) {
-    std::cout << "Calling RobotomyRequestForm destructor." << std::endl;
     return ;
 }
 
 
-void RobotomyRequestForm::execute ( Bureaucrat const &executor ) const
+void RobotomyRequestForm::local_execute ( Bureaucrat const &executor ) const
 {   
     (void)executor;
-    std::cout << "RobotomyRequestForm execute() called." << std::endl;
-    std::cout << "* SOME DRILLING NOISES *" << std::endl;
-    std::cout << getTarget() << " has been robotomized succesfully 50% of the time" << std::endl;
+    std::cout << ANSIColors::MAGENTA << "⚙️  [RobotomyRequestForm]: Initiating robotomy procedure..." << std::endl;
+    std::cout << "🔧 [RobotomyRequestForm]: Brace yourself for the jackhammer symphony!" << std::endl;
+    std::cout << "🔊 Imagine the sound of a jackhammer breaking into concrete... 🛠️" << std::endl;
+    std::cout << "🤖 [RobotomyRequestForm]: Target " << getTarget() << " is undergoing robotomization..." << ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::BRIGHT_BACKGROUND_GREEN <<  "🔄 [RobotomyRequestForm]: Robotomization complete! Success rate: 50% - Flip a coin! 🤞" <<  ANSIColors::RESET << std::endl;
+
     return;
 }
 
-void RobotomyRequestForm::local_failure ( void )
+void RobotomyRequestForm::local_failure ( void ) const
 {
     std::cout << "Robotomy failed. " << std::endl;
     return;

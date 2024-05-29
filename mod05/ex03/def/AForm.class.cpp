@@ -2,14 +2,12 @@
 
 AForm::AForm( void ): name("Default"), gradeToSign(150), gradeToExecute(150)
 {
-    std::cout << "Calling default AForm constructor." << std::endl;
     isSigned = false;
     return ;
 }
 
 
 AForm::AForm(std::string _name, int _greadeToSign, int _gradeToExecute): name(_name), gradeToSign(_greadeToSign), gradeToExecute(_gradeToExecute) {
-    std::cout << "Calling AForm constructor." << std::endl;
     isSigned = false;
     if (gradeToSign < 1 || gradeToExecute < 1)
         throw GradeTooHighException();
@@ -33,41 +31,14 @@ AForm::~AForm(void )
 {
     return;
 }
+        
 
-bool AForm::beSigned( Bureaucrat const &b )
-{
-    std::cout << "Calling beSigned()" << std::endl;
-    try
-    {
-        if (b.getGrade() > gradeToSign)
-        {
-            throw GradeTooLowException();
-        }
-        isSigned = true;
-        return true;
-    }
-    catch (std::exception &e)
-    {
-        std::cerr << e.what() << std::endl;
-        return false;
-    }
-}
+// Accessors 
 
 std::string AForm::getName( void ) const
 {
     return name;
 }
-
-void AForm::setTarget(std::string _target)
-{
-    target = _target;
-}
-
-std::string AForm::getTarget( void ) const
-{
-    return target;
-}
-
 
 int AForm::getGradeToExecute( void ) const
 {
@@ -82,35 +53,81 @@ int AForm::getGradeToSign( void ) const
 std::string AForm::getIsSigned( void ) const
 {
     if (isSigned)
-        return "True";
-    return "False";
+        return "Yes";
+    return "No";
+}
+
+void AForm::setTarget(std::string _target)
+{
+    target = _target;
+}
+
+std::string AForm::getTarget( void ) const
+{
+    return target;
 }
 
 
-void AForm::execute(Bureaucrat const &executor)
+// beSigned that checks if the bureaucrat has the right grade to sign the form and sets isSigned to true
+
+bool AForm::beSigned( Bureaucrat const &b )
+{
+    if (b.getGrade() > gradeToSign)
+    {
+        throw AForm::GradeTooLowException();
+        return false;
+    }
+    isSigned = true;
+    return true;
+}
+
+// Execute that calls local_execute and local_failure
+
+void AForm::execute(Bureaucrat const &executor) const
 {
     try {
         if (executor.getGrade() >  getGradeToExecute())
         {
-            throw GradeTooLowException();
+            throw AForm::GradeTooLowException();
         }
         if (getIsSigned() == "False")
         {
-            throw FormNotSignedException();
+            throw AForm::NotSignedException();
         }
-        execute(executor);
+        local_execute(executor);
     } catch (std::exception &e)
     {
         std::cerr << e.what() << std::endl;
         local_failure();
     }
-
-
-
     return ;
 }
-std::ostream& operator<< (std::ostream& os, const AForm &object)
-{
-    os << "AForm: " << object.getName() << "; Grade to execute: " << object.getGradeToExecute() << "; Grade to sign: " << object.getGradeToSign() << "; Is signed: " << object.getIsSigned();
+
+// Operator Overload
+
+std::ostream& operator<<(std::ostream& os, const AForm& object) {
+    os << ANSIColors::BRIGHT_BACKGROUND_BLUE  << ANSIColors::WHITE << "Form: " << ANSIColors::CYAN << object.getName() << ANSIColors::WHITE << " | ";
+    os << ANSIColors::BRIGHT_BACKGROUND_BLUE  << ANSIColors::WHITE << "Grade to execute: " << ANSIColors::CYAN << object.getGradeToExecute()<< ANSIColors::WHITE << " | ";
+    os << ANSIColors::BRIGHT_BACKGROUND_BLUE  << ANSIColors::WHITE<< "Grade to sign: " << ANSIColors::CYAN << object.getGradeToSign()<< ANSIColors::WHITE << " | ";
+    os << ANSIColors::BRIGHT_BACKGROUND_BLUE  << ANSIColors::WHITE<< "Is signed: "  << ANSIColors::CYAN  << object.getIsSigned()<< ANSIColors::WHITE << " | " << ANSIColors::RESET;
     return os;
+}
+
+
+// Exceptions
+
+const char *AForm::GradeTooHighException::what()const throw()
+{
+    return "STOP: Excessive grade.";
+}
+
+
+const char *AForm::GradeTooLowException::what()const throw()
+{
+    return "Insufficient grade.";
+}
+
+const char *AForm::NotSignedException::what()const throw()
+{
+    return "You need to sign this form before executing it.";
 }

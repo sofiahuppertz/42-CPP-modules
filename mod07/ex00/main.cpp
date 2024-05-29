@@ -1,36 +1,100 @@
 #include "dec/Templates.hpp"
 #include <iostream>
+#include <vector>
+#include <string>
+#include <sstream>
+#include <algorithm>
+
+
+// Function to check if a string is a valid number
+bool is_valid_number(std::string str)
+{
+    if (str.empty())
+        return false;
+    if (str.length() == 1 and not isdigit(str[0]))
+        return false;
+
+    int i = 0;
+    if (str[0] == '+' or str[0] == '-')
+        i = 1;
+    for (; i < int(str.length()); i++)
+    {
+        if (not isdigit(str[i]))
+            return false;
+    }
+    return true;
+}
 
 int main (void)
 {
-    int int_a = 10, int_b = 20;
-    double double_a = 10.5, double_b = 20.5;
-    float float_a = 10.5, float_b = 10.55;
-    char char_a = 'A', char_b = 'B';
+    try {
+        // Prompt for a sentence or word
+        std::cout << ANSIColors::BRIGHT_BACKGROUND_GREEN << "Enter a sentence or a word:" << ANSIColors::RESET << " ";
+        std::string inputLine;
+        std::getline(std::cin, inputLine);
+        if (inputLine.empty())
+            throw std::exception();
 
-    std::cout << "We will call the same function for different types thanks to templates " << std::endl << std::endl;
-    std::cout << "int_a = " << int_a << ", int_b = " << int_b << std::endl;
-    std::cout << "min(int_a, int_b) = " << min(int_a, int_b) << std::endl;
-    std::cout << "max(int_a, int_b) = " << max(int_a, int_b) << std::endl;
-    swap(int_a, int_b);
-    std::cout << "After swap: int_a = " << int_a << ", int_b = " << int_b << std::endl << std::endl;
+        std::istringstream iss(inputLine);
+        std::vector<std::string> words;
+        std::string word;
 
-    std::cout << "double_a = " << double_a << ", double_b = " << double_b << std::endl;
-    std::cout << "min(double_a, double_b) = " << min(double_a, double_b) << std::endl;
-    std::cout << "max(double_a, double_b) = " << max(double_a, double_b) << std::endl;
-    swap(double_a, double_b);
-    std::cout << "After swap: double_a = " << double_a << ", double_b = " << double_b << std::endl  << std::endl;
+        // Split the input into words
+        while (iss >> word)
+        {
+            words.push_back(word);
+        }
 
-    std::cout << "float_a = " << float_a << ", float_b = " << float_b << std::endl;
-    std::cout << "min(float_a, float_b) = " << min(float_a, float_b) << std::endl;
-    std::cout << "max(float_a, float_b) = " << max(float_a, float_b) << std::endl;
-    swap(float_a, float_b);
-    std::cout << "After swap: float_a = " << float_a << ", float_b = " << float_b << std::endl << std::endl;
+        // Calculate the total length of all words
+        int totalLength = 0;
+        for (std::vector<std::string>::iterator it = words.begin(); it != words.end(); it++)
+            totalLength += it->length();
 
-    std::cout << "char_a = " << char_a << ", char_b = " << char_b << std::endl;
-    std::cout << "min(char_a, char_b) = " << min(char_a, char_b) << std::endl;
-    std::cout << "max(char_a, char_b) = " << max(char_a, char_b) << std::endl;
-    swap(char_a, char_b);
-    std::cout << "After swap: char_a = " << char_a << ", char_b = " << char_b << std::endl << std::endl;
+        // Copy all words into a single array
+        char allWords[totalLength];
+        int index = 0;
+        for (std::vector<std::string>::iterator it = words.begin(); it != words.end(); it++)
+        {
+            std::copy(it->begin(), it->end(), allWords + index);
+            index += it->length();
+        }
 
+        printListInfo(allWords, totalLength);
+
+        iss.str("");
+        iss.clear();
+
+        // Prompt for a list of numbers
+        std::cout << std::endl << ANSIColors::BRIGHT_BACKGROUND_GREEN << "Enter a list of numbers separated by spaces:" << ANSIColors::RESET << " ";
+        std::getline(std::cin, inputLine);
+        if (inputLine.empty())
+            throw std::exception();
+        iss.str(inputLine);
+
+        std::vector<int> numbers;
+        std::string str;
+        int number;
+
+        // Parse the numbers and add them to a vector
+        while (iss >> str)
+        {
+            if (not is_valid_number(str))
+                throw std::exception();
+
+            std::stringstream ss(str);
+            ss >> number;
+            numbers.push_back(number);
+        }
+
+        // Copy the numbers into an array
+        int numNumbers = numbers.size();
+        int numberArray[numNumbers];
+        std::copy(numbers.begin(), numbers.end(), numberArray);
+
+        printListInfo(numberArray, numNumbers);        
+    }
+    catch (std::exception &e)
+    {
+        std::cerr << ANSIColors::BRIGHT_BACKGROUND_RED << "Invalid input" << std::endl;
+    }
 }

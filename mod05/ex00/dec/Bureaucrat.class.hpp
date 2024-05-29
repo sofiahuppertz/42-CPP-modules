@@ -3,7 +3,6 @@
 
 #include <string>
 #include <iostream>
-#include "Exceptions.hpp"
 #include "ANSIColors.hpp"
 
 
@@ -25,6 +24,16 @@ class Bureaucrat {
         // Member functions
         void incrementGrade( int amount);
         void decrementGrade( int amount );
+
+        class GradeTooHighException: public std::exception {
+            public:
+                virtual const char *what() const throw();
+        };
+
+        class GradeTooLowException: public std::exception {
+            public:
+                virtual const char *what() const throw();
+        };
 
     private:
         const std::string name;

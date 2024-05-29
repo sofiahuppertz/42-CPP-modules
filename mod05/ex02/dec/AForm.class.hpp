@@ -3,8 +3,9 @@
 
 #include <fstream>
 #include <string>
+#include <exception>
 #include "Bureaucrat.class.hpp"
-#include "Exceptions.hpp"
+#include "ANSIColors.hpp"
 
 class Bureaucrat;
 
@@ -36,6 +37,22 @@ class AForm {
         //setter
         void setTarget(std::string _target);
 
+
+        // Exceptions
+        class GradeTooHighException: public std::exception {
+            public:
+                virtual const char* what() const throw();
+        };
+
+        class GradeTooLowException : public std::exception {
+            public:
+                virtual const char* what() const throw();
+        };
+
+        class NotSignedException: public std::exception {
+            public:
+                virtual const char* what() const throw();
+        };
 
     private:
         const std::string name;

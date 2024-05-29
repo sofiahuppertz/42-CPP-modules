@@ -4,8 +4,8 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include <exception>
 #include "Bureaucrat.class.hpp"
-#include "Exceptions.hpp"
 
 class Bureaucrat;
 
@@ -27,6 +27,17 @@ class Form {
 
         // Member functions
         bool beSigned( Bureaucrat const &b );
+
+        // Exceptions
+        class GradeTooHighException: public std::exception {
+            public:
+                virtual const char* what() const throw();
+        };
+
+        class GradeTooLowException : public std::exception {
+            public:
+                virtual const char* what() const throw();
+        };
 
     private:
         const std::string name;

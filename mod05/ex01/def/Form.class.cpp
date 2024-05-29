@@ -10,9 +10,9 @@ Form::Form( void ): name("Default"), gradeToSign(150), gradeToExecute(150)
 Form::Form(std::string _name, int _gradeToSign, int _gradeToExecute): name(_name), isSigned(false), gradeToSign(_gradeToSign), gradeToExecute(_gradeToExecute)
 {
     if (gradeToSign < 1 || gradeToExecute < 1)
-        throw GradeTooHighException();
+        throw Form::GradeTooHighException();
     if (gradeToSign > 150 || gradeToExecute > 150)
-        throw GradeTooLowException();
+        throw Form::GradeTooLowException();
 }
 
 Form::Form(Form const &other): name(other.name), gradeToSign(other.gradeToSign), gradeToExecute(other.gradeToExecute)
@@ -36,7 +36,7 @@ bool Form::beSigned( Bureaucrat const &b )
 {
     if (b.getGrade() > gradeToSign)
     {
-        throw GradeTooLowException();
+        throw Form::GradeTooLowException();
         return false;
     }
     isSigned = true;
@@ -71,4 +71,18 @@ std::ostream& operator<<(std::ostream& os, const Form& object) {
     os << ANSIColors::BRIGHT_BACKGROUND_BLUE  << ANSIColors::WHITE<< "Grade to sign: " << ANSIColors::CYAN << object.getGradeToSign()<< ANSIColors::WHITE << " | ";
     os << ANSIColors::BRIGHT_BACKGROUND_BLUE  << ANSIColors::WHITE<< "Is signed: "  << ANSIColors::CYAN  << object.getIsSigned()<< ANSIColors::WHITE << " | " << ANSIColors::RESET;
     return os;
+}
+
+
+// Exceptions
+
+const char *Form::GradeTooHighException::what()const throw()
+{
+    return "STOP: Excessive grade.";
+}
+
+
+const char *Form::GradeTooLowException::what()const throw()
+{
+    return "Insufficient grade.";
 }

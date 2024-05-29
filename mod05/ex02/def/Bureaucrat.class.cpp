@@ -1,16 +1,16 @@
 #include "../dec/Bureaucrat.class.hpp"
 
-Bureaucrat::Bureaucrat( std::string _name, int _grade): name(_name), grade(_grade)
+Bureaucrat::Bureaucrat( std::string _name, int _grade): name(_name)
 {
-    std::cout<< "Calling constructor" << std::endl;
     if ( _grade < 1)
     {
-        throw GradeTooHighException();
+        throw Bureaucrat::GradeTooHighException();
     }
     if ( _grade > 150 )
     {
         throw GradeTooLowException();
     }
+    grade = _grade;
     return;
 }
 
@@ -33,76 +33,86 @@ Bureaucrat& Bureaucrat::operator=(const Bureaucrat &other)
     return *this;
 }
 
-std::string Bureaucrat::getName( void )  const
-{
-    return name;
 
+// Accessors
+
+std::string Bureaucrat::getName( void )  const {
+    return name;
 }
 
-int Bureaucrat::getGrade( void ) const
-{
+int Bureaucrat::getGrade( void ) const {
     return grade;
 }
 
-void Bureaucrat::incrementGrade( void )
-{
-    std::cout << "Calling incrementGrade()" << std::endl;
-    grade--;
-    if ( grade < 1)
+// Member functions
+
+void Bureaucrat::incrementGrade( int amount ) {
+    if ( grade - amount < 1)
     {
         throw GradeTooHighException();
     }
+    grade -= amount;
     return;
 }
 
-void Bureaucrat::decrementGrade( void )
-{
-    std::cout << "Calling decrementGrade()" << std::endl;
-    grade++;
-    if (grade > 150)
+void Bureaucrat::decrementGrade( int amount) {
+    if (grade + amount > 150)
     {
-        throw GradeTooLowException();
+        throw Bureaucrat::GradeTooLowException();
     }
+    grade += amount;
     return;
 }
 
-void Bureaucrat::signAForm( AForm &f )
+
+void Bureaucrat::signForm( AForm &f )
 {
-    std::cout << "Calling signForm()" << std::endl;
     try
     {
         f.beSigned(*this);
-        std::cout << name << " signed " << f.getName() << std::endl;
+        std::cout << ANSIColors::GREEN << name <<  " " << ANSIColors::BRIGHT_BACKGROUND_GREEN << ANSIColors::WHITE <<  "signed" << ANSIColors::RESET << " " << ANSIColors::GREEN << f.getName() << ANSIColors::RESET << std::endl;
     }
     catch(std::exception &e)
     {
-        std::cout << name << " coulndn't sign " << f.getName() << ". Reason: " <<  e.what() << std::endl;
+        std::cout << ANSIColors::RED << name <<  " " << ANSIColors::BRIGHT_BACKGROUND_RED << ANSIColors::WHITE << "coulndn't sign" <<  ANSIColors::RESET << ANSIColors::RED << " " << f.getName() << " " << ANSIColors::BRIGHT_BACKGROUND_RED <<  ANSIColors::WHITE << "Reason:" << ANSIColors::RESET << ANSIColors::RED << " " << e.what() <<  ANSIColors::RESET << std::endl;
     }
 }
 
 void Bureaucrat::executeForm( AForm const &form )
 {
-    std::cout << "Calling executeForm()" << std::endl;
     try {
         if (getGrade() >  form.getGradeToExecute())
         {
-            throw GradeTooLowException();
+            throw AForm::GradeTooLowException();
         }
         if (form.getIsSigned() == "False")
         {
-            throw FormNotSignedException();
+            throw AForm::NotSignedException();
         }
         form.execute(*this);
-        std::cout << name << " executed " << form.getName() << std::endl;
+        std::cout << ANSIColors::GREEN << name <<  " " << ANSIColors::BRIGHT_BACKGROUND_WHITE << ANSIColors::GREEN <<  "executed" << ANSIColors::RESET << " " << ANSIColors::GREEN << form.getName() << ANSIColors::RESET << std::endl;
     }
-    catch (std::exception &e ){
-        std::cout << name << " couldn't execute " << form.getName() << " because " << e.what() << std::endl;
+    catch (std::exception &e )
+    {
+        std::cout << ANSIColors::RED << name << " " << ANSIColors::BRIGHT_BACKGROUND_WHITE << ANSIColors::RED << "couldn't execute" << ANSIColors::RESET << ANSIColors::RED << " " << form.getName() << ". " << ANSIColors::BRIGHT_BACKGROUND_WHITE << ANSIColors::RED << "Reason:" << ANSIColors::RESET << ANSIColors::RED << " " << e.what() <<  ANSIColors::RESET << std::endl;
     }
 }
 
-// Operator overload
+
 std::ostream& operator<< (std::ostream& os, const Bureaucrat &object)
 {
-    os << object.getName() << ", bureaucrat grade " << object.getGrade() << ".";
+    os << ANSIColors::BRIGHT_BACKGROUND_BLACK <<  ANSIColors::WHITE << "Bureaucrat: " << ANSIColors::GREEN << object.getName() << ANSIColors::WHITE << " | " << " Grade: " << ANSIColors::GREEN << object.getGrade() << ANSIColors::WHITE << " | " <<ANSIColors::RESET;
     return os;
+}
+
+// Exceptions
+
+const char *Bureaucrat::GradeTooHighException::what()const throw()
+{
+    return   "Doesn't have a low enough grade. (too high)" ;
+}
+
+const char *Bureaucrat::GradeTooLowException::what()const throw()
+{
+    return "Doesn't have a high enough grade. (too low)";
 }

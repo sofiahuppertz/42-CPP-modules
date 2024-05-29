@@ -5,124 +5,39 @@
 
 int main( void )
 {
-    {
-        std::cout << std::endl << "Test 1" << std::endl;
-        Bureaucrat b("Sofia", 146);
-        AForm *form1 = new ShrubberyCreationForm("home");
-        std::cout << b << std::endl;
-        std::cout << *form1 << std::endl;
-        form1->execute(b);
-        std::cout << *form1 << std::endl;
-        delete form1;
-    }
-    {
-        std::cout << std::endl << "Test 2" << std::endl;
-        Bureaucrat b("Sofia", 130);
-        AForm *form1 = new ShrubberyCreationForm("home");
-        std::cout << b << std::endl;
-        std::cout << *form1 << std::endl;
-        form1->execute(b);
-        std::cout << *form1 << std::endl;
-        delete form1;
-    }
-    {
-        std::cout << std::endl << "Test 3" << std::endl;
-        Bureaucrat b("Sofia", 1);
-        AForm *form1 = new ShrubberyCreationForm("home");
-        std::cout << b << std::endl;
-        std::cout << *form1 << std::endl;
-        b.signAForm(*form1);
-        std::cout << *form1 << std::endl;
-        form1->execute(b);
-        std::cout << *form1 << std::endl;
-        delete form1;
-    }
+    /* Test 1 : Executing Shruberry Creation Form */
+    std::cout << ANSIColors::BRIGHT_BACKGROUND_MAGENTA  << ANSIColors::WHITE << std::endl << "Leonardo Da Feeling, a bureaucrat by day and an artist by night. He will execute the schrubbery creation Form. " << ANSIColors::RESET << std::endl << std::endl;
+    Bureaucrat LeonardoDaFeeling("Leonardo Da Feeling", 15);
+    ShrubberyCreationForm ShrubberyForm("I_want_vacation");
+    std::cout << LeonardoDaFeeling << std::endl;
+    std::cout << ShrubberyForm << std::endl;
+    LeonardoDaFeeling.signForm(ShrubberyForm);
+    LeonardoDaFeeling.executeForm(ShrubberyForm);
     std::cout << std::endl;
-    {
-        std::cout << std::endl << "Test 4" << std::endl;
-        Bureaucrat b("Sofia", 40);
-        AForm *form1 = new RobotomyRequestForm("someone");
-        std::cout << b << std::endl;
-        std::cout << *form1 << std::endl;
-        form1->execute(b);
-        std::cout << *form1 << std::endl;
-        delete form1;
-    }
-    {
-        std::cout << std::endl << "Test 5" << std::endl;
-        Bureaucrat b("Sofia", 130);
-        AForm *form1 = new RobotomyRequestForm("someone");
-        std::cout << b << std::endl;
-        std::cout << *form1 << std::endl;
-        form1->execute(b);
-        std::cout << *form1 << std::endl;
-        delete form1;
-    }
-    {
-        std::cout << std::endl << "Test 6" << std::endl;
-        Bureaucrat b("Sofia", 1);
-        AForm *form1 = new RobotomyRequestForm("someone");
-        std::cout << b << std::endl;
-        std::cout << *form1 << std::endl;
-        form1->beSigned(b);
-        form1->execute(b);
-        std::cout << *form1 << std::endl;
-        delete form1;
-    }
+
+    /*Test 2 : Robotomization Form */
+    std::cout << ANSIColors::BRIGHT_BACKGROUND_MAGENTA  << ANSIColors::WHITE << std::endl << "Kim Card-Ashian, loves playing with her barbies. This time she will robotmize-them. " << ANSIColors::RESET << std::endl << std::endl;
+    Bureaucrat KimCardAshian("Kim Card-Ashian", 45);
+    RobotomyRequestForm RobotomyForm("Botox Barbie");
+    std::cout << KimCardAshian << std::endl;
+    std::cout << RobotomyForm << std::endl;
+    KimCardAshian.signForm(RobotomyForm);
+    KimCardAshian.executeForm(RobotomyForm);
     std::cout << std::endl;
-    {
-        std::cout << std::endl << "Test 7" << std::endl;
-        Bureaucrat b("Sofia", 146);
-        AForm *form1 = new PresidentialPardonForm("Arthur Dent");
-        std::cout << b << std::endl;
-        std::cout << *form1 << std::endl;
-        form1->execute(b);
-        std::cout << *form1 << std::endl;
-        delete form1;
-    }
-    {
-        std::cout << std::endl << "Test 8" << std::endl;
-        Bureaucrat b("Sofia", 10);
-        AForm *form1 = new PresidentialPardonForm("Arthur Dent");
-        b.signAForm(*form1);
-        std::cout << b << std::endl;
-        std::cout << *form1 << std::endl;
-        form1->execute(b);
-        std::cout << *form1 << std::endl;
-        delete form1;
-    }
-    {
-        std::cout << std::endl << "Test 9" << std::endl;
-        Bureaucrat b("Sofia", 1);
-        AForm *form1 = new PresidentialPardonForm("Arthur Dent");
-        std::cout << b << std::endl;
-        std::cout << *form1 << std::endl;
-        form1->beSigned(b);
-        form1->execute(b);
-        std::cout << *form1 << std::endl;
-        delete form1;
-    }
-    {
-        std::cout << std::endl << "Test 10" << std::endl;
-        Bureaucrat b("Sofia", 1);
-        AForm *form1 = new PresidentialPardonForm("Arthur Dent");
-        b.signAForm(*form1);
-        b.executeForm(*form1);
-        delete form1;
-    }
-    {
-        std::cout << std::endl << "Test 11" << std::endl;
-        Bureaucrat b("Sofia", 100);
-        AForm *form1 = new PresidentialPardonForm("Arthur Dent");
-        b.executeForm(*form1);
-        delete form1;
-    }
-    {
-        std::cout << std::endl << "Test 11" << std::endl;
-        Bureaucrat b("Sofia", 1);
-        AForm *form1 = new PresidentialPardonForm("Arthur Dent");
-        b.executeForm(*form1);
-        delete form1;
-    }
-    std::cout << std::endl;
-}
+
+    /* Test 3: Executing Presidential Pardon Form */
+    std::cout << ANSIColors::BRIGHT_BACKGROUND_MAGENTA  << ANSIColors::WHITE << std::endl << "Xavier Niel, himself, allowed a student to be pardonned after being black-holed, with the Presidential Pardon Form. " << ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::BRIGHT_BACKGROUND_MAGENTA  << ANSIColors::WHITE << std::endl << "He was very busy buying carrefour, so he asked the staff to do it, but because of their grade they could only sign it." << ANSIColors::RESET << std::endl << std::endl;
+    Bureaucrat XavierNiel("Xavier Niel", 1);
+    Bureaucrat Staff("Staff", 25);
+    PresidentialPardonForm PresidentialForm("Lazy Student");
+    std::cout << XavierNiel << std::endl;
+    std::cout << Staff << std::endl;
+    std::cout << PresidentialForm << std::endl;
+    Staff.signForm(PresidentialForm);
+    Staff.executeForm(PresidentialForm);
+    XavierNiel.executeForm(PresidentialForm);
+    return 0;
+
+
+}   

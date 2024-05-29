@@ -3,8 +3,9 @@
 
 #include <string>
 #include <iostream>
+#include <exception>
 #include "AForm.class.hpp"
-#include "Exceptions.hpp"
+#include "ANSIColors.hpp"
 
 class AForm;
 
@@ -23,12 +24,23 @@ class Bureaucrat {
         int getGrade( void ) const;
 
         // Memeber functions
-        void incrementGrade( void );
-        void decrementGrade( void );
-        void signAForm( AForm &f );
+        void incrementGrade( int amount );
+        void decrementGrade( int amount );
+        void signForm( AForm &f );
 
         // New function
         void executeForm( AForm const &form );
+
+        // Exceptions
+        class GradeTooHighException: public std::exception {
+            public:
+                virtual const char* what() const throw();
+        };
+
+        class GradeTooLowException : public std::exception {
+            public:
+                virtual const char* what() const throw();
+        };
 
     private:
         const std::string name;

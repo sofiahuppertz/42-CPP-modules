@@ -9,11 +9,11 @@ Bureaucrat::Bureaucrat( std::string _name, int _grade): name(_name)
 {
     if ( _grade < 1)
     {
-        throw GradeTooHighException();
+        throw Bureaucrat::GradeTooHighException();
     }
     if ( _grade > 150 )
     {
-        throw GradeTooLowException();
+        throw Bureaucrat::GradeTooLowException();
     }
     grade = _grade;
     return;
@@ -53,7 +53,7 @@ void Bureaucrat::incrementGrade( int amount )
 {
     if ( grade - amount < 1)
     {
-        throw GradeTooHighException();
+        throw Bureaucrat::GradeTooHighException();
     }
     grade -= amount;
     return;
@@ -63,7 +63,7 @@ void Bureaucrat::decrementGrade( int amount )
 {
     if (grade + amount > 150)
     {
-        throw GradeTooLowException();
+        throw Bureaucrat::GradeTooLowException();
     }
     grade += amount;
     return;
@@ -74,4 +74,16 @@ std::ostream& operator<< (std::ostream& os, const Bureaucrat &object)
 {
     os << ANSIColors::BLUE << object.getName() << ANSIColors::GREEN << ", bureaucrat grade " << ANSIColors::BLUE << object.getGrade() <<  ANSIColors::GREEN << "." << ANSIColors::RESET;
     return os;
+}
+
+// Exceptions
+
+const char *Bureaucrat::GradeTooHighException::what()const throw()
+{
+    return   "Doesn't have a low enough grade. (too high)" ;
+}
+
+const char *Bureaucrat::GradeTooLowException::what()const throw()
+{
+    return "Doesn't have a high enough grade. (too low)";
 }

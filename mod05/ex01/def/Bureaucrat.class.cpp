@@ -9,11 +9,11 @@ Bureaucrat::Bureaucrat( std::string _name, int _grade): name(_name)
 {
     if ( _grade < 1)
     {
-        throw GradeTooHighException();
+        throw Bureaucrat::GradeTooHighException();
     }
     if ( _grade > 150 )
     {
-        throw GradeTooLowException();
+        throw Bureaucrat::GradeTooLowException();
     }
     grade = _grade;
     return;
@@ -63,7 +63,7 @@ void Bureaucrat::decrementGrade( int amount )
 {
     if (grade + amount > 150)
     {
-        throw GradeTooLowException();
+        throw Bureaucrat::GradeTooLowException();
     }
     grade += amount;
     return;
@@ -74,17 +74,29 @@ void Bureaucrat::signForm( Form &f )
     try
     {
         f.beSigned(*this);
-        std::cout << ANSIColors::BACKGROUND_GREEN << name << " signed " << f.getName() << "✍️" << ANSIColors::RESET << std::endl;
+        std::cout << ANSIColors::GREEN << name <<  " " << ANSIColors::BRIGHT_BACKGROUND_GREEN << ANSIColors::WHITE <<  "signed" << ANSIColors::RESET << " " << ANSIColors::GREEN << f.getName() << ANSIColors::RESET << std::endl;
     }
     catch(std::exception &e)
     {
-        std::cout << name << " coulndn't sign " << f.getName() << ". Reason: " <<  e.what() << std::endl;
+        std::cout << ANSIColors::RED << name <<  " " << ANSIColors::BRIGHT_BACKGROUND_RED << ANSIColors::WHITE << "coulndn't sign" <<  ANSIColors::RESET << ANSIColors::RED << " " << f.getName() << " " << ANSIColors::BRIGHT_BACKGROUND_RED <<  ANSIColors::WHITE << "Reason:" << ANSIColors::RESET << ANSIColors::RED << " " << e.what() <<  ANSIColors::RESET << std::endl;
     }
 }
 
 // Operator overload
 std::ostream& operator<< (std::ostream& os, const Bureaucrat &object)
 {
-    os << ANSIColors::BLUE << object.getName() << ANSIColors::GREEN << ", bureaucrat grade " << ANSIColors::BLUE << object.getGrade() <<  ANSIColors::GREEN << "." << ANSIColors::RESET;
+    os << ANSIColors::BRIGHT_BACKGROUND_BLACK <<  ANSIColors::WHITE << "Bureaucrat: " << ANSIColors::GREEN << object.getName() << ANSIColors::WHITE << " | " << " Grade: " << ANSIColors::GREEN << object.getGrade() << ANSIColors::WHITE << " | " <<ANSIColors::RESET;
     return os;
+}
+
+// Exceptions
+
+const char *Bureaucrat::GradeTooHighException::what()const throw()
+{
+    return   "Doesn't have a low enough grade. (too high)" ;
+}
+
+const char *Bureaucrat::GradeTooLowException::what()const throw()
+{
+    return "Doesn't have a high enough grade. (too low)";
 }

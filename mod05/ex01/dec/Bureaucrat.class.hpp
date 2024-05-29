@@ -3,8 +3,8 @@
 
 #include <string>
 #include <iostream>
+#include <exception>
 #include "ANSIColors.hpp"
-#include "Exceptions.hpp"
 #include "Form.class.hpp"
 
 class Form;
@@ -30,6 +30,17 @@ class Bureaucrat {
 
         // New function
         void signForm( Form &f );
+
+        // Exceptions
+        class GradeTooHighException: public std::exception {
+            public:
+                virtual const char* what() const throw();
+        };
+
+        class GradeTooLowException : public std::exception {
+            public:
+                virtual const char* what() const throw();
+        };
 
     private:
         const std::string name;

@@ -1,14 +1,8 @@
 #ifndef SERIALIZER_CLASS_H
 # define SERIALIZER_CLASS_H
 
-
+#include "Data.class.hpp"
 #include <cstdint>
-#include <string>
-
-struct Data {
-    std::string str_a;
-    int int_a;
-};
 
 class Serializer {
 

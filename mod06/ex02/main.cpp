@@ -5,9 +5,11 @@
 #include "dec/C.class.hpp"
 
 #include <iostream>
-#include <ctime>
+#include <time.h>
 #include <sstream>
 #include <exception>
+#include <stdio.h>
+#include <stdlib.h>
 
 
 // ANSI COLOR CODES
@@ -19,10 +21,11 @@
 #define BACKGROUND_RED  "\033[41m"
 #define BACKGROUND_GREEN  "\033[42m"
 #define BACKGROUND_BLUE  "\033[44m"
+#define BACKGROUND_CYAN "\033[46m"
 
 Base *generate ( void )
 {
-    int random = std::rand() % 3;
+    int random = rand() % 3;
     if (random == 0)
         return new A;
     if (random == 1)
@@ -75,10 +78,12 @@ int main ( void)
         ss >> seed;
         if (ss.fail() || !ss.eof())
             throw std::exception();
-        std::srand(static_cast<unsigned int>(seed * time(0)));
-        for (int i = 0; i < 9; ++i) {
+        srand(static_cast<unsigned int>(seed * time(0)));
+
+        std::cout <<  std::endl << BACKGROUND_CYAN << "\tWe will generate 3 random classes 🎲" << RESET << std::endl << std::endl;
+        for (int i = 0; i < 3; ++i) {
             Base* obj = generate();
-            std::cout << "Object " << i + 1 << ": ";
+            std::cout << CYAN << "\tRandom class " << i + 1 << ": " << RESET;
             identify(obj);
             std::cout << " ";
             identify(*obj);

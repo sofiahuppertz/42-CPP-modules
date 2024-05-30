@@ -33,9 +33,9 @@ void ShrubberyCreationForm::local_execute (Bureaucrat const &executor) const
 {
     std::ofstream ofs;
     std::string filename;
-    
+
     (void)executor;
-    std::cout << "🌳 ShrubberyCreationForm execute() called. 🌳" << std::endl;
+    std::cout << "\t" << "🌳 ShrubberyCreationForm execute() called. 🌳" << std::endl;
     filename = getTarget() + "_shrubbery";
     ofs.open(filename.c_str(), std::ios::out | std::ios::app);
     if (ofs.is_open()) {

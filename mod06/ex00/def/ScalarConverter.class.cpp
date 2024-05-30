@@ -22,40 +22,57 @@ bool ScalarConverter::isChar( std::string const &literal ) {
     return false;
 }
 
+bool ScalarConverter::isNumber(std::string const &literal)
+{
+    int dot;
+    int i;
+
+    i  = 0;
+    dot = 0;
+    if (literal[i] == '+' or literal[i] == '-')
+        i++;
+    for(;i < int(literal.length()); i++)
+    {
+        if (std::isdigit(literal[i]) || (literal[i] == 'E' && literal[i + 1] == '+' && i++) || (literal[i] == '.' && dot == 0))
+        {
+            dot = literal[i] == '.' ? 1 : dot;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 bool ScalarConverter::isInf( std::string const &literal ) {
 
     return (literal == "inf" || literal == "-inf" || literal == "+inf" ||literal == "inff" || literal == "-inff" || literal == "+inff");
 }
 
-std::ostringstream ScalarConverter::convertChar( double Value )
+void ScalarConverter::convertChar( double Value, std::ostringstream &os )
 {
-    std::ostringstream os;
-
     if (Value > CHAR_MAX || Value < CHAR_MIN || (Value != Value))
         os <<  "impossible";
     else if (isprint(static_cast<char>(Value)))
         os << "'" << static_cast<char>(Value) << "'";
     else
         os << "Non displayable" ;
-    return os;
+
 }
 
-std::ostringstream ScalarConverter::convertInt( double Value )
+void  ScalarConverter::convertInt( double Value, std::ostringstream &os )
 {
-    std::ostringstream os;
-
     if (Value > INT_MAX || Value < INT_MIN || (Value != Value))
         os << "impossible";
     else
         os << static_cast<int>(Value);
-    return os;
+
 }
 
 
-std::ostringstream ScalarConverter::convertFloat( double Value, int is_inf )
+void ScalarConverter::convertFloat( double Value, std::ostringstream &os, int is_inf )
 {
-    std::ostringstream os;
-
     if (is_inf)
         os << (Value > 0 ? "inff" : "-inff");
     else if (ScalarConverter::isOverflow(static_cast<float>(Value)))
@@ -64,20 +81,17 @@ std::ostringstream ScalarConverter::convertFloat( double Value, int is_inf )
         os << std::fixed << std::setprecision(1) << static_cast<float>(Value) << "f";
     else
         os << static_cast<float>(Value) << "f";
-    return os;
 }
 
-std::ostringstream ScalarConverter::convertDouble( double Value, int is_inf)
+void ScalarConverter::convertDouble( double Value, std::ostringstream &os, int is_inf)
 {
-    std::ostringstream os;
-
     if (!is_inf && ScalarConverter::isOverflow(Value))
         os << "impossible";
     else if (Value == std::floor(Value))
         os << std::fixed << std::setprecision(1) << Value;
     else
         os << Value;
-    return os;
+
 }
 
 
@@ -89,6 +103,8 @@ std::string ScalarConverter::removeTrailingF( std::string literal ) {
         return literal.substr(0, literal.length() - 1);
     return literal;
 }
+
+
 
 double ScalarConverter::convertToDouble( std::string literal ) {
 
@@ -110,7 +126,7 @@ double ScalarConverter::convertToDouble( std::string literal ) {
     return Value;
 }
 
-void ScalarConverter::printConversions(std::ostringstream const (&outputs)[4]) 
+void ScalarConverter::printConversions(std::ostringstream const (&outputs)[4])
 {
     std::string types[4] = {"char", "int", "float", "double"};
     std::string colors[4] = {"\033[36m", "\033[32m", "\033[33m", "\033[35m"};
@@ -119,7 +135,7 @@ void ScalarConverter::printConversions(std::ostringstream const (&outputs)[4])
 
     for (int i = 0; i < 4; i++)
     {
-        std::cout << colors[i] << types[i] << reset << ": " 
+        std::cout << colors[i] << types[i] << reset << ": "
                   << brightWhite << outputs[i].str() << reset << std::endl;
     }
 }
@@ -127,33 +143,37 @@ void ScalarConverter::printConversions(std::ostringstream const (&outputs)[4])
 
 void ScalarConverter::setConversions( double Value, std::ostringstream (&outputs)[4], int is_inf)
 {
-    outputs[0] = convertChar(Value);
-    outputs[1] = convertInt(Value);
-    outputs[2] = convertFloat(Value, is_inf);
-    outputs[3] = convertDouble(Value, is_inf);
+    ScalarConverter::convertChar(Value, outputs[0]);
+    ScalarConverter::convertInt(Value, outputs[1]);
+    ScalarConverter::convertFloat(Value, outputs[2], is_inf);
+    ScalarConverter::convertDouble(Value, outputs[3], is_inf);
 }
 
-void ScalarConverter::convert( std::string literal ) 
+void ScalarConverter::convert( std::string literal )
 {
     std::ostringstream outputs[4];
-    int is_inf = 0; 
-    try 
+    int is_inf = 0;
+    try
     {
 
         if (literal.empty())
             throw std::exception();
-        
+
         if (isInf(literal))
             is_inf = 1;
 
         if (!isChar(literal))
+        {
             literal = ScalarConverter::removeTrailingF(literal);
+        }
+        if (!is_inf && !isNumber(literal))
+            throw std::exception();
 
         double Value = ScalarConverter::convertToDouble(literal);
-
+        std::cout << Value << std::endl;
         setConversions(Value, outputs, is_inf);
     }
-    catch (std::exception & e) 
+    catch (std::exception & e)
     {
         for (int i = 0; i < 4; i++)
             outputs[i] << "impossible";

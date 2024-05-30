@@ -70,11 +70,11 @@ void Bureaucrat::signForm( AForm &f )
     try
     {
         f.beSigned(*this);
-        std::cout << ANSIColors::GREEN << name <<  " " << ANSIColors::BRIGHT_BACKGROUND_GREEN << ANSIColors::WHITE <<  "signed" << ANSIColors::RESET << " " << ANSIColors::GREEN << f.getName() << ANSIColors::RESET << std::endl;
+        std::cout << ANSIColors::GREEN << "\t" << name <<  " " << ANSIColors::BRIGHT_BACKGROUND_GREEN << ANSIColors::WHITE <<  "signed" << ANSIColors::RESET << " " << ANSIColors::GREEN << f.getName() << ANSIColors::RESET << std::endl;
     }
     catch(std::exception &e)
     {
-        std::cout << ANSIColors::RED << name <<  " " << ANSIColors::BRIGHT_BACKGROUND_RED << ANSIColors::WHITE << "coulndn't sign" <<  ANSIColors::RESET << ANSIColors::RED << " " << f.getName() << " " << ANSIColors::BRIGHT_BACKGROUND_RED <<  ANSIColors::WHITE << "Reason:" << ANSIColors::RESET << ANSIColors::RED << " " << e.what() <<  ANSIColors::RESET << std::endl;
+        std::cout << ANSIColors::RED << "\t" << name <<  " " << ANSIColors::BRIGHT_BACKGROUND_RED << ANSIColors::WHITE << "coulndn't sign" <<  ANSIColors::RESET << ANSIColors::RED << " " << f.getName() << " " << ANSIColors::BRIGHT_BACKGROUND_RED <<  ANSIColors::WHITE << "Reason:" << ANSIColors::RESET << ANSIColors::RED << " " << e.what() <<  ANSIColors::RESET << std::endl;
     }
 }
 
@@ -90,11 +90,11 @@ void Bureaucrat::executeForm( AForm const &form )
             throw AForm::NotSignedException();
         }
         form.execute(*this);
-        std::cout << ANSIColors::GREEN << name <<  " " << ANSIColors::BRIGHT_BACKGROUND_WHITE << ANSIColors::GREEN <<  "executed" << ANSIColors::RESET << " " << ANSIColors::GREEN << form.getName() << ANSIColors::RESET << std::endl;
+        std::cout << ANSIColors::GREEN << "\t" << name <<  " " << ANSIColors::BRIGHT_BACKGROUND_WHITE << ANSIColors::GREEN <<  "executed" << ANSIColors::RESET << " " << ANSIColors::GREEN << form.getName() << ANSIColors::RESET << std::endl;
     }
     catch (std::exception &e )
     {
-        std::cout << ANSIColors::RED << name << " " << ANSIColors::BRIGHT_BACKGROUND_WHITE << ANSIColors::RED << "couldn't execute" << ANSIColors::RESET << ANSIColors::RED << " " << form.getName() << ". " << ANSIColors::BRIGHT_BACKGROUND_WHITE << ANSIColors::RED << "Reason:" << ANSIColors::RESET << ANSIColors::RED << " " << e.what() <<  ANSIColors::RESET << std::endl;
+        std::cout << ANSIColors::RED << "\t" << name << " " << ANSIColors::BRIGHT_BACKGROUND_WHITE << ANSIColors::RED << "couldn't execute" << ANSIColors::RESET << ANSIColors::RED << " " << form.getName() << ". " << ANSIColors::BRIGHT_BACKGROUND_WHITE << ANSIColors::RED << "Reason:" << ANSIColors::RESET << ANSIColors::RED << " " << e.what() <<  ANSIColors::RESET << std::endl;
     }
 }
 

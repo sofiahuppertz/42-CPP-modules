@@ -28,13 +28,15 @@ PresidentialPardonForm::~PresidentialPardonForm( void ) {
 void PresidentialPardonForm::local_execute (Bureaucrat const &executor) const
 {
     (void)executor;
-    std::cout << ANSIColors::CYAN 
-              << "🚀 [Presidential Pardon]: Zaphod Beeblebrox, in all his intergalactic swagger, announces:" 
-              << ANSIColors::RESET << std::endl;
-    std::cout << ANSIColors::BRIGHT_BACKGROUND_CYAN 
-              << ANSIColors::WHITE 
-              << "✨ " << getTarget() << " has been graciously pardoned! 🌟" 
-              << ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::CYAN
+            << "\t"
+            << "🚀 [Presidential Pardon]: Zaphod Beeblebrox, in all his intergalactic swagger, announces:"
+            << ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::BRIGHT_BACKGROUND_CYAN
+            << "\t"
+            << ANSIColors::WHITE
+            << "✨ " << getTarget() << " has been graciously pardoned! 🌟"
+            << ANSIColors::RESET << std::endl;
     return;
 }
 

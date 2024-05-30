@@ -15,7 +15,7 @@ int main( void )
     for (int i = 0; i < 3; i++) {
         AForm *form = LatteMcbrew.makeForm(forms[i], "Caffeine_Queen");
         if (form != NULL) {
-            std::cout << *form << std::endl;
+            std::cout << "\t" << *form << std::endl;
             CaffeineQueen.signForm(*form);
             CaffeineQueen.executeForm(*form);
             std::cout << std::endl;
@@ -24,9 +24,10 @@ int main( void )
     }
 
     /* Test 2: Creating a form that doesn't exist */
-    std::cout << std::endl << ANSIColors::BRIGHT_BACKGROUND_MAGENTA  << ANSIColors::WHITE << std::endl 
-          << "☕️ It's 14:30 and Latte McBrew, feels the afternoon slump. In his sleepyness, he makes a mistake! But fear not, for La Poste's exception handling jumps in to save the day! (Well, except for those mysteriously vanishing packages...)" 
+    std::cout << std::endl << ANSIColors::BRIGHT_BACKGROUND_MAGENTA  << ANSIColors::WHITE << std::endl
+          << "☕️ It's 14:30 and Latte McBrew, feels the afternoon slump. In his sleepyness, he makes a mistake! But fear not, for La Poste's exception handling jumps in to save the day! (Well, except for those mysteriously vanishing packages...)"
           << ANSIColors::RESET << std::endl << std::endl;
 
     LatteMcbrew.makeForm("non-existent form", "Caffeine Queen");
+    std::cout << std::endl;
 }

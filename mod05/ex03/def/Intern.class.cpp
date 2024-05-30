@@ -42,20 +42,20 @@ AForm *Intern::makeForm( std::string formName, std::string target )
     try {
         for (int i = 0; i < 3; i++) {
             if (concreteFormName[i] == formName) {
-                std::cout << ANSIColors::BRIGHT_BACKGROUND_YELLOW << "Intern creates a " << formName << " form." << ANSIColors::RESET << std::endl;
+                std::cout << ANSIColors::BRIGHT_BACKGROUND_YELLOW << "\tIntern creates a " << formName << " form." << ANSIColors::RESET << std::endl;
                 return concreteForm[i](target);
             }
         }
         throw FormNotFoundException();
-    } 
-    catch (std::exception &e) 
+    }
+    catch (std::exception &e)
     {
-        std::cout << ANSIColors::BACKGROUND_RED << "Exception caught:" << ANSIColors::RESET << ANSIColors::RED << " " << e.what() << ANSIColors::RESET << std::endl;
+        std::cout << ANSIColors::BACKGROUND_RED << "\tException caught:" << ANSIColors::RESET << ANSIColors::RED << " " << e.what() << ANSIColors::RESET << std::endl;
         return NULL;
     }
 }
 
-// FormNotFoundException 
+// FormNotFoundException
 const char *Intern::FormNotFoundException::what() const throw()
 {
     return "Form doesn't exist.";

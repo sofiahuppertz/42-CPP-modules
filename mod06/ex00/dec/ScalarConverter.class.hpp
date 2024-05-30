@@ -2,13 +2,16 @@
 #define SCALARCONVERTER_CLASS_HPP
 
 
+#include <cassert>
+#include <cerrno>
 #include <climits>
-#include <limits>
+#include <cmath>
+#include <cstdlib>
 #include <iomanip>
 #include <iostream>
-#include <cmath>
-#include <string>
+#include <limits>
 #include <sstream>
+#include <string>
 
 
 class ScalarConverter {
@@ -24,13 +27,13 @@ class ScalarConverter {
         static void convertChar ( double Value, std::ostringstream &os );
         static void convertInt ( double Value, std::ostringstream &os );
         static void convertFloat ( double Value, std::ostringstream &os, int is_inf );
-        static void convertDouble ( double Value, std::ostringstream &os, int is_inf );
+        static void convertDouble ( double Value, std::ostringstream &os);
 
         static bool isChar ( std::string const &literal );
         static bool isNumber ( std::string const &literal );
         static bool isInf ( std::string const &literal );
         static bool isOverflow ( float const &Value );
-        static bool isOverflow ( double const &Value );
+        static bool isOverflow ( std::string &str, double &Value );
 
         static std::string removeTrailingF ( std::string literal );
         static double convertToDouble ( std::string literal, int is_inf );

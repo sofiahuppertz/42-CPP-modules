@@ -45,8 +45,7 @@ int main(void)
 
 
     // Step 5: Let's conver the pointer deserializedData to a string pointer;
-    std::string *str = reinterpret_cast<std::string *>(deserializedData)
-    std::cout << backgroundMagenta << "\t✨ Assert : Original Ptr Matches Deserialized Ptr ✨" << reset << std::endl;
+    std::string *str = reinterpret_cast<std::string *>(deserializedData);
     std::cout << std::endl << brightCyan << "Step 5: Converted the pointer deserializedData to a string pointer.\n\tThis allows to access the first member of the struct only because it has the same adress ad the struct itself." << reset << std::endl;
     std::cout << brightGreen << "\tString Pointer: " << str << reset << std::endl;
     std::cout << brightYellow << "\tString: " << brightMagenta << *str << reset << std::endl;

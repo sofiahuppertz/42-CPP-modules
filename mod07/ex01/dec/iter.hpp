@@ -2,7 +2,9 @@
 #define ITER_H
 
 #include <cstddef>
+#include <cstdlib>
 #include <iostream>
+#include "ANSIColors.hpp"
 
 template <typename T>
 void iter(T array[], size_t size, void (*func)(T&))
@@ -17,13 +19,22 @@ void iter(T array[], size_t size, void (*func)(T&))
 template <typename T>
 void print(T &i)
 {
-    std::cout << i << std::endl;
+    std::string colors[] = {ANSIColors::RED, ANSIColors::GREEN, ANSIColors::YELLOW, ANSIColors::BLUE, ANSIColors::MAGENTA, ANSIColors::CYAN};    
+    std::cout << colors[rand() % 6] << i << ANSIColors::RESET; 
+    std::cout << " ";   
+
 }
 
 template <typename T>
-void increment(T &i)
+void replaceWithO(T &i)
 {
-    i++;
+    i = 'o';
+}
+
+template <typename T>
+void square(T &i)
+{
+    i *= i;
 }
 
 

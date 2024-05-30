@@ -59,13 +59,14 @@ int main (void)
             index += it->length();
         }
 
+        std::cout << std::endl;
         printListInfo(allWords, totalLength);
 
         iss.str("");
         iss.clear();
 
         // Prompt for a list of numbers
-        std::cout << std::endl << ANSIColors::BRIGHT_BACKGROUND_GREEN << "Enter a list of numbers separated by spaces:" << ANSIColors::RESET << " ";
+        std::cout << std::endl << ANSIColors::BRIGHT_BACKGROUND_GREEN << "Enter a list of integers separated by spaces:" << ANSIColors::RESET << " ";
         std::getline(std::cin, inputLine);
         if (inputLine.empty())
             throw std::exception();
@@ -91,10 +92,11 @@ int main (void)
         int numberArray[numNumbers];
         std::copy(numbers.begin(), numbers.end(), numberArray);
 
-        printListInfo(numberArray, numNumbers);        
+        std::cout << std::endl;
+        printListInfo(numberArray, numNumbers);
     }
     catch (std::exception &e)
     {
-        std::cerr << ANSIColors::BRIGHT_BACKGROUND_RED << "Invalid input" << std::endl;
+        std::cerr << ANSIColors::BRIGHT_BACKGROUND_RED << "Invalid input" << ANSIColors::RESET << std::endl;
     }
 }

@@ -3,7 +3,8 @@
 
 const float ScalarConverter::max_float = std::numeric_limits<float>::max();
 const double ScalarConverter::max_double = std::numeric_limits<double>::max();
-
+const double ScalarConverter::positive_infinity = std::numeric_limits<double>::infinity();
+const double ScalarConverter::negative_infinity = -std::numeric_limits<double>::infinity();
 
 bool ScalarConverter::isOverflow( float const &Value ) {
    return (Value > ScalarConverter::max_float || Value < -ScalarConverter::max_float);
@@ -106,7 +107,7 @@ std::string ScalarConverter::removeTrailingF( std::string literal ) {
 
 
 
-double ScalarConverter::convertToDouble( std::string literal ) {
+double ScalarConverter::convertToDouble( std::string literal, int is_inf ) {
 
     std::istringstream i(literal);
     double Value;
@@ -118,9 +119,16 @@ double ScalarConverter::convertToDouble( std::string literal ) {
         else
             Value = static_cast<double>(literal[0]);
     }
+    else if (is_inf)
+    {
+        if (literal[0] == '-')
+            Value = ScalarConverter::negative_infinity;
+        else
+            Value = ScalarConverter::positive_infinity;
+    }
     else
         i >> Value;
-    if (Value == 0 && literal.length() != 1 && literal != "-0")
+    if (!is_inf && Value == 0 && literal.length() != 1 && literal != "-0")
         throw std::exception();
 
     return Value;
@@ -165,12 +173,11 @@ void ScalarConverter::convert( std::string literal )
         if (!isChar(literal))
         {
             literal = ScalarConverter::removeTrailingF(literal);
+            if (!is_inf && !isNumber(literal))
+                throw std::exception();
         }
-        if (!is_inf && !isNumber(literal))
-            throw std::exception();
 
-        double Value = ScalarConverter::convertToDouble(literal);
-        std::cout << Value << std::endl;
+        double Value = ScalarConverter::convertToDouble(literal, is_inf);
         setConversions(Value, outputs, is_inf);
     }
     catch (std::exception & e)

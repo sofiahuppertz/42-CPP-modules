@@ -33,11 +33,13 @@ class ScalarConverter {
         static bool isOverflow ( double const &Value );
 
         static std::string removeTrailingF ( std::string literal );
-        static double convertToDouble ( std::string literal );
+        static double convertToDouble ( std::string literal, int is_inf );
 
 
         static const float max_float;
         static const double max_double;
+        static const double positive_infinity;
+        static const double negative_infinity;
 
     private:
 

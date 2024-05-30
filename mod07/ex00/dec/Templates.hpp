@@ -4,7 +4,7 @@
 #include <iostream>
 #include "ANSIColors.hpp"
 
-template <typename T> 
+template <typename T>
 void swap( T &a, T &b) {
 
     T temp;
@@ -14,13 +14,13 @@ void swap( T &a, T &b) {
     b = temp;
 }
 
-template <typename T> 
+template <typename T>
 T min( T a, T b ) {
 
     return (a < b) ? a : b;
 }
 
-template <typename T> 
+template <typename T>
 T max( T a, T b ) {
 
     return (a > b ) ? a : b;
@@ -45,20 +45,20 @@ void SortList(T arr[], int size)
 template <typename T>
 void printListInfo (T arr[], int size)
 {
-    std::cout << ANSIColors::BRIGHT_BACKGROUND_CYAN << "Size:" << ANSIColors::RESET << " " << ANSIColors::BRIGHT_GREEN << size << ANSIColors::RESET << std::endl;
-    std::cout << ANSIColors::BRIGHT_BACKGROUND_CYAN  << "Content:"  << ANSIColors::RESET << " ";
+    std::cout << ANSIColors::BRIGHT_BACKGROUND_CYAN << "\tSize:" << ANSIColors::RESET << "\t" << ANSIColors::BRIGHT_CYAN << size << ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::BRIGHT_BACKGROUND_CYAN  << "\tContent:"  << ANSIColors::RESET << " ";
     for (int i = 0; i < size; i++)
     {
-        std::cout << ANSIColors::BRIGHT_GREEN << arr[i] << " ";
+        std::cout << ANSIColors::BRIGHT_CYAN << arr[i] << ", ";
     }
     std::cout << ANSIColors::RESET << std::endl;
     SortList(arr, size);
-    std::cout << ANSIColors::BRIGHT_BACKGROUND_CYAN << "Minimum:" << ANSIColors::RESET << " " << ANSIColors::BRIGHT_GREEN << arr[0] <<  ANSIColors::RESET << std::endl;
-    std::cout << ANSIColors::BRIGHT_BACKGROUND_CYAN << "Maximum:" << ANSIColors::RESET << " "<< ANSIColors::BRIGHT_GREEN << arr[size - 1] <<  ANSIColors::RESET << std::endl;
-    std::cout << ANSIColors::BRIGHT_BACKGROUND_CYAN << "Sorted:" << ANSIColors::RESET << " ";
+    std::cout << ANSIColors::BRIGHT_BACKGROUND_CYAN << "\tMinimum:" << ANSIColors::RESET << " " << ANSIColors::BRIGHT_CYAN << arr[0] <<  ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::BRIGHT_BACKGROUND_CYAN << "\tMaximum:" << ANSIColors::RESET << " "<< ANSIColors::BRIGHT_CYAN << arr[size - 1] <<  ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::BRIGHT_BACKGROUND_CYAN << "\tSorted:" << ANSIColors::RESET << "\t";
     for (int i = 0; i < size; i++)
     {
-        std::cout << ANSIColors::BRIGHT_GREEN << arr[i] << " ";
+        std::cout << ANSIColors::BRIGHT_CYAN << arr[i] << ", ";
     }
     std::cout << ANSIColors::RESET << std::endl;
 }

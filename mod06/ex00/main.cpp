@@ -1,9 +1,5 @@
 #include "dec/ScalarConverter.class.hpp"
 
-// DOUBLE MAX: 1.7976931348623157E+308;
-// FLOAT MAX: 3.4028235E+38;
-// INT MAX: 2147483647;
-
 int main(int argc, char **argv) {
     if (argc != 2) {
         std::cout << "Usage: ./convert [value]" << std::endl;

@@ -2,9 +2,9 @@
 #include <iostream>
 
 template <class T>
-Array<T>::Array( void ): array(nullptr), _size(0){
+Array<T>::Array( void ):  _size(0) {
     std::cout << "Default constructor called" << std::endl;
-// array = nullptr is the same than array = new T[0];
+    array = new T[0];
 }
 
 template <class T>

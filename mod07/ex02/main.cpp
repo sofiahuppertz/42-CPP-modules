@@ -1,66 +1,50 @@
-#include "dec/Array.hpp"
+#include    "dec/Array.hpp"
+#include    <cstdlib>
+#include    <ctime>
+#include    <string>
+#include    <cassert>
 
-int main( void ){
 
-    Array<int>a; // Calls the default constructor
+int main( void )
+{
+
+    srand(std::time(0));
+    std::cout << ANSIColors::BACKGROUND_GREEN << "We Have an Integers Array: " << ANSIColors::RESET << std::endl;
+   
+    Array <int>intArr(static_cast<unsigned int>(5));
+    for (int i = 0; i < 5; i++)
+        intArr[i] = rand() % 100;
+    intArr.printArray();
+    std::cout << std::endl;
+
+    std::cout << ANSIColors::BACKGROUND_BLUE << "We Have a Char Array: " << ANSIColors::RESET << std::endl;
+    Array <char>charArr(static_cast<unsigned int>(5));
+    for (int i = 0; i < 5; i++)
+        charArr[i] = static_cast<char>(rand() % 26 + 65);
+    charArr.printArray();
+    std::cout << std::endl;
+
+    std::cout << ANSIColors::BACKGROUND_CYAN << "We can copy an array: " << ANSIColors::RESET << std::endl;
+    Array <char>charArr2;
+    charArr2 = charArr;
+    charArr2.printArray();
+    std::cout << std::endl;
+
+    assert(charArr.getArray() != charArr2.getArray());
+    std::cout << ANSIColors::BACKGROUND_MAGENTA << "\t✨ Asserted: deep copy of charArr -> charArr2 ✨" << ANSIColors::RESET << std::endl << std::endl;
+
+    std::cout << ANSIColors::BACKGROUND_YELLOW << "Elements can be accessed through the subscript operator: " << ANSIColors::RESET << std::endl;
+    std::cout << "\tintArr[2]: " << intArr[2] << std::endl;
+    std::cout << std::endl;
+
+    std::cout << ANSIColors::BACKGROUND_GREEN << "And if we try to access an index that is out of bounds, an exception is thrown: " << ANSIColors::RESET << std::endl;
     try {
-        std::cout << "Accessing a:" << std::endl;
-        a[0] = 42;
+        std::cout << "\tintArr[5]: " << intArr[5] << std::endl;
+    } catch (std::exception & e) {
+        std::cout << ANSIColors::BACKGROUND_RED << "Exception caught:" << ANSIColors::RESET << ANSIColors::RED << " " << e.what() << ANSIColors::RESET << std::endl;
     }
-    catch (std::exception & e) {
-        std::cout << e.what() << std::endl;
-    }
+    std::cout << std::endl;
 
-    Array<int>b(5);
-    try {
-        std::cout << "Accessing and printing b:" << std::endl;
-        for (unsigned int i = 0; i < b.size(); i++) {
-            b[i] = i;
-        }
-        std::cout << b[4] << std::endl;
-        std::cout << std::endl;
-    }
-    catch (std::exception & e) {
-        std::cout << e.what() << std::endl;
-    }
-
-    Array<char>c(3);
-    try {
-        std::cout << "Printing c:" << std::endl;
-        for (unsigned int i = 0; i < c.size(); i++) {
-            c[i] = 97 + i;
-            std::cout << c[i] << ", ";
-        }
-        std::cout << c[3] << std::endl;
-    }
-    catch (std::exception & e) {
-        std::cout << e.what() << std::endl;
-    }
-
-    Array<char>d(c);
-    try {
-        std::cout << "Printing d:" << std::endl;
-        for (unsigned int i = 0; i < d.size(); i++) {
-            std::cout << d[i] << ", ";
-        }
-        std::cout << std::endl;
-    }
-    catch (std::exception & e) {
-        std::cout << e.what() << std::endl;
-    }
-
-    Array<char>e;
-    try {
-        std::cout << "Printing e:" << std::endl;
-        e = d;
-        for (unsigned int i = 0; i < e.size(); i++) {
-            std::cout << e[i] << ", ";
-        }
-        std::cout << std::endl;
-    }
-    catch (std::exception & e) {
-        std::cout << e.what() << std::endl;
-    }
 
     return 0;
 }

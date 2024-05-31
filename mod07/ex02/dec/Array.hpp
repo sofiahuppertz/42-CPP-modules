@@ -1,6 +1,7 @@
 #ifndef ARRAY_HPP
 #define ARRAY_HPP
 
+#include    "ANSIColors.hpp"
 
 template <class T>
 class Array {
@@ -19,7 +20,11 @@ class Array {
         Array & operator=( Array const & other );
 
         unsigned int size ( void ) const;
-        void copyElements( const T *src, T *dst, unsigned int size );
+        void copyElements( const T *src, T *dst);
+
+        // Function to print array
+        void printArray( void ) const;
+        T *getArray( void ) const;
 
     private:
         T *array;

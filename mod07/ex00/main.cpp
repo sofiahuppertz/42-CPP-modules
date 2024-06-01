@@ -5,8 +5,10 @@
 #include <sstream>
 #include <algorithm>
 
+//Vectors only for testing purposes...
 
-// Function to check if a string is a valid number
+
+//Function to check if a string is a valid number
 bool is_valid_number(std::string str)
 {
     if (str.empty())
@@ -27,6 +29,13 @@ bool is_valid_number(std::string str)
 
 int main (void)
 {
+
+
+    int a = 1;
+    int b = 2;
+    //char c = 'a';
+    min(a, b);
+
     try {
         // Prompt for a sentence or word
         std::cout << ANSIColors::BRIGHT_BACKGROUND_GREEN << "Enter a sentence or a word:" << ANSIColors::RESET << " ";
@@ -100,3 +109,21 @@ int main (void)
         std::cerr << ANSIColors::BRIGHT_BACKGROUND_RED << "Invalid input" << ANSIColors::RESET << std::endl;
     }
 }
+
+
+//int main( void )
+//{
+//    int a = 2;
+//    int b = 3;
+//    ::swap( a, b );
+//    std::cout << "a = " << a << ", b = " << b << std::endl;
+//    std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
+//    std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
+//    std::string c = "chaine1";
+//    std::string d = "chaine2";
+//    ::swap(c, d);
+//    std::cout << "c = " << c << ", d = " << d << std::endl;
+//    std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
+//    std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
+//    return 0;
+//}

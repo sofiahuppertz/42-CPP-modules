@@ -1,22 +1,14 @@
 #include "../dec/Span.hpp"
 
-
-const std::string blue("\033[0;34m");
-const std::string reset("\033[0m");
-
 Span::Span( void ): storage() {
-
-    std::cout << blue << "Default constructor called. Storage capacity = 0" << reset << std::endl;
 
 }
 
 Span::Span( unsigned int N ): storage() {
     storage.reserve(N);
-    std::cout << blue << "Constructor called. Storage capacity = " << storage.capacity() <<  reset <<std::endl;
 }
 
 Span::Span ( const Span & other ): storage(other.storage) {
-    std::cout << blue << "Copy constructor called. Storage capacity = " << storage.capacity() << reset << std::endl;
 }
 
 Span::~Span ( void ) {
@@ -35,7 +27,7 @@ void Span::addNumber ( int n ) {
 
     if ( storage.size() == storage.capacity()) {
         
-        throw std::logic_error("Storage is full");
+        throw std::logic_error("Storage is full 🔒");
     } else {
        
         storage.insert(std::upper_bound(storage.begin(), storage.end(), n), n);
@@ -45,7 +37,7 @@ void Span::addNumber ( int n ) {
 void Span::addNumber ( std::vector<int>::iterator begin, std::vector<int>::iterator end ) {
 
     if ( storage.size() + std::distance(begin, end) > storage.capacity()) {
-        throw std::logic_error("Storage is full");
+        throw std::logic_error("Storage is full 🔒");
     } else {
         storage.insert(storage.end(), begin, end);
         std::sort(storage.begin(), storage.end());
@@ -54,14 +46,14 @@ void Span::addNumber ( std::vector<int>::iterator begin, std::vector<int>::itera
 
 unsigned int Span::shortestSpan ( void ) const {
 
-    int shortestSpan = std::abs(storage[0] - storage[1]);
 
     // Make sure there are at least 2 elements in the storage
     if ( storage.size() < 2 ) {
-        throw std::logic_error("Not enough elements to calculate span");
+        throw std::logic_error("Not enough elements to calculate span.");
     }
 
     // Calculate the shortest span
+    int shortestSpan = std::abs(storage[0] - storage[1]);
     for ( size_t i = 1; i < storage.size(); i++) {
         shortestSpan = std::min(shortestSpan, std::abs(storage[i] - storage[i+1]));
     }
@@ -74,7 +66,7 @@ unsigned int Span::longestSpan ( void ) const {
     
     // Make sure there are at least 2 elements in the storage
     if ( storage.size() < 2 ) {
-        throw std::logic_error("Not enough elements to calculate span");
+        throw std::logic_error("Not enough elements to calculate span.");
     }
         
     return static_cast<unsigned int>(storage.back() - storage.front());
@@ -83,10 +75,21 @@ unsigned int Span::longestSpan ( void ) const {
 
 // My functions (getters)
 
-unsigned int Span::getStorageCapacity( void ) const {
+unsigned int Span::getCapacity( void ) const {
     return storage.capacity();
 }
 
-unsigned int Span::getStorageSize( void ) const {
+unsigned int Span::getSize( void ) const {
     return storage.size();
+}
+
+void Span::print( unsigned int last_index ) const
+{
+    std::string colors[] = {ANSIColors::RED, ANSIColors::GREEN, ANSIColors::YELLOW, ANSIColors::BLUE, ANSIColors::MAGENTA, ANSIColors::CYAN, ANSIColors::WHITE};
+    
+    for ( size_t i = 0; i < last_index && i <= storage.size() - 1; i++) 
+    {
+        std::cout << colors[i % colors->length()] << storage[i] << ANSIColors::RESET << " ";
+    }
+    std::cout  << std::endl;
 }

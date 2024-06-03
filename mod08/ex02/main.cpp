@@ -1,56 +1,52 @@
 #include "dec/Mutantstack.hpp"
+#include "dec/ANSIColors.hpp"
 #include <iostream>
-#include <list>
-
-// ANSI color codes
-const std::string green("\033[0;32m");
-const std::string blue("\033[0;34m");
-const std::string reset("\033[0m");
+#include <cstdlib>
+#include <map>
+#include <utility>
 
 int main()
 {
-    MutantStack<int> mstack;
-    std::list<int> mlist;
 
-    // Push elements
-    mstack.push(5);
-    mstack.push(17);
-    mlist.push_back(5);
-    mlist.push_back(17);
+    std::cout << ANSIColors::GREEN << "  __   __  __   __  _______  _______  __    _  _______  _______  _______  _______  _______  ___   _  " << ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::GREEN << " |  |_|  ||  | |  ||       ||   _   ||  |  | ||       ||       ||       ||   _   ||       ||   | | | " << ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::GREEN << " |       ||  | |  ||_     _||  |_|  ||   |_| ||_     _||  _____||_     _||  |_|  ||       ||   |_| | " << ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::GREEN << " |       ||  |_|  |  |   |  |       ||       |  |   |  | |_____   |   |  |       ||       ||      _| " << ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::GREEN << " |       ||       |  |   |  |       ||  _    |  |   |  |_____  |  |   |  |       ||      _||     |_  " << ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::GREEN << " | ||_|| ||       |  |   |  |   _   || | |   |  |   |   _____| |  |   |  |   _   ||     |_ |    _  | " << ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::GREEN << " |_|   |_||_______|  |___|  |__| |__||_|  |__|  |___|  |_______|  |___|  |__| |__||_______||___| |_| 👽" << ANSIColors::RESET << std::endl;
 
-    // Print top/last element
-    std::cout << green << "Stack top: " << mstack.top() << reset << std::endl;
-    std::cout << blue << "List back: " << mlist.back() << reset << std::endl;
 
-    // Pop elements
-    mstack.pop();
-    mlist.pop_back();
+    std::cout << std::endl <<  ANSIColors::GREEN << "Stacking numbers is boring, am I right?" <<  ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::GREEN << "Let's stack some jokes instead! [ Try to answer or type exit to stop the game ]" << ANSIColors::RESET << std::endl;
 
-    // Print size
-    std::cout << green << "Stack size: " << mstack.size() << reset << std::endl;
-    std::cout << blue << "List size: " << mlist.size() << reset << std::endl;
+    MutantStack<std::pair<std::string, std::string> > jokeStack;
+    jokeStack.push(std::make_pair("Why don't programmers like nature?", "Because it has too many bugs."));
+    jokeStack.push(std::make_pair("How many programmers does it take to change a light bulb?", "None. That's a hardware problem."));
+    jokeStack.push(std::make_pair("Why do Java developers wear glasses?","Because they don't C#."));
+    jokeStack.push(std::make_pair("Why was the computer cold?", "It left its Windows open."));
+    jokeStack.push(std::make_pair("What did the spider do on the computer?", "It made the web!"));
+    jokeStack.push(std::make_pair("Why Neil Armstrong didn't get any memory leaks?", "Because space is infinite."));
+    
+    MutantStack<std::pair<std::string, std::string> >::iterator it = jokeStack.begin();
+    MutantStack<std::pair<std::string, std::string> >::iterator ite = jokeStack.end();
 
-    // Push more elements
-    mstack.push(3); mstack.push(5); mstack.push(737); mstack.push(0);
-    mlist.push_back(3); mlist.push_back(5); mlist.push_back(737); mlist.push_back(0);
+    for (; it != ite; ++it)
+    {
+        std::cout << std::endl << "\t" << ANSIColors::BLUE << it->first << " " << ANSIColors::RESET;
 
-    // Iterate and print elements
-    MutantStack<int>::iterator it = mstack.begin();
-    MutantStack<int>::iterator ite = mstack.end();
-    while (it != ite) {
-        std::cout << green << "Stack: " << *it << reset << std::endl;
-        ++it;
+        std::string input;
+        std::getline(std::cin, input);
+        if (input.empty() || input == "exit")
+            break;
+        if (input == it->second)
+            std::cout << std::endl << ANSIColors::GREEN << "\tCorrect!" << ANSIColors::RESET << std::endl;
+        else
+            std::cout << std::endl << ANSIColors::RED << "\tIncorrect! The answer is: " << it->second << ANSIColors::RESET << std::endl;
     }
+    std::cout << std::endl << "\t" << ANSIColors::BACKGROUND_MAGENTA << "END OF GAME.🎮" << ANSIColors::RESET << std::endl;
 
-    std::list<int>::iterator list_it = mlist.begin();
-    std::list<int>::iterator lite = mlist.end();
-    while (list_it != lite) {
-        std::cout << blue << "List: " << *list_it << reset << std::endl;
-        ++list_it;
-    }
 
-    // Copy to a new stack
-    std::stack<int> s(mstack);
 
-    return 0;
+    
 }

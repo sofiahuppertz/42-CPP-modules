@@ -1,6 +1,7 @@
 #ifndef SPAN_H
 #define SPAN_H
 
+#include "ANSIColors.hpp"
 #include <algorithm>
 #include <stdexcept>
 #include <functional>
@@ -11,7 +12,6 @@
 class Span {
 
     public:
-        Span( void );
         Span ( unsigned int N );
         Span ( const Span & other );
         ~Span ( void );
@@ -25,10 +25,14 @@ class Span {
         unsigned int longestSpan( void ) const;
 
         // Getters
-        unsigned int getStorageCapacity( void ) const;
-        unsigned int getStorageSize( void ) const;
+        unsigned int getCapacity( void ) const;
+        unsigned int getSize( void ) const;
+
+        void print( unsigned int last_index ) const;
 
     private:
+        Span( void );
+
         std::vector<int> storage;
 };
 

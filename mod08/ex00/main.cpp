@@ -9,12 +9,8 @@
 #include "dec/easyfind.hpp"
 #include "dec/ANSIColors.hpp"
 
-class InvalidArgumentException : public std::exception {
-public:
-    virtual const char *what() const throw() {
-        return "Invalid argument. Please provide a valid integer.";
-    }
-};
+
+
 
 void simulate_searching() {
     for (int i = 0; i < 3; ++i) {
@@ -25,10 +21,32 @@ void simulate_searching() {
     std::cout << std::endl;
 }
 
+bool find_in_arg(std::string arg, char c) {
+    return arg.find(c) != std::string::npos;
+}
+
 int main(int argc, char* argv[])
 {
+
+    // Check user input
     if (argc != 2) {
         std::cerr << "Usage: " << argv[0] << " [number]" << std::endl;
+        return 1;
+    }
+    
+    int searchValue;
+    try
+    { 
+        std::string arg = argv[1];
+        if (find_in_arg(arg, '.') ||  find_in_arg(arg, 'f') || find_in_arg(arg, 'F')) {
+            throw InvalidArgumentException();
+        }
+        searchValue = std::atoi(argv[1]);
+        if (argv[1][0] == '\0' || (searchValue == 0 && argv[1][0] != '0')) {
+            throw InvalidArgumentException();
+        }
+    } catch (std::exception &e) {
+        std::cerr << ANSIColors::BACKGROUND_RED << "\tException Caught:" << ANSIColors::RESET << ANSIColors::RED <<  " " << e.what() << std::endl;
         return 1;
     }
 
@@ -38,7 +56,7 @@ int main(int argc, char* argv[])
     myvector.push_back(30);
     myvector.push_back(40);
 
-    std::cout << ANSIColors::BACKGROUND_MAGENTA << "We are first going to call easyfind() with a vector " << ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::BACKGROUND_MAGENTA << " 🔍 We are first going to call easyfind() with a vector. 👀 " << ANSIColors::RESET << std::endl;
 
     std::cout << ANSIColors::MAGENTA << "\tValues inside the vector: ";
     for (std::vector<int>::iterator it = myvector.begin(); it != myvector.end(); ++it) {
@@ -50,16 +68,6 @@ int main(int argc, char* argv[])
     std::cout << ANSIColors::MAGENTA << "\tSearching in vector container ." ;
     simulate_searching();
 
-    int searchValue;
-    try {
-        searchValue = std::atoi(argv[1]);
-        if (argv[1][0] == '\0' || (searchValue == 0 && argv[1][0] != '0')) {
-            throw InvalidArgumentException();
-        }
-    } catch (...) {
-        std::cerr << InvalidArgumentException().what() << std::endl;
-        return 1;
-    }
 
     try {
         std::vector<int>::iterator it = easyfind(myvector, searchValue);
@@ -69,30 +77,30 @@ int main(int argc, char* argv[])
     }
 
     std::deque<int> mydeque;
-    for (int i = 0; i < 25; i++)
+    for (int i = 0; i < 10; i++)
     {
         mydeque.push_front(i);
     }
 
-    std::cout << ANSIColors::BACKGROUND_MAGENTA << "Now we are going to call easyfind() with a deque " << ANSIColors::RESET << std::endl;
+    std::cout <<  std::endl << ANSIColors::BACKGROUND_BLUE << "🔍 Now we are going to call easyfind() with a deque. 👀" << ANSIColors::RESET << std::endl;
 
-    std::cout << std::endl << "\033[0;32m" << "Deque values: ";
+    std::cout << ANSIColors::BLUE << "\tValues inside the deque: ";
     for (std::deque<int>::iterator it = mydeque.begin(); it != mydeque.end(); ++it) {
         std::cout << *it << " ";
     }
     std::cout << std::endl;
 
-    std::cout << "Searching in Deque container .";
+    std::cout << "\tSearching in Deque container ." << ANSIColors::RESET;
     simulate_searching();
 
 
 
     try {
         std::deque<int>::iterator it = easyfind(mydeque, searchValue);
-        std::cout << "\033[34mFound value " << *it << " at possition " << std::distance(mydeque.begin(), it) <<"\033[0m" << std::endl;
+        std::cout << ANSIColors::BLUE << "\tFound value " << *it << "!🎂 At possition " << std::distance(mydeque.begin(), it) << ANSIColors::RESET << std::endl;
     } catch (std::exception &e)
     {
-        std::cout << "\033[35m" << e.what() << "\033[0m" << std::endl;
+        std::cout << ANSIColors::BACKGROUND_RED << "\tException caught:" << ANSIColors::RESET << "\t"<< ANSIColors::RED << e.what() << ANSIColors::RESET<< std::endl;
     }
 
 
@@ -104,21 +112,21 @@ int main(int argc, char* argv[])
         mylist.push_back(randomValue);
     }
 
-    std::cout << "\033[0;32m" << "List values: ";
+    std::cout <<  std::endl << ANSIColors::BACKGROUND_GREEN << "🔍 At last, we are going to call easyfind() with a list. 👀" << ANSIColors::RESET << std::endl;
+
+    std::cout << ANSIColors::GREEN << "\tList values: ";
     for (std::list<int>::iterator it = mylist.begin(); it != mylist.end(); ++it) {
         std::cout << *it << " ";
     }
-    std::cout << std::endl << "\033[0m";
-
-    std::cout << "Searching in List container .";
+    std::cout << std::endl << "\tSearching in List container ." << ANSIColors::RESET;;
     simulate_searching();
 
     try {
         std::list<int>::iterator it = easyfind(mylist, searchValue);
-        std::cout << "\033[34mFound value " << *it << " at possition " << std::distance(mylist.begin(), it) <<"\033[0m" << std::endl;
+        std::cout << ANSIColors::GREEN << "Found value " << *it << " at possition " << std::distance(mylist.begin(), it) << ANSIColors::RESET << std::endl;
     } catch (std::exception &e)
     {
-        std::cout << "\033[35m" << e.what() << "\033[0m" << std::endl;
+        std::cout << ANSIColors::BACKGROUND_RED << "\tException caught:" << ANSIColors::RESET << "\t"<< ANSIColors::RED << e.what() << ANSIColors::RESET<< std::endl;
     }
     return 0;
 

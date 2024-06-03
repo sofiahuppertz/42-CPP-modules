@@ -1,84 +1,121 @@
 #include "dec/Span.hpp"
+#include <cstdlib>
+#include <ctime>
+#include <cstdlib>
+#include <sstream>
+#include <limits>
+#include <vector>
+
+
+bool isValidInt ( const std::string &input )
+{
+  if (input.empty()) {
+    return false;
+  }
+  unsigned int i = 0;
+  if (input[i] == '-' || input[i] == '+') {
+    i++;
+  }
+  for ( ; i < input.size(); i++) {
+    if ( !std::isdigit(input[i]) ) {
+      return false;
+    }
+  }
+  double num;
+  std::istringstream ss(input);
+  ss >> num;
+
+  return (num >= std::numeric_limits<int>::min() && num <= std::numeric_limits<int>::max());
+}
+
+bool isValidUnsignedInt ( const std::string &input )
+{
+
+    for ( size_t i = 0; i < input.size(); i++) {
+        if ( !std::isdigit(input[i]) ) {
+            return false;
+        }
+    }
+    double num;
+    std::istringstream ss(input);
+    ss >> num;
+
+    return (num >= std::numeric_limits<unsigned int>::min() && num <= std::numeric_limits<unsigned int>::max());
+}
 
 int main ( void )
 {
-  // ANSI color codes
-  const std::string red("\033[0;31m");
-  const std::string green("\033[0;32m");
-  const std::string blue("\033[0;34m");
-  const std::string reset("\033[0m");
 
-  // Test 1: Add a range of numbers and check the shortest and longest span
-  std::cout << "Test 1: Add a range of numbers and check the shortest and longest span" << std::endl;
-  std::vector<int> v;
-  for ( int i = 0; i < 10000; i++ ) {
-    v.push_back(i);
+  unsigned int N;
+  std::string input;
+  
+  std::cout << ANSIColors::BACKGROUND_CYAN << "Enter a size N:" << ANSIColors::RESET << " ";  
+  std::getline(std::cin, input);
+
+  if (!isValidUnsignedInt(input)) {
+    std::cerr << ANSIColors::BACKGROUND_RED << "Wrong input!💩" << ANSIColors::RESET << std::endl;
+    return 1;
   }
+  N = static_cast<unsigned int>(std::atoi(input.c_str()));
 
-  Span s(10000);
-  try {
-    s.addNumber(v.begin(), v.end());
-    std::cout << green << "Shortest span: " << s.shortestSpan() << reset << std::endl;
-    std::cout << green << "Longest span: " << s.longestSpan() << reset << std::endl;
-  } catch ( std::exception & e ) {
-    std::cout << red << e.what() << reset << std::endl;
-  }
-
-  // Test 2: Try to add a number to a full Span
-  std::cout << "Test 2: Try to add a number to a full Span" << std::endl;
-  try {
-    s.addNumber(10000);
-  } catch ( std::exception & e ) {
-    std::cout << red << "Expected exception: " << e.what() << reset << std::endl;
-  }
-
-  // Test 3: Create a Span with a single number and try to calculate the span
-  std::cout << "Test 3: Create a Span with a single number and try to calculate the span" << std::endl;
-  Span s2(1);
-  s2.addNumber(5);
-  try {
-    std::cout << green << "Shortest span: " << s2.shortestSpan() << reset << std::endl;
-  } catch ( std::exception & e ) {
-    std::cout << red << "Expected exception: " << e.what() << reset << std::endl;
-  }
-
-  // Test 4: Create an empty Span and try to add a range that exceeds its capacity
-  std::cout << "Test 4: Create an empty Span and try to add a range that exceeds its capacity" << std::endl;
-  Span s3;
-  std::vector<int> v2;
-  for ( int i = 0; i < 6; i++ ) {
-    v2.push_back(i);
+  Span span(N);
+  std::cout << std::endl << ANSIColors::BACKGROUND_GREEN << "\tSpan created! ⭐" << ANSIColors::RESET << std::endl << std::endl;
+  std::cout << ANSIColors::CYAN << "\tSpan capacity " << span.getCapacity() << ANSIColors::RESET << std::endl;
+  std::cout << ANSIColors::CYAN << "\tSpan size: " << span.getSize() << ANSIColors::RESET << std::endl;
+  
+  std::cout << std::endl << ANSIColors::BACKGROUND_CYAN << "Enter an integer or a list of integers separated by a space:" << ANSIColors::RESET << " ";
+  std::getline(std::cin, input);
+  std::istringstream ss(input);
+  
+  std::vector<int> numbers;
+  while (ss >> input) {
+    if (!isValidInt(input)) {
+      std::cerr << std::endl << ANSIColors::BACKGROUND_RED << "\tWrong input!💩" << ANSIColors::RESET << std::endl;
+      return 1;
+    }
+    numbers.push_back(std::atoi(input.c_str()));
   }
   try {
-    s3.addNumber(v2.begin(), v2.end());
-  } catch ( std::exception & e ) {
-    std::cout << red << "Expected exception: " << e.what() << reset << std::endl;
+    span.addNumber(numbers.begin(), numbers.end());
+    std::cout << std::endl << ANSIColors::BACKGROUND_GREEN << "\tNumbers added successfully! ⭐" << ANSIColors::RESET << std::endl << std::endl;
+    std::cout << ANSIColors::CYAN << "\tSpan capacity: " << span.getCapacity() << ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::CYAN << "\tSpan size: " << span.getSize() << ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::CYAN << "\tShortest span: " << span.shortestSpan() << ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::CYAN << "\tLongest span: " << span.longestSpan() << ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::CYAN << "\tSpan content (first 10 elements): " << ANSIColors::RESET;
+    span.print(static_cast<unsigned int>(10));
+  }
+  catch (std::exception &e)
+  {
+    std::cerr << ANSIColors::BACKGROUND_RED << "\tException caught:" << ANSIColors::RESET << " " << ANSIColors::RED << e.what() << ANSIColors::RESET << std::endl;
   }
 
-  //Test 5: Create a span with 5 random numbers and check it's spans
-  std::cout << "Test 5: Create a span with 5 random numbers and check it's spans" << std::endl;
-  Span s4(5);
-  s4.addNumber(5);
-  s4.addNumber(3);
-  s4.addNumber(1);
-  s4.addNumber(4);
-  s4.addNumber(2);
-  std::cout << green << "Shortest span: " << s4.shortestSpan() << reset << std::endl;
-  std::cout << green << "Longest span: " << s4.longestSpan() << reset << std::endl;
-
-
-  // Test 6: Create a Span with a capacity larger than it's size.
-  std::cout << "Test 6: Create a Span with a capacity larger than it's size." << std::endl;
-  Span s5(10000);
-  std::vector<int> v3;
-  for ( int i = 0; i < 5000; i++ ) {
-    v3.push_back(i * 1.5);
+  std::cout << std::endl << ANSIColors::BACKGROUND_CYAN << "Enter how many numbers you want to add:" << ANSIColors::RESET << " ";
+  std::getline(std::cin, input);
+  try{
+    if (!isValidUnsignedInt(input)) {
+      std::cerr <<  std::endl << ANSIColors::BACKGROUND_RED << "\tWrong input!💩" << ANSIColors::RESET << std::endl;
+      return 1;
+    }
+    N = static_cast<unsigned int>(std::atoi(input.c_str()));
+    for (unsigned int i = 0; i < N ; i++)
+    {
+      span.addNumber(42);
+    }
+    std::cout << std::endl << ANSIColors::BACKGROUND_GREEN << "\tNumbers added successfully! ⭐" << ANSIColors::RESET << std::endl << std::endl;
+    std::cout << ANSIColors::CYAN << "\tSpan capacity: " << span.getCapacity() << ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::CYAN << "\tSpan size: " << span.getSize() << ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::CYAN << "\tShortest span: " << span.shortestSpan() << ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::CYAN << "\tLongest span: " << span.longestSpan() << ANSIColors::RESET << std::endl;
+    std::cout << ANSIColors::CYAN << "\tSpan content (first 10 elements): " << ANSIColors::RESET;
+    span.print(static_cast<unsigned int>(10));
   }
-  s5.addNumber(v3.begin(), v3.end());
-  std::cout << blue << "Storage capacity: " << s5.getStorageCapacity() << reset << std::endl;
-  std::cout << blue << "Storage size: " << s5.getStorageSize() << reset << std::endl;
-  std::cout << green << "Shortest span: " << s5.shortestSpan() << reset << std::endl;
-  std::cout << green << "Longest span: " << s5.longestSpan() << reset << std::endl;
+  catch (std::exception &e)
+  {
+    std::cerr << ANSIColors::BACKGROUND_RED << "\tException caught:" << ANSIColors::RESET << " " << ANSIColors::RED << e.what() << ANSIColors::RESET << std::endl;
+  }
+  std::cout << ANSIColors::BACKGROUND_MAGENTA << std::endl << "Bye! If you liked this main, you can put me outstanding. 🐣" << ANSIColors::RESET << std::endl;
+
 
   return 0;
    

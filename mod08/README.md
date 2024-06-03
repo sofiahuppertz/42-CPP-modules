@@ -80,8 +80,8 @@ public:
     unsigned int longestSpan(void) const;
 
     // Getters
-    unsigned int getStorageCapacity(void) const;
-    unsigned int getStorageSize(void) const;
+    unsigned int getCapacity(void) const;
+    unsigned int getSize(void) const;
 
 private:
     std::vector<int> storage;

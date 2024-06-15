@@ -1,4 +1,4 @@
-NAME = btc
+NAME = PmergeMe
 
 CXX = c++
 INCLUDE = include

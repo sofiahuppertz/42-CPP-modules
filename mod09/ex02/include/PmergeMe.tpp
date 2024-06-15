@@ -6,13 +6,14 @@
 /*   By: sofia <sofia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 17:41:38 by sofia             #+#    #+#             */
-/*   Updated: 2024/06/15 16:59:55 by sofia            ###   ########.fr       */
+/*   Updated: 2024/06/15 17:59:19 by sofia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 template <class T, class U>
 void FJA<T, U>::MergeInsertionSort()
 {
+  // Start the clock
   clock_t start = clock();
   if ( getSequence().size() == 1 )
     getSortedTerms() = getSequence();
@@ -22,6 +23,7 @@ void FJA<T, U>::MergeInsertionSort()
     _setHalfSortSequence(); // STEP 3
     _insertionSort(); // STEP 4
   }
+  // Compute time
   time = (double)(clock() - start) / CLOCKS_PER_SEC * 1000;
 }
 
@@ -107,8 +109,7 @@ void FJA<T, U>::_setHalfSortSequence()
   }
 }
 
-
-/* STEP 4: Insertion sort with comparisson optimization using Jacobsthal sequence */
+/* STEP 4: Insertion sort with comparison optimization using Jacobsthal sequence */
 
 template <class T, class U>
 void FJA<T, U>::_insertionSort()
@@ -156,16 +157,6 @@ typename T::iterator FJA<T, U>::binarySearch(int value, typename T::iterator lef
   return left;
 }
 
-
-template <class T, class U>
-int FJA<T, U>::jacobsthal(int n)
-{
-  if (n == 0) return 0;
-  if (n == 1) return 1;
-  return jacobsthal(n - 1) + 2 * jacobsthal(n - 2);
-}
-
-
 template <class T, class U>
 T  FJA<T, U>::insertSequence(size_t n)
 {
@@ -195,4 +186,12 @@ T  FJA<T, U>::insertSequence(size_t n)
       insertSeq.push_back(prevJacobVal);
   }
   return insertSeq;
+}
+
+template <class T, class U>
+int FJA<T, U>::jacobsthal(int n)
+{
+  if (n == 0) return 0;
+  if (n == 1) return 1;
+  return jacobsthal(n - 1) + 2 * jacobsthal(n - 2);
 }

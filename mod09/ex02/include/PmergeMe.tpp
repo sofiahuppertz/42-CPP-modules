@@ -6,30 +6,14 @@
 /*   By: sofia <sofia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 17:41:38 by sofia             #+#    #+#             */
-/*   Updated: 2024/06/15 14:50:42 by sofia            ###   ########.fr       */
+/*   Updated: 2024/06/15 16:59:55 by sofia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
-template <class T, class U>    
-void FJA<T, U>::printBefore()
-{
-  for (typename T::const_iterator it = getSequence().begin(); it != getSequence().end(); it++)
-    std::cout << *it << " ";
-  std::cout << std::endl;
-}
-
-template <class T, class U>
-void FJA<T, U>::printAfter()
-{
-  for (typename T::const_iterator it = getSortedTerms().begin(); it != getSortedTerms().end(); it++)
-    std::cout << *it << " ";
-  std::cout << std::endl;
-}
 
 template <class T, class U>
 void FJA<T, U>::MergeInsertionSort()
 {
+  clock_t start = clock();
   if ( getSequence().size() == 1 )
     getSortedTerms() = getSequence();
   else 
@@ -38,6 +22,7 @@ void FJA<T, U>::MergeInsertionSort()
     _setHalfSortSequence(); // STEP 3
     _insertionSort(); // STEP 4
   }
+  time = (double)(clock() - start) / CLOCKS_PER_SEC * 1000;
 }
 
 

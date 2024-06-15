@@ -6,7 +6,7 @@
 /*   By: sofia <sofia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:42:42 by sofia             #+#    #+#             */
-/*   Updated: 2024/06/14 17:37:01 by sofia            ###   ########.fr       */
+/*   Updated: 2024/06/15 17:35:29 by sofia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,12 @@
 #include <algorithm>
 #include <cstddef>
 #include <cstdlib>
+#include <ctime>
 #include <exception>
 #include <iostream>
 #include <list>
 #include <deque>
+#include "Ansi.hpp"
 
 
 template <class T, class U>
@@ -45,41 +47,45 @@ class FJA
     void _setHalfSortSequence();
     void _insertionSort();
     
-    
-    T const &getSequence() const;
+  
+  protected:
     T &getSortedTerms();
     T &getUnresolved();
     T &getInsertPositions();
     U &getPairs();
+    T const &getSequence() const;
 
   public:
     FJA();
     FJA(char *argv[]);
     virtual ~FJA();
+    double time;
         
     void MergeInsertionSort();
-    void printBefore();
+    void printBefore() const;
     void printAfter();
+    virtual void printTime() const = 0;
     
 
     class InvalidInputException: public std::exception {
       public:
         virtual const char *what() const throw() {
-          return "Invalid Input";
+          return "Invalid Input 💩";
         }
     };
 };
 
 
-class PmergeMeList : public FJA< std::list<int>, std::list<std::pair<int, int> > > 
+class PmergeMeVector : public FJA< std::vector<int>, std::vector<std::pair<int, int> > > 
 {
   private:
-    PmergeMeList( PmergeMeList const &other );  
-    PmergeMeList &operator=( PmergeMeList const &other);
+    PmergeMeVector( PmergeMeVector const &other );  
+    PmergeMeVector &operator=( PmergeMeVector const &other);
 
   public:
-    PmergeMeList(char *argv[]);
-    ~PmergeMeList();
+    PmergeMeVector(char *argv[]);
+    ~PmergeMeVector();
+    void printTime() const;
 };
 
 
@@ -92,10 +98,12 @@ class PmergeMeDeque : public FJA< std::deque<int>, std::deque<std::pair <int, in
   public:
     PmergeMeDeque(char *argv[]);
     ~PmergeMeDeque();
+    void printTime() const;
 };
 
 
 
 #include "PmergeMe.LifeCycle.tpp"
+#include "PmergeMe.Print.tpp"
 #include "PmergeMe.Get.tpp"
 #include "PmergeMe.tpp"

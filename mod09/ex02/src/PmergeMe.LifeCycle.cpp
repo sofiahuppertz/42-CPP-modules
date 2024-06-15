@@ -6,25 +6,26 @@
 /*   By: sofia <sofia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 12:20:04 by sofia             #+#    #+#             */
-/*   Updated: 2024/06/13 18:49:31 by sofia            ###   ########.fr       */
+/*   Updated: 2024/06/15 17:04:32 by sofia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
 
-PmergeMeList::PmergeMeList(char *argv[]): FJA<std::list <int>, std::list<std::pair< int, int > > >( argv ) {}
+PmergeMeVector::PmergeMeVector(char *argv[]): FJA<std::vector <int>, std::vector<std::pair< int, int > > >( argv ) {}
 
-PmergeMeList::~PmergeMeList(){}
+PmergeMeVector::~PmergeMeVector(){}
 
-PmergeMeList::PmergeMeList( PmergeMeList const &other ) {
+PmergeMeVector::PmergeMeVector( PmergeMeVector const &other ) {
   (void)other;
 }
 
-PmergeMeList &PmergeMeList::operator=( PmergeMeList const &other) {
+PmergeMeVector &PmergeMeVector::operator=( PmergeMeVector const &other) {
   (void)other;
   return *this;
 }
+
 
 PmergeMeDeque::PmergeMeDeque(char *argv[]): FJA<std::deque <int> , std::deque<std::pair <int, int> > >( argv ) {}
 

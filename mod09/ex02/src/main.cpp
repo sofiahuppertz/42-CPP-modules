@@ -6,7 +6,7 @@
 /*   By: sofia <sofia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 12:10:20 by sofia             #+#    #+#             */
-/*   Updated: 2024/06/15 17:31:15 by sofia            ###   ########.fr       */
+/*   Updated: 2024/06/15 17:54:25 by sofia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,19 @@ int main (int argc, char *argv[])
 
     FJA< std::deque<int>, std::deque<std::pair<int, int> > > *deque = new PmergeMeDeque(argv);
     deque->MergeInsertionSort();
+
+    FJA < std::list<int>, std::list<std::pair<int, int> > > *list = new PmergeMeList(argv);
+    list->MergeInsertionSort();
     
     vector->printBefore();
     vector->printAfter();
-    deque->printTime();
     vector->printTime();
+    deque->printTime();
+    list->printTime();
 
     delete vector;
     delete deque;
+    delete list;
   } 
   catch (std::exception &e) 
   {

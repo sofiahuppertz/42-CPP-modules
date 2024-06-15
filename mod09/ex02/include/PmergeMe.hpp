@@ -6,7 +6,7 @@
 /*   By: sofia <sofia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/11 15:42:42 by sofia             #+#    #+#             */
-/*   Updated: 2024/06/15 17:35:29 by sofia            ###   ########.fr       */
+/*   Updated: 2024/06/15 17:48:26 by sofia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,18 @@ class PmergeMeDeque : public FJA< std::deque<int>, std::deque<std::pair <int, in
   public:
     PmergeMeDeque(char *argv[]);
     ~PmergeMeDeque();
+    void printTime() const;
+};
+
+class PmergeMeList : public FJA< std::list<int>, std::list<std::pair <int, int> > > 
+{
+  private:
+    PmergeMeList( PmergeMeList const &other );  
+    PmergeMeList &operator=( PmergeMeList const &other);
+
+  public:
+    PmergeMeList(char *argv[]);
+    ~PmergeMeList();
     void printTime() const;
 };
 

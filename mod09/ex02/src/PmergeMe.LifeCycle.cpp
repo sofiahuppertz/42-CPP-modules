@@ -6,7 +6,7 @@
 /*   By: sofia <sofia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/12 12:20:04 by sofia             #+#    #+#             */
-/*   Updated: 2024/06/15 17:04:32 by sofia            ###   ########.fr       */
+/*   Updated: 2024/06/15 17:48:56 by sofia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,3 +39,18 @@ PmergeMeDeque &PmergeMeDeque::operator=( PmergeMeDeque const &other) {
   (void)other;
   return *this;
 }
+
+
+PmergeMeList::PmergeMeList(char *argv[]): FJA<std::list <int> , std::list<std::pair <int, int> > >( argv ) {}
+
+PmergeMeList::~PmergeMeList(){}
+
+PmergeMeList::PmergeMeList( PmergeMeList const &other ) {
+  (void)other;
+}
+
+PmergeMeList &PmergeMeList::operator=( PmergeMeList const &other) {
+  (void)other;
+  return *this;
+}
+

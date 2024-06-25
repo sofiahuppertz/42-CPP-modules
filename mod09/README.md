@@ -61,7 +61,9 @@ The `DatesAndPrices` class includes a constant `Date` that is initialized to the
 
 For testing, we are provided with a Bitcoin history database. However, I also wanted to include other currencies to create more instances of `DatesAndPrices`. To achieve this, I searched for Ethereum and Dogecoin historical data on Kaggle. Here is the final result:
 
-![Screenshot 2024-06-25 at 16.00.27.png](https://prod-files-secure.s3.us-west-2.amazonaws.com/797a9c11-b676-440c-9009-3577d206558f/991cc30e-9990-4495-a4ce-7c60b788550d/Screenshot_2024-06-25_at_16.00.27.png)
+<p align="center">
+  <img src="./../images/mod09_ex00.png" alt="Console Output" width="700"/>
+</p>
 
 And, thanks to OOP 😏, the main is a simple as this: 
 
@@ -174,7 +176,7 @@ typename T::iterator FJA<T, U>::binarySearch(int value, typename T::iterator lef
     return std::next(left);
   return left;
 }
-}
+
 ```
 
 ## Resources

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   BitcoinExchange.cpp                                :+:      :+:    :+:   */
+/*   DatesAndPrices.cpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sofia <sofia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "BitcoinExchange.hpp"
+#include "DatesAndPrices.hpp"
 
-void BitcoinExchange::processInputFile(std::string filename)
+void DatesAndPrices::printFees(std::string filename)
 {
   std::ifstream file(filename);
 
@@ -32,7 +32,6 @@ void BitcoinExchange::processInputFile(std::string filename)
   {
     try
     {
-
       std::istringstream iss(line);
       std::string newDate;
       std::string newNumStr;
@@ -42,107 +41,108 @@ void BitcoinExchange::processInputFile(std::string filename)
       getline(iss, newDate, '|');
       parseDate(newDate);
       getline(iss, newNumStr);
-      parseNumber(newNumStr);
+      parsePrice(newNumStr);
       std::stringstream ss(newNumStr);
       ss >> newNum;
 
       price_for_date = priceForDate(newDate);
-      std::cout << "\t" << FGRN(newDate) << FGRN("\t=>\t") << FGRN(newNum) << FGRN("\t=\t") << SUNDL(FGRN(price_for_date * newNum)) << std::endl;
+      std::cout << "\t" << SITAL(FGRN(newDate)) << FGRN("\t=>\t") << FGRN(newNum) << FGRN("\t=\t") << SBOLD(SUNDL(FGRN(price_for_date * newNum))) << std::endl;
     }
     catch (std::exception &e)
     {
-      std::cerr << BRED(FWHI("Error:\t")) << BRED(FWHI(" ")) << BRED(FWHI(e.what())) << std::endl;
+      std::cerr << SBOLD(BRED(FWHI(" Error: "))) << " " << FRED(e.what()) << std::endl;
     }
   }
 }
 
-std::map<std::string, double> BitcoinExchange::loadDB(std::string filename, char delimiter)
-{
 
-  std::map<std::string, double> dataset;
-  std::ifstream file(filename);
+double DatesAndPrices::priceForDate(std::string date) {
+  std::map<std::string, double>::const_iterator it = datesAndPrices.find(date);
 
-  // Check if file is open
-  if (!file.is_open())
+  if (it == datesAndPrices.end())
   {
-    throw std::runtime_error("Could not open file");
+    it = datesAndPrices.upper_bound(date);
+    it--;
   }
+  return it->second;
+}
 
-  // Skip header
+std::string DatesAndPrices::findFirstDate(std::string db)
+{
+  Date result;
+
+  std::ifstream file(db);
+  if (!file.is_open())
+    throw std::runtime_error("Could not open file");
   std::string header;
   std::getline(file, header);
 
-  // Read file line by line
+  std::string line;
+  while (getline(file, line))
+  {
+    std::istringstream ss(line);
+    std::string date;
+    if (!getline(ss, date, ','))
+      throw std::runtime_error("Could not parse line");
+    Date curr(date);
+    if (result > curr)
+      result = curr; 
+  }
+  file.close();
+  return result.getDate();
+}
+
+
+std::map<std::string, double> DatesAndPrices::loadDB(std::string filename)
+{
+  std::map<std::string, double> dataset;
+  
+  std::ifstream file(filename);
+  if (!file.is_open())
+    throw std::runtime_error("Could not open file");
+
+  std::string header;
+  std::getline(file, header);
+
   std::string line;
   while (std::getline(file, line))
   {
-    // Convert line to stream
     std::istringstream iss(line);
 
-    // Parse line
     std::string date;
     double value;
-    if (!(getline(iss, date, delimiter) && (iss >> value)))
-    {
+    if (!(getline(iss, date, ',') && (iss >> value)))
       throw std::runtime_error("Could not parse line");
-    }
-    // Add line to map
     dataset[date] = value;
   }
   file.close();
-
   return dataset;
 }
 
-void BitcoinExchange::parseNumber(std::string &num) const
+void DatesAndPrices::parsePrice(std::string &num) const
 {
-  num = Date::trimDate(num);
+  num = Date::trimString(num);
   for (unsigned int i = 0; i < num.length() - 1; i++)
   {
     if (num[0] != '-' && num[i] != '.' && !std::isdigit(num[i]))
-      throw BitcoinExchange::notANumber();
+      throw DatesAndPrices::notANumber();
   }
 
   double number;
   std::stringstream ss(num);
   ss >> number;
   if (!number || number <= 0)
-    throw BitcoinExchange::negativeNumber();
+    throw DatesAndPrices::negativeNumber();
   else if (number >= 1000)
-    throw BitcoinExchange::tooLargeNumber();
+    throw DatesAndPrices::tooLargeNumber();
 }
 
-void BitcoinExchange::parseDate(std::string &dateStr) const {
+void DatesAndPrices::parseDate(std::string &dateStr) const {
 
-  dateStr = Date::trimDate(dateStr);
   Date date(dateStr);
   // Check date is between the beginning of the DB and today
-  if (!date.isInRange(Date("2009-03-01"), Date(Date::getToday())))
+  if (!date.isInRange(_initial, Date(Date::getToday())))
     throw Date::dateException(date);
 }
 
-double BitcoinExchange::priceForDate(std::string date) {
-  std::map<std::string, double>::iterator it = bitcoinPrices.find(date);
 
-  if (it == bitcoinPrices.end())
-  {
-    it = bitcoinPrices.upper_bound(date);
-    it--;
-  }
-  return it->second;
-}
-
-BitcoinExchange::BitcoinExchange(std::string database) : bitcoinPrices(loadDB(database, ',')) 
-{}
-
-
-BitcoinExchange::BitcoinExchange(BitcoinExchange const &other) {
-  *this = other;
-}
-
-BitcoinExchange::~BitcoinExchange(){}
-
-BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &other) {
-  bitcoinPrices = other.bitcoinPrices;
-  return *this;
-}

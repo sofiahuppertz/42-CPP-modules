@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
+/*   DatesAndPrices.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sofia <sofia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -19,27 +19,28 @@
 #include <map>
 #include <sstream>
 #include <string>
-
 #include "Date.hpp"
 #include "Ansi.hpp"
 
-class BitcoinExchange {
+class DatesAndPrices {
 
   private:
-    BitcoinExchange(BitcoinExchange const &src);
-    BitcoinExchange &operator=(BitcoinExchange const &rhs);
-    std::map<std::string, double> bitcoinPrices;
+    DatesAndPrices(DatesAndPrices const &src);
+    DatesAndPrices &operator=(DatesAndPrices const &rhs);
+    void parsePrice(std::string &num) const;
+    void parseDate(std::string &date) const;
+    std::string findFirstDate(std::string db);
+    std::map<std::string, double> loadDB(std::string filename);
+   
+    const Date _initial;
+    const std::map<std::string, double> datesAndPrices;
 
   public:
-    BitcoinExchange(std::string database);
-    ~BitcoinExchange();
+    DatesAndPrices(std::string database);
+    ~DatesAndPrices();
 
-    std::map<std::string, double> loadDB(std::string filename, char delimiter);
     double priceForDate(std::string date);
-    void processInputFile(std::string filename);
-
-    void parseNumber(std::string &num) const;
-    void parseDate(std::string &date) const;
+    void printFees(std::string filename);
 
     class notANumber : public std::exception
     {

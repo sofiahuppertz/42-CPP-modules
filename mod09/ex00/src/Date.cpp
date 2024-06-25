@@ -6,13 +6,13 @@
 /*   By: sofia <sofia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:23:00 by sofia             #+#    #+#             */
-/*   Updated: 2024/06/10 16:50:49 by sofia            ###   ########.fr       */
+/*   Updated: 2024/06/25 14:42:53 by sofia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Date.hpp"
 
-std::string Date::trimDate(const std::string &str)
+std::string Date::trimString(const std::string &str)
 {
   size_t first = str.find_first_not_of(' ');
   if (std::string::npos == first)
@@ -37,7 +37,7 @@ std::string Date::getToday()
 void Date::_stringToDate()
 {
   std::string date;
-  date = trimDate(_date);
+  date = trimString(_date);
 
   // Check date is in format YYYY-MM-DD
   if (date.size() != 10)
@@ -81,30 +81,13 @@ int Date::_dateToNum(void) const {
 }
 
 bool Date::isInRange(Date const &start, const Date &end) const {
-  if (_dateToNum() >= start._dateToNum() && _dateToNum() <= end._dateToNum())
+  if (!(*this > end) && !(start > *this))
     return true;
   return false;
 }
 
-Date::Date(std::string date) : _date(date) {
-  _stringToDate();
-}
 
 std::string Date::getDate() const {
   return _date;
 }
 
-Date &Date::operator=(Date const &other) {
-  _year = other._year;
-  _month = other._month;
-  _day = other._day;
-  return *this;
-}
-
-Date::Date(Date const &src) : _date(src._date),
-                              _year(src._year),
-                              _month(src._month),
-                              _day(src._day)
-{}
-
-Date::~Date() {}

@@ -6,7 +6,7 @@
 /*   By: sofia <sofia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 18:14:35 by sofia             #+#    #+#             */
-/*   Updated: 2024/06/15 17:45:06 by sofia            ###   ########.fr       */
+/*   Updated: 2024/06/25 16:32:24 by sofia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ int main(int argc, char *argv[])
     return 1;
   }
   try {
-    RPN rpn(argv[1]);
-    std::cout << "\t" << BBLU("Result:") << " " << FBLU(rpn.getResult()) << std::endl;
+    double result = RPN::calc(argv[1]);
+    std::cout << "\t" << BBLU("Result:") << " " << FBLU(result) << std::endl;
   }  catch (std::exception &e) {
     std::cout << "\t" << BRED(FWHI("Exception caught:"))  << " " << FRED(e.what()) << std::endl;
   }

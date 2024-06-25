@@ -6,44 +6,42 @@
 /*   By: sofia <sofia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 16:51:38 by sofia             #+#    #+#             */
-/*   Updated: 2024/06/11 12:51:58 by sofia            ###   ########.fr       */
+/*   Updated: 2024/06/25 16:30:06 by sofia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #pragma once
 
+#include <exception>
+#include <iostream>
+#include <map>
+#include <sstream>
 #include <string>
 #include <stack>
-#include <map>
-#include <exception>
-# include <iostream>
 
 
 class RPN {
 
   private:
-    RPN ( RPN const &other );
-    RPN &operator=( RPN const &other);
-
-    std::stack<double> _nums;
-    std::string _expr;
-    int _res;
     
-    bool isOperator ( std::string const &op ) const;
-    bool isTerm ( std::string const &op ) const;
-    void performOperation ( std::string const &op );
+    static bool isOperator ( std::string const &op );
+    static bool isTerm ( std::string const &op );
+    static void performOperation ( std::string const &op , std::stack<double> &nums);
 
     static double add ( double a, double b );
     static double sub ( double a, double b );
     static double mlt ( double a, double b );
     static double div ( double a, double b );
 
+  protected:
+    RPN ( void );
+    RPN ( RPN const &other );
+    RPN &operator=( RPN const &other);
+
   public:
-    RPN ( std::string expression );
     ~RPN ();
 
-    void setResult ( double d );
-    double getResult () const;
+    static double calc( std::string expr );
 
     class execErrorException: public std::exception {
       public:

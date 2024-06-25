@@ -6,40 +6,38 @@
 /*   By: sofia <sofia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 17:02:11 by sofia             #+#    #+#             */
-/*   Updated: 2024/06/11 12:46:43 by sofia            ###   ########.fr       */
+/*   Updated: 2024/06/25 16:31:52 by sofia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RPN.hpp"
-#include <sstream>
 
 
-RPN::RPN ( std::string expression ) : _expr(expression) {
+double RPN::calc ( std::string expression ) {
   
-  std::istringstream ss(_expr);
+  std::istringstream ss(expression);
+  std::stack<double> nums;
   std::string elem;  
 
   while (ss >> elem) {
-    // Check it's a valid number or operator, if not display error and stop
     if (isOperator(elem))
     {
-      performOperation(elem);
+      performOperation(elem, nums);
     }
     else if (isTerm(elem))
     {
-      _nums.push(std::atoi(elem.c_str()));
+      nums.push(std::atoi(elem.c_str()));
     }
     else
       throw RPN::execErrorException();
 
   }
-  if (_nums.size() != 1)
+  if (nums.size() != 1)
     throw RPN::execErrorException();
-  setResult(_nums.top());
-  _nums.pop();
+  return nums.top();
 }
 
-void RPN::performOperation ( std::string const &op ) {
+void RPN::performOperation ( std::string const &op, std::stack<double> &nums ) {
   
   double a, b;
   std::map <std::string, double(*)(double, double)> operations;
@@ -48,18 +46,23 @@ void RPN::performOperation ( std::string const &op ) {
   operations["*"] = &RPN::mlt;
   operations["/"] = &RPN::div;
 
-  if (_nums.size() < 2)
+  if (nums.size() < 2)
     throw RPN::execErrorException();
-  b = _nums.top();
-  _nums.pop();
-  a = _nums.top();
-  _nums.pop();
+  b = nums.top();
+  nums.pop();
+  a = nums.top();
+  nums.pop();
 
   if (operations.find(op) != operations.end())
-    _nums.push(operations[op](a, b));
+    nums.push(operations[op](a, b));
 }
 
-bool RPN::isOperator ( std::string const &op ) const {
+double RPN::add ( double a, double b ) { return a + b; }
+double RPN::sub ( double a, double b ) { return a - b; }
+double RPN::mlt ( double a, double b ) { return a * b; }
+double RPN::div ( double a, double b ) { return a / b; }
+
+bool RPN::isOperator ( std::string const &op ) {
 
   char operators[4] = {'+', '-', '/', '*'};
 
@@ -74,7 +77,7 @@ bool RPN::isOperator ( std::string const &op ) const {
   return false;
 }
 
-bool RPN::isTerm ( std::string const &op ) const {
+bool RPN::isTerm ( std::string const &op ) {
 
   if (op.size() != 1)
     return false;
@@ -82,27 +85,5 @@ bool RPN::isTerm ( std::string const &op ) const {
 }
 
 
-void RPN::setResult ( double d ) {
-  _res = d;
-}
 
-double RPN::getResult () const {
-  return _res;
-}
-
-double RPN::add ( double a, double b ) { return a + b; }
-double RPN::sub ( double a, double b ) { return a - b; }
-double RPN::mlt ( double a, double b ) { return a * b; }
-double RPN::div ( double a, double b ) { return a / b; }
-
-RPN::RPN ( RPN const &other ) {
-  (void)other;
-}
-
-RPN &RPN::operator=( RPN const &other) {
-  (void)other;
-  return *this;
-}
-
-RPN::~RPN () {}
 

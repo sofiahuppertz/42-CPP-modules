@@ -6,7 +6,7 @@
 /*   By: sofia <sofia@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/10 12:23:13 by sofia             #+#    #+#             */
-/*   Updated: 2024/06/25 14:09:50 by sofia            ###   ########.fr       */
+/*   Updated: 2024/06/25 15:13:04 by sofia            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,25 @@
 
 #define BITCOIN "static/bitcoin.csv"
 #define ETHEREUM "static/ethereum.csv"
+#define DOGE "static/doge.csv"
 
 int main ( void )
 {
     try 
     {
         std::cout << SBOLD(SITAL(BCYN("\t\t Bitcoin exchange fees: " ))) << std::endl << std::endl;
-        DatesAndPrices bitcoinExchange(BITCOIN);
-        bitcoinExchange.printFees("static/input.csv");
+        DatesAndPrices bitcoin(BITCOIN);
+        bitcoin.printFees("static/input.csv");
         
         std::cout << std::endl << std::endl;
         std::cout << SBOLD(SITAL(BMAG("\t\t Ethereum exchange fees: "))) << std::endl << std::endl;
-        DatesAndPrices ethereumExchange(ETHEREUM);
-        ethereumExchange.printFees("static/input.csv");
+        DatesAndPrices ether(ETHEREUM);
+        ether.printFees("static/input.csv");
+
+        std::cout << std::endl << std::endl;
+        std::cout << SBOLD(SITAL(BYLW("\t\t Doge coin exchange fees: "))) << std::endl << std::endl;
+        DatesAndPrices doge(DOGE);
+        doge.printFees("static/input.csv");
     } 
     catch (std::exception &e) 
     {

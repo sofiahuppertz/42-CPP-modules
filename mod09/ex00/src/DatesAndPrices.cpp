@@ -112,7 +112,7 @@ std::map<std::string, double> DatesAndPrices::loadDB(std::string filename)
     std::string date;
     double value;
     if (!(getline(iss, date, ',') && (iss >> value)))
-      throw std::runtime_error("Could not parse line");
+      throw std::runtime_error("Could not parse line 1");
     dataset[date] = value;
   }
   file.close();

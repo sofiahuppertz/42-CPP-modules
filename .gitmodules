@@ -1,0 +1,30 @@
+[submodule "CPP00"]
+	path = CPP00
+	url = https://github.com/sofiahuppertz/CPP00.git
+[submodule "CPP01"]
+	path = CPP01
+	url = https://github.com/sofiahuppertz/CPP01.git
+[submodule "CPP02"]
+	path = CPP02
+	url = https://github.com/sofiahuppertz/CPP02.git
+[submodule "CPP03"]
+	path = CPP03
+	url = https://github.com/sofiahuppertz/CPP03.git
+[submodule "CPP04"]
+	path = CPP04
+	url = https://github.com/sofiahuppertz/CPP04.git
+[submodule "CPP05"]
+	path = CPP05
+	url = https://github.com/sofiahuppertz/CPP05.git
+[submodule "CPP06"]
+	path = CPP06
+	url = https://github.com/sofiahuppertz/CPP06.git
+[submodule "CPP07"]
+	path = CPP07
+	url = https://github.com/sofiahuppertz/CPP07.git
+[submodule "CPP08"]
+	path = CPP08
+	url = https://github.com/sofiahuppertz/CPP08.git
+[submodule "CPP09"]
+	path = CPP09
+	url = https://github.com/sofiahuppertz/CPP09.git
